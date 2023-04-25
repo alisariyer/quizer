@@ -1,0 +1,29 @@
+{
+  "name": "quizer",
+  "version": "1.0.0",
+  "description": "A quiz web app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alisariyer/quizer.git"
+  },
+  "keywords": [
+    "quiz",
+    "test",
+    "questions",
+    "web"
+  ],
+  "author": "Ali Sariyer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alisariyer/quizer/issues"
+  },
+  "homepage": "https://github.com/alisariyer/quizer#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

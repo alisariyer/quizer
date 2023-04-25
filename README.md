@@ -1,2 +1,2 @@
-# quizer
+# Quizer
 A quiz web application
