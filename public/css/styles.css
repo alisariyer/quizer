@@ -170,8 +170,22 @@ body {
 .question__list {
   padding: 0;
 }
-.question__list li {
-  margin-bottom: 1.5rem;
+.question__answer {
+  border: 2px solid #d500e8;
+  background-color: white;
+  margin-bottom: 1rem;
+  padding: 1rem 0.5rem;
+  border-radius: 0.3rem;
+  transition: background-color 0.2s ease;
+}
+.question__answer:hover {
+  color: #fbfbfb;
+  background-color: #3a3a3a;
+  border-color: #3a3a3a;
+  cursor: pointer;
+}
+.question__answer:hover span {
+  color: #d500e8;
 }
 
 .footer {

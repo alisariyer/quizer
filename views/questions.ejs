@@ -11,20 +11,20 @@
         <% for (let i=0; i< questions.length; i++) { %>
             <div class="question">
                 <h3 class="question__title">
-                    <%= questions[i].question %>
+                    <span><%= i + 1 %>&rpar; </span><%= questions[i].question %>
                 </h3>
-                <ol type="a" class="question__list">
-                    <li>
-                        <%= questions[i].answers[0] %>
+                <ol class="question__list">
+                    <li class="question__answer">
+                        <span>a&rpar; </span><%= questions[i].answers[0] %>
                     </li>
-                    <li>
-                        <%= questions[i].answers[1] %>
+                    <li class="question__answer">
+                        <span>b&rpar; </span><%= questions[i].answers[1] %>
                     </li>
-                    <li>
-                        <%= questions[i].answers[2] %>
+                    <li class="question__answer">
+                        <span>c&rpar; </span><%= questions[i].answers[2] %>
                     </li>
-                    <li>
-                        <%= questions[i].answers[3] %>
+                    <li class="question__answer">
+                        <span>d&rpar; </span><%= questions[i].answers[3] %>
                     </li>
                 </ol>
             </div>
