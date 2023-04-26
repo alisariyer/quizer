@@ -9,10 +9,13 @@ $fs-regular: 1.5rem;
 $color-primary: #0073ff;
 $color-secondary: #2b2929;
 $color-tertiary: #4655ff;
-$color-light: #fafffe;
+$color-light: #fbfbfb;
+
+$background-image: '../assets/images/pattern.jpg';
 
 body {
     background-color: $color-light;
+    background-image: url($background-image);
     font-family: $default-font;
     font-weight: $fw-regular;
     font-size: $fs-regular;
