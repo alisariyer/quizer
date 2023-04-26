@@ -1,93 +1,111 @@
-@import 'reset';
+@import "reset";
 
-$default-font: 'Sen', sans-serif;
+$default-font: "Sen", sans-serif;
 $fw-regular: 400;
 $fw-bold: 700;
-$fs-heading: 4.8rem;
 $fs-regular: 2rem;
 
-$color-primary: #D500E8;
-$color-secondary: #3A3A3A;
+$color-primary: #d500e8;
+$color-secondary: #3a3a3a;
 $color-tertiary: #4655ff;
 $color-light: #fbfbfb;
 
-$background-image: '../assets/images/pattern.jpg';
+$background-image: "../assets/images/pattern.jpg";
 
 // utility classes
+
+@for $value from 1 through 6 {
+    h#{$value} {
+        font-size: #{3-($value * 0.4)} + rem;
+        margin-bottom: 1rem;
+    }
+}
+
 .bg-image {
-    background-color: $color-light;
-    background-image: url($background-image);
-    font-family: $default-font;
-    font-weight: $fw-regular;
-    font-size: $fs-regular;
+  background-color: $color-light;
+  background-image: url($background-image);
 }
 
 .logo {
-    fill: $color-primary;
-    margin-bottom: 1rem;
+  fill: $color-primary;
+  margin-bottom: 1rem;
 }
 
 .btn {
-    background-color: transparent;
-    margin: 2rem;
-    padding: 1.4rem 3rem;
-    border-radius: .5rem;
-    border: .4rem solid $color-primary;
-    font-weight: $fw-bold;
-    color: $color-secondary;
-    text-decoration: none;
-    &:hover {
-        color: $color-primary;
-        cursor: pointer;
-    }
+  background-color: transparent;
+  margin: 2rem;
+  padding: 1.4rem 3rem;
+  border-radius: 0.5rem;
+  border: 0.4rem solid $color-primary;
+  font-weight: $fw-bold;
+  color: $color-secondary;
+  text-decoration: none;
+  &:hover {
+    color: $color-primary;
+    cursor: pointer;
+  }
 }
 
 .link {
-    text-decoration: none;
-    color: $color-primary;
-    &:hover {
-        text-decoration: underline solid $color-primary .2rem;
-    }
+  text-decoration: none;
+  color: $color-primary;
+  &:hover {
+    text-decoration: underline solid $color-primary 0.2rem;
+  }
+}
+
+.text-center {
+    text-align: center;
 }
 
 // homepage
+body {
+  font-family: $default-font;
+  font-weight: $fw-regular;
+  font-size: $fs-regular;
+}
+
 .main {
-    color: $color-secondary;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-flow: column nowrap;
-    padding: 6rem 6rem 2rem;
-    text-align: center;
+  color: $color-secondary;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column nowrap;
+  padding: 6rem 6rem 2rem;
+  &__brand {
+    font-size: 4.8rem;
+    font-weight: $fw-bold;
+    margin-bottom: 6rem;
+  }
+  &__title {
+    color: $color-primary;
+    margin-bottom: 3rem;
+  }
+  &__description {
+    line-height: 1.5;
+    margin-bottom: 6rem;
+    padding: 1.4rem;
+    border-radius: 0.4rem;
+    border-width: 0 0.4rem;
+    border-color: $color-primary;
+    border-style: solid;
+  }
+}
 
-    &__title {
-        font-size: $fs-heading;
-        font-weight: $fw-bold;
-        margin-bottom: 6rem;
-    }
-
-    &__description {
-        line-height: 1.5;
-        margin-bottom: 6rem;
-        padding: 1.4rem;
-        border-radius: .4rem;
-        border-width: 0 .4rem;
-        border-color: $color-primary;
-        border-style: solid;
-    }
+.question {
+    font-size: $fs-regular * 0.8;
+    margin-bottom: 4rem;
 }
 
 .footer {
-    margin-top: auto;
-
-    & p {
-        font-size: 1.4rem;
-        margin-bottom: .4rem;
-    }
-
-    & small {
-        font-size: 1.2rem;
-    }
+  margin-top: auto;
+  & p {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+  & small {
+    font-size: 1.2rem;
+  }
 }

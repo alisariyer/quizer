@@ -32,16 +32,43 @@ p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
 
+h1 {
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+h5 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+h6 {
+  font-size: 0.6rem;
+  margin-bottom: 1rem;
+}
+
 .bg-image {
   background-color: #fbfbfb;
   background-image: url("../assets/images/pattern.jpg");
-  font-family: "Sen", sans-serif;
-  font-weight: 400;
-  font-size: 2rem;
 }
 
 .logo {
-  fill: #D500E8;
+  fill: #d500e8;
   margin-bottom: 1rem;
 }
 
@@ -50,26 +77,36 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: 2rem;
   padding: 1.4rem 3rem;
   border-radius: 0.5rem;
-  border: 0.4rem solid #D500E8;
+  border: 0.4rem solid #d500e8;
   font-weight: 700;
-  color: #3A3A3A;
+  color: #3a3a3a;
   text-decoration: none;
 }
 .btn:hover {
-  color: #D500E8;
+  color: #d500e8;
   cursor: pointer;
 }
 
 .link {
   text-decoration: none;
-  color: #D500E8;
+  color: #d500e8;
 }
 .link:hover {
-  text-decoration: underline solid #D500E8 0.2rem;
+  text-decoration: underline solid #d500e8 0.2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+body {
+  font-family: "Sen", sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
 }
 
 .main {
-  color: #3A3A3A;
+  color: #3a3a3a;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -77,12 +114,15 @@ p, h1, h2, h3, h4, h5, h6 {
   align-items: center;
   flex-flow: column nowrap;
   padding: 6rem 6rem 2rem;
-  text-align: center;
 }
-.main__title {
+.main__brand {
   font-size: 4.8rem;
   font-weight: 700;
   margin-bottom: 6rem;
+}
+.main__title {
+  color: #d500e8;
+  margin-bottom: 3rem;
 }
 .main__description {
   line-height: 1.5;
@@ -90,8 +130,13 @@ p, h1, h2, h3, h4, h5, h6 {
   padding: 1.4rem;
   border-radius: 0.4rem;
   border-width: 0 0.4rem;
-  border-color: #D500E8;
+  border-color: #d500e8;
   border-style: solid;
+}
+
+.question {
+  font-size: 1.6rem;
+  margin-bottom: 4rem;
 }
 
 .footer {
