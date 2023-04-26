@@ -53,17 +53,18 @@ p, h1, h2, h3, h4, h5, h6 {
   border: 0.4rem solid #D500E8;
   font-weight: 700;
   color: #3A3A3A;
+  text-decoration: none;
 }
 .btn:hover {
   color: #D500E8;
   cursor: pointer;
 }
 
-a {
+.link {
   text-decoration: none;
   color: #D500E8;
 }
-a:hover {
+.link:hover {
   text-decoration: underline solid #D500E8 0.2rem;
 }
 

@@ -35,13 +35,14 @@ $background-image: '../assets/images/pattern.jpg';
     border: .4rem solid $color-primary;
     font-weight: $fw-bold;
     color: $color-secondary;
+    text-decoration: none;
     &:hover {
         color: $color-primary;
         cursor: pointer;
     }
 }
 
-a {
+.link {
     text-decoration: none;
     color: $color-primary;
     &:hover {
