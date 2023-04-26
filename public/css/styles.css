@@ -32,16 +32,76 @@ p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
 
-body {
+.bg-image {
   background-color: #fbfbfb;
   background-image: url("../assets/images/pattern.jpg");
   font-family: "Sen", sans-serif;
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
-h1 {
-  font-size: 2.5rem;
+.logo {
+  fill: #D500E8;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  background-color: transparent;
+  margin: 2rem;
+  padding: 1.4rem 3rem;
+  border-radius: 0.5rem;
+  border: 0.4rem solid #D500E8;
+  font-weight: 700;
+  color: #3A3A3A;
+}
+.btn:hover {
+  color: #D500E8;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: #D500E8;
+}
+a:hover {
+  text-decoration: underline solid #D500E8 0.2rem;
+}
+
+.main {
+  color: #3A3A3A;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column nowrap;
+  padding: 6rem 6rem 2rem;
+  text-align: center;
+}
+.main__title {
+  font-size: 4.8rem;
+  font-weight: 700;
+  margin-bottom: 6rem;
+}
+.main__description {
+  line-height: 1.5;
+  margin-bottom: 6rem;
+  padding: 1.4rem;
+  border-radius: 0.4rem;
+  border-width: 0 0.4rem;
+  border-color: #D500E8;
+  border-style: solid;
+}
+
+.footer {
+  margin-top: auto;
+}
+.footer p {
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+}
+.footer small {
+  font-size: 1.2rem;
 }
 
 /*# sourceMappingURL=styles.css.map */
