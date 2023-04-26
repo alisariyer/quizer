@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 app.set('ejs', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => {
-    res.send('Hello');
+    res.render('home');
 });
 
 app.get('/questions', (req, res) => {
