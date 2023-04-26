@@ -6,11 +6,11 @@
 </head>
 
 <body class="bg-image">
-    <main class="main">
-        <h1 class="main__title">Questions</h1>
+    <main class="main d-flex">
+        <h1 class="main__title text-center">Questions</h1>
         <% for (let i=0; i< questions.length; i++) { %>
             <div class="question">
-                <h3>
+                <h3 class="question__title">
                     <%= questions[i].question %>
                 </h3>
                 <ol type="a" class="question__list">

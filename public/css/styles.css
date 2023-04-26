@@ -117,6 +117,16 @@ h6 {
   text-align: center;
 }
 
+.d-flex {
+  display: flex;
+  justify-content: center;
+  flex-flow: column nowrap;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
 body {
   font-family: "Sen", sans-serif;
   font-weight: 400;
@@ -127,11 +137,9 @@ body {
   color: #3a3a3a;
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-flow: column nowrap;
-  padding: 6rem 6rem 2rem;
+  max-width: 576px;
+  padding: 6rem 3rem 2rem;
+  margin-inline: auto;
 }
 .main__brand {
   font-size: 4.8rem;
@@ -155,6 +163,15 @@ body {
 .question {
   font-size: 1.6rem;
   margin-bottom: 4rem;
+}
+.question__title {
+  margin-bottom: 2rem;
+}
+.question__list {
+  padding: 0;
+}
+.question__list li {
+  margin-bottom: 1.5rem;
 }
 
 .footer {
