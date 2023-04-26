@@ -1,0 +1,23 @@
+@import 'reset';
+
+$default-font: 'Sen', sans-serif;
+$fw-regular: 400;
+$fw-bold: 700;
+$fs-heading: 2.5rem;
+$fs-regular: 1.5rem;
+
+$color-primary: #0073ff;
+$color-secondary: #2b2929;
+$color-tertiary: #4655ff;
+$color-light: #fafffe;
+
+body {
+    background-color: $color-light;
+    font-family: $default-font;
+    font-weight: $fw-regular;
+    font-size: $fs-regular;
+}
+
+h1 {
+    font-size: $fs-heading;
+}

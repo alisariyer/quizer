@@ -3,8 +3,8 @@ const app = express();
 const path = require('path');
 const questions = require('./questions');
 
-// setup static folder
-app.set('static', path.join(__dirname, 'public'));
+// use express static middleware
+app.use(express.static(path.join(__dirname, 'public')));
 
 // setup view engine
 app.set('view engine', 'ejs');
