@@ -15,10 +15,10 @@ $background-image: "../assets/images/pattern.jpg";
 // utility classes
 
 @for $value from 1 through 6 {
-    h#{$value} {
-        font-size: #{3-($value * 0.4)} + rem;
-        margin-bottom: 1rem;
-    }
+  h#{$value} {
+    font-size: #{3-($value * 0.4)} + rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .bg-image {
@@ -29,6 +29,9 @@ $background-image: "../assets/images/pattern.jpg";
 .logo {
   fill: $color-primary;
   margin-bottom: 1rem;
+  &:hover circle {
+    animation-play-state: paused;
+  }
   & circle {
     fill: white;
     animation-name: signal;
@@ -42,12 +45,12 @@ $background-image: "../assets/images/pattern.jpg";
 }
 
 @keyframes signal {
-    0% {
-        fill: white;
-    }
-    50% {
-        fill: $color-primary;
-    }
+  0% {
+    fill: white;
+  }
+  50% {
+    fill: $color-primary;
+  }
 }
 
 .btn {
@@ -59,6 +62,7 @@ $background-image: "../assets/images/pattern.jpg";
   font-weight: $fw-bold;
   color: $color-secondary;
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
   &:hover {
     color: $color-primary;
     cursor: pointer;
@@ -66,25 +70,26 @@ $background-image: "../assets/images/pattern.jpg";
 }
 
 .link {
-  text-decoration: none;
+  text-decoration: underline solid transparent 0.2rem;
   color: $color-primary;
+  transition: text-decoration-color 0.2s ease-in-out;
   &:hover {
-    text-decoration: underline solid $color-primary 0.2rem;
+    text-decoration-color: $color-primary;
   }
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .d-flex {
-    display: flex;
-    justify-content: center;
-    flex-flow: column nowrap;
+  display: flex;
+  justify-content: center;
+  flex-flow: column nowrap;
 }
 
 .align-items-center {
-    align-items: center;
+  align-items: center;
 }
 
 // homepage
@@ -123,31 +128,31 @@ body {
 }
 
 .question {
-    font-size: $fs-regular * 0.8;
-    margin-bottom: 4rem;
-    &__title {
-        margin-bottom: 2rem;
+  font-size: $fs-regular * 0.8;
+  margin-bottom: 4rem;
+  &__title {
+    margin-bottom: 2rem;
+  }
+  &__list {
+    padding: 0;
+  }
+  &__answer {
+    border: 2px solid $color-primary;
+    background-color: white;
+    margin-bottom: 1rem;
+    padding: 1rem 0.5rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.2s ease;
+    &:hover {
+      color: $color-light;
+      background-color: $color-secondary;
+      border-color: $color-secondary;
+      cursor: pointer;
+      & span {
+        color: $color-primary;
+      }
     }
-    &__list {
-        padding: 0;
-    }
-    &__answer {
-        border: 2px solid $color-primary;
-        background-color: white;
-        margin-bottom: 1rem;
-        padding: 1rem .5rem;
-        border-radius: .3rem;
-        transition: background-color .2s ease;
-        &:hover {
-            color: $color-light;
-            background-color: $color-secondary;
-            border-color: $color-secondary;
-            cursor: pointer;
-            & span {
-                color: $color-primary;
-            }
-        }
-    }
+  }
 }
 
 .footer {
