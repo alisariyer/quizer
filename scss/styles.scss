@@ -29,6 +29,25 @@ $background-image: "../assets/images/pattern.jpg";
 .logo {
   fill: $color-primary;
   margin-bottom: 1rem;
+  & circle {
+    fill: white;
+    animation-name: signal;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  & circle:first-of-type {
+    animation-delay: 1s;
+  }
+}
+
+@keyframes signal {
+    0% {
+        fill: white;
+    }
+    50% {
+        fill: $color-primary;
+    }
 }
 
 .btn {

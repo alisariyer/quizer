@@ -71,7 +71,25 @@ h6 {
   fill: #d500e8;
   margin-bottom: 1rem;
 }
+.logo circle {
+  fill: white;
+  animation-name: signal;
+  animation-timing-function: linear;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+.logo circle:first-of-type {
+  animation-delay: 1s;
+}
 
+@keyframes signal {
+  0% {
+    fill: white;
+  }
+  50% {
+    fill: #d500e8;
+  }
+}
 .btn {
   background-color: transparent;
   margin: 2rem;
