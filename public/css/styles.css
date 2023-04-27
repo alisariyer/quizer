@@ -145,6 +145,10 @@ h6 {
   align-items: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .mt-1 {
   margin-top: 1rem;
 }
@@ -286,6 +290,22 @@ body {
   padding-inline: 3rem;
 }
 
+.navbar-scroll {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fbfbfb;
+  border-bottom: 0.2rem solid #d500e8;
+  opacity: 0;
+  animation: appear 0.2s ease-in-out forwards;
+}
+
+@keyframes appear {
+  to {
+    opacity: 1;
+  }
+}
 .brand {
   font-weight: 700;
   padding-inline: 0.25rem;

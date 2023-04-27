@@ -17,6 +17,23 @@ body {
   padding-inline: 3rem;
 }
 
+.navbar-scroll {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $color-light;
+  border-bottom: .2rem solid $color-primary;
+  opacity: 0;
+  animation: appear $default-animation-duration ease-in-out forwards;
+}
+
+@keyframes appear {
+  to {
+    opacity: 1;
+  }
+}
+
 .brand {
   font-weight: $fw-bold;
   padding-inline: .25rem;
