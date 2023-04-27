@@ -14,10 +14,17 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+// Show questions to guest
 app.get('/questions', (req, res) => {
     res.render('questions', { questions });
 });
 
+// Add a new question
+app.get('/question/new', (req, res) => {
+    res.render('new');
+})
+
+// Show questions to admin
 app.get('/questions/list', (req, res) => {
     res.render('questions-list', { questions });
 })

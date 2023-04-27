@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include('partials/head', { title: 'Questions' }) %>
+    <%- include('partials/head', { title: 'Question List' }) %>
     <script src="/js/scroll.js" defer></script>
 </head>
 
@@ -10,17 +10,16 @@
     <%- include('partials/navbar') %>
     <main class="container main d-flex d-flex-col justify-content-center ">
         <h1 class="main__title text-center mt-2">Questions</h1>
+        <ol class="question">
         <% for (let i=0; i< questions.length; i++) { %>
-            <div class="question">
-                <p class="question__title">
-                    <span>
-                        <%= i + 1 %>&rpar;
-                    </span>
-                    <%= questions[i].question %>
-                </p>
-                
-            </div>
+            <li class="question__title">
+                <span>
+                    <%= i + 1 %>&rpar;
+                </span>
+                <%= questions[i].question %>
+            </li>
         <% } %>
+        </ol>
         <%- include('partials/footer') %>
     </main>
 </body>
