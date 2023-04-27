@@ -1,0 +1,84 @@
+.btn {
+  background-color: transparent;
+  margin: 2rem;
+  padding: 1.4rem 3rem;
+  border-radius: 0.5rem;
+  border: 0.4rem solid $color-primary;
+  font-weight: $fw-bold;
+  color: $color-secondary;
+  text-decoration: none;
+  transition: color $default-animation-duration ease-in-out;
+  &:hover {
+    color: $color-primary;
+    cursor: pointer;
+  }
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: $fs-smaller;
+  font-weight: $fw-regular;
+  line-height: 1.5;
+  color: $color-secondary;
+  background-color: $color-light;
+  background-clip: padding-box;
+  border: $default-border-width solid $color-primary;
+  border-radius: $default-border-radius;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: border-color $default-animation-duration ease-in-out,
+    box-shadow $default-animation-duration ease-in-out;
+  resize: vertical;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem $color-primary;
+  }
+}
+
+.input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  &-text {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    color: $color-light;
+    background-color: $color-primary;
+    border: $default-border-width solid $color-primary;
+    border-radius: $default-border-radius 0 0 $default-border-radius;
+  }
+  & > .form-control {
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    border-radius: 0 $default-border-radius $default-border-radius 0;
+  }
+}
+
+.form-select {
+  padding: 0.3rem 1rem;
+  line-height: 1.5;
+  color: $color-secondary;
+  background-color: $color-light;
+  border: $default-border-width solid $color-primary;
+  border-radius: $default-border-radius;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: border-color $default-animation-duration ease-in-out,
+    box-shadow $default-animation-duration ease-in-out;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem $color-primary;
+  }
+}

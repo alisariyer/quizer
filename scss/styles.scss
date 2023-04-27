@@ -1,7 +1,9 @@
 @import "utils/variables";
 @import "reset";
+@import "classes/custom";
+@import "classes/display";
+@import "classes/form";
 @import "classes/typography";
-@import "classes/base";
 @import "classes/spacing";
 
 body {
@@ -19,7 +21,6 @@ body {
 
 .main {
   color: $color-secondary;
-  min-height: calc(100vh - 68px);
   & .brand {
     font-size: 4.8rem;
     margin-bottom: 6rem;

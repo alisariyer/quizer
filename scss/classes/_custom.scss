@@ -37,22 +37,6 @@
   }
 }
 
-.btn {
-  background-color: transparent;
-  margin: 2rem;
-  padding: 1.4rem 3rem;
-  border-radius: 0.5rem;
-  border: 0.4rem solid $color-primary;
-  font-weight: $fw-bold;
-  color: $color-secondary;
-  text-decoration: none;
-  transition: color $default-animation-duration ease-in-out;
-  &:hover {
-    color: $color-primary;
-    cursor: pointer;
-  }
-}
-
 .link {
   text-decoration: underline solid transparent 0.2rem;
   color: $color-primary;
@@ -66,26 +50,10 @@
   text-align: center;
 }
 
-.d-flex {
-  display: flex;
-}
-
-.d-flex-col {
-  flex-flow: column nowrap;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.hidden {
-  display: none;
-}
-
 .min-vh-100 {
   min-height: 100vh;
+}
+
+.min-vh-100-within {
+  min-height: calc(100vh - 68px);
 }

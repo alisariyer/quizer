@@ -8,10 +8,47 @@
 
 <body class="bg-image">
     <%- include('partials/navbar') %>
-    <main class="container main d-flex d-flex-col justify-content-center ">
+    <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
 
         <!-- Main content goes here -->
-        
+        <form action="#" method="POST" class="my-2">
+
+            <div class="mb-2">
+                <label for="question" class="d-block mb-1">New Question:</label>
+                <textarea name="question" id="question" class="form-control" rows="5" placeholder="Write question here..."></textarea>
+            </div>
+
+            <div class="mb-2 input-group">
+                <label for="answer1" class="input-group-text">a&rpar;</label>
+                <input type="text" id="answer1" class="form-control" name="answer1" placeholder="First answer">
+            </div>
+
+            <div class="mb-2 input-group">
+                <label for="answer2" class="input-group-text">b&rpar; </label>
+                <input type="text" id="answer2" class="form-control" name="answer2" placeholder="Second answer">
+            </div>
+
+            <div class="mb-2 input-group">
+                <label for="answer3" class="input-group-text">c&rpar; </label>
+                <input type="text" id="answer3" class="form-control" name="answer3" placeholder="Third answer"><br>
+            </div>
+
+            <div class="mb-2 input-group">
+                <label for="answer4" class="input-group-text">d&rpar; </label>
+                <input type="text" id="answer4" class="form-control" name="answer4" placeholder="Fourth answer"><br>
+            </div>
+            
+            <div class="mb-2">
+                <label for="correct">Correct Answer</label>
+                <select name="correct" class="form-select">
+                    <option value="0" selected>a&rpar;</option>
+                    <option value="1">b&rpar;</option>
+                    <option value="2">c&rpar;</option>
+                    <option value="3">d&rpar;</option>
+                </select>
+            </div>
+            
+        </form>
         
         <%- include('partials/footer') %>
     </main>

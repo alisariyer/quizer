@@ -11,7 +11,7 @@ module.exports = [
         correct: 1
     },
     {
-        id: 2,
+        id: 1,
         question: 'Which is a invalid CSS usage?',
         answers: [
             'Internal CSS',
@@ -22,7 +22,7 @@ module.exports = [
         correct: 3
     },
     {
-        id: 3,
+        id: 2,
         question: 'Which HTML element does not have a semantic meaning?',
         answers: [
             'main',
