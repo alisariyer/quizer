@@ -20,8 +20,19 @@ app.get('/questions', (req, res) => {
 });
 
 // Add a new question
-app.get('/question/new', (req, res) => {
+app.get('/questions/new', (req, res) => {
     res.render('new');
+});
+
+// Edit a question
+app.get('/questions/:id', (req, res) => {
+    const { id } = req.params;
+    if (/^[0-9]+$/.test(id)) {
+        const question = questions.find(question => question.id === parseInt(id));
+        return res.send(question);
+    }
+    res.status(400).send('Unknown Id, please check it: ' + id);
+    // res.render('edit', { question });
 })
 
 // Show questions to admin
