@@ -1,0 +1,6 @@
+@for $value from 1 through 6 {
+  h#{$value} {
+    font-size: #{3-($value * 0.4)} + rem;
+    margin-bottom: 1rem;
+  }
+}

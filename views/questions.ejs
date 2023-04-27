@@ -6,30 +6,46 @@
 </head>
 
 <body class="bg-image">
-    <main class="main d-flex">
+    <header class="container header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" class="logo">
+            <path
+                d="M16 2H8C4.691 2 2 4.691 2 8v12a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 13c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v7z">
+            </path>
+            <circle cx="9.5" cy="11.5" r="1.5"></circle>
+            <circle cx="14.5" cy="11.5" r="1.5"></circle>
+        </svg>
+    </header>
+    <main class="container main d-flex">
         <h1 class="main__title text-center">Questions</h1>
         <% for (let i=0; i< questions.length; i++) { %>
             <div class="question">
                 <h3 class="question__title">
-                    <span><%= i + 1 %>&rpar; </span><%= questions[i].question %>
+                    <span>
+                        <%= i + 1 %>&rpar;
+                    </span>
+                    <%= questions[i].question %>
                 </h3>
                 <ol class="question__list">
                     <li class="question__answer">
-                        <span>a&rpar; </span><%= questions[i].answers[0] %>
+                        <span>a&rpar; </span>
+                        <%= questions[i].answers[0] %>
                     </li>
                     <li class="question__answer">
-                        <span>b&rpar; </span><%= questions[i].answers[1] %>
+                        <span>b&rpar; </span>
+                        <%= questions[i].answers[1] %>
                     </li>
                     <li class="question__answer">
-                        <span>c&rpar; </span><%= questions[i].answers[2] %>
+                        <span>c&rpar; </span>
+                        <%= questions[i].answers[2] %>
                     </li>
                     <li class="question__answer">
-                        <span>d&rpar; </span><%= questions[i].answers[3] %>
+                        <span>d&rpar; </span>
+                        <%= questions[i].answers[3] %>
                     </li>
                 </ol>
             </div>
-        <% } %>
-        <%- include('partials/footer') %>
+            <% } %>
+                <%- include('partials/footer') %>
     </main>
 </body>
 

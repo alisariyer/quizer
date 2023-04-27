@@ -69,13 +69,13 @@ h6 {
 
 .logo {
   fill: #d500e8;
-  margin-bottom: 1rem;
+  margin-block: 1rem;
 }
 .logo:hover circle {
   animation-play-state: paused;
 }
 .logo circle {
-  fill: white;
+  fill: #fbfbfb;
   animation-name: signal;
   animation-timing-function: linear;
   animation-duration: 2s;
@@ -87,7 +87,7 @@ h6 {
 
 @keyframes signal {
   0% {
-    fill: white;
+    fill: #fbfbfb;
   }
   50% {
     fill: #d500e8;
@@ -138,13 +138,17 @@ body {
   font-size: 2rem;
 }
 
+.container {
+  width: 100%;
+  max-width: 576px;
+  margin-inline: auto;
+  padding-inline: 3rem;
+}
+
 .main {
   color: #3a3a3a;
-  width: 100%;
   min-height: 100vh;
-  max-width: 576px;
-  padding: 6rem 3rem 2rem;
-  margin-inline: auto;
+  padding-block: 2rem;
 }
 .main__brand {
   font-size: 4.8rem;
@@ -177,7 +181,7 @@ body {
 }
 .question__answer {
   border: 2px solid #d500e8;
-  background-color: white;
+  background-color: #fbfbfb;
   margin-bottom: 1rem;
   padding: 1rem 0.5rem;
   border-radius: 0.3rem;
