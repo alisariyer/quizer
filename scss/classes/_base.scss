@@ -1,80 +1,87 @@
+.container {
+  width: 100%;
+  max-width: 576px;
+  margin-inline: auto;
+  padding-inline: 3rem;
+}
+
 .bg-image {
-    background-color: $color-light;
-    background-image: url($background-image);
+  background-color: $color-light;
+  background-image: url($background-image);
+}
+
+.logo {
+  fill: $color-primary;
+  margin-block: 1rem;
+  &:hover circle {
+    animation-play-state: paused;
   }
-  
-  .logo {
+  & circle {
+    fill: $color-light;
+    animation-name: signal;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  & circle:first-of-type {
+    animation-delay: 1s;
+  }
+}
+
+@keyframes signal {
+  0% {
+    fill: $color-light;
+  }
+  50% {
     fill: $color-primary;
-    margin-block: 1rem;
-    &:hover circle {
-      animation-play-state: paused;
-    }
-    & circle {
-      fill: $color-light;
-      animation-name: signal;
-      animation-timing-function: linear;
-      animation-duration: 2s;
-      animation-iteration-count: infinite;
-    }
-    & circle:first-of-type {
-      animation-delay: 1s;
-    }
   }
-  
-  @keyframes signal {
-    0% {
-      fill: $color-light;
-    }
-    50% {
-      fill: $color-primary;
-    }
-  }
-  
-  .btn {
-    background-color: transparent;
-    margin: 2rem;
-    padding: 1.4rem 3rem;
-    border-radius: 0.5rem;
-    border: 0.4rem solid $color-primary;
-    font-weight: $fw-bold;
-    color: $color-secondary;
-    text-decoration: none;
-    transition: color $default-animation-duration ease-in-out;
-    &:hover {
-      color: $color-primary;
-      cursor: pointer;
-    }
-  }
-  
-  .link {
-    text-decoration: underline solid transparent 0.2rem;
+}
+
+.btn {
+  background-color: transparent;
+  margin: 2rem;
+  padding: 1.4rem 3rem;
+  border-radius: 0.5rem;
+  border: 0.4rem solid $color-primary;
+  font-weight: $fw-bold;
+  color: $color-secondary;
+  text-decoration: none;
+  transition: color $default-animation-duration ease-in-out;
+  &:hover {
     color: $color-primary;
-    transition: text-decoration-color $default-animation-duration ease-in-out;
-    &:hover {
-      text-decoration-color: $color-primary;
-    }
+    cursor: pointer;
   }
-  
-  .text-center {
-    text-align: center;
-  }
-  
-  .d-flex {
-    display: flex;
-  }
+}
 
-  .d-flex-col {
-    flex-flow: column nowrap;
+.link {
+  text-decoration: underline solid transparent 0.2rem;
+  color: $color-primary;
+  transition: text-decoration-color $default-animation-duration ease-in-out;
+  &:hover {
+    text-decoration-color: $color-primary;
   }
-  
-  .justify-content-center {
-    justify-content: center;
-  }
+}
 
-  .align-items-center {
-    align-items: center;
-  }
+.text-center {
+  text-align: center;
+}
 
-  .hidden {
-    display: none;
-  }
+.d-flex {
+  display: flex;
+}
+
+.d-flex-col {
+  flex-flow: column nowrap;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}

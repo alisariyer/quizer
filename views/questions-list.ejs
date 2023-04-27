@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', { title: 'Questions' }) %>
+    <script src="/js/scroll.js" defer></script>
+</head>
+
+<body class="bg-image">
+    <%- include('partials/navbar') %>
+    <main class="container main d-flex d-flex-col justify-content-center ">
+        <h1 class="main__title text-center mt-2">Questions</h1>
+        <% for (let i=0; i< questions.length; i++) { %>
+            <div class="question">
+                <p class="question__title">
+                    <span>
+                        <%= i + 1 %>&rpar;
+                    </span>
+                    <%= questions[i].question %>
+                </p>
+                
+            </div>
+        <% } %>
+        <%- include('partials/footer') %>
+    </main>
+</body>
+
+</html>

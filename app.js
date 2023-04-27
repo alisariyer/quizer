@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
 
 app.get('/questions', (req, res) => {
     res.render('questions', { questions });
+});
+
+app.get('/questions/list', (req, res) => {
+    res.render('questions-list', { questions });
 })
 
 const PORT = 3000;

@@ -69,6 +69,13 @@ h6 {
   margin-bottom: 1rem;
 }
 
+.container {
+  width: 100%;
+  max-width: 576px;
+  margin-inline: auto;
+  padding-inline: 3rem;
+}
+
 .bg-image {
   background-color: #fbfbfb;
   background-image: url("../assets/images/pattern.jpg");
@@ -281,13 +288,6 @@ body {
   font-family: "Sen", sans-serif;
   font-weight: 400;
   font-size: 2rem;
-}
-
-.container {
-  width: 100%;
-  max-width: 576px;
-  margin-inline: auto;
-  padding-inline: 3rem;
 }
 
 .navbar-scroll {

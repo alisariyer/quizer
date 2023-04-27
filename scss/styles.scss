@@ -10,29 +10,7 @@ body {
   font-size: $fs-regular;
 }
 
-.container {
-  width: 100%;
-  max-width: 576px;
-  margin-inline: auto;
-  padding-inline: 3rem;
-}
-
-.navbar-scroll {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: $color-light;
-  border-bottom: .2rem solid $color-primary;
-  opacity: 0;
-  animation: appear $default-animation-duration ease-in-out forwards;
-}
-
-@keyframes appear {
-  to {
-    opacity: 1;
-  }
-}
+@import "modules/navbar.scss";
 
 .brand {
   font-weight: $fw-bold;
@@ -89,13 +67,4 @@ body {
   }
 }
 
-.footer {
-  margin-top: auto;
-  & p {
-    font-size: 1.4rem;
-    margin-bottom: 0.4rem;
-  }
-  & small {
-    font-size: 1.2rem;
-  }
-}
+@import "modules/footer.scss";

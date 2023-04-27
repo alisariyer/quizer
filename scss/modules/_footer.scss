@@ -1,0 +1,10 @@
+.footer {
+    margin-top: auto;
+    & p {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+    & small {
+      font-size: 1.2rem;
+    }
+  }
