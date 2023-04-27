@@ -8,11 +8,12 @@ const questions = require('./questions');
 app.set('view engine', 'ejs');
 app.set('ejs', path.join(__dirname, 'views'));
 
-// use express static middleware
+// use middlewares
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true}))
 
+// GET home route
 app.get('/', (req, res) => {
     res.render('home');
 });
