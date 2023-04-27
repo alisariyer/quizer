@@ -35,6 +35,9 @@ p, h1, h2, h3, h4, h5, h6 {
 a {
   text-decoration: none;
 }
+a:active {
+  color: #3a3a3a;
+}
 
 h1 {
   font-size: 2.6rem;
@@ -286,9 +289,6 @@ body {
 .brand {
   font-weight: 700;
   padding-inline: 0.25rem;
-}
-.brand:hover {
-  color: #3a3a3a;
 }
 
 .main {

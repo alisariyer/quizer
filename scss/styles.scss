@@ -1,5 +1,5 @@
-@import "reset";
 @import "utils/variables";
+@import "reset";
 @import "classes/typography";
 @import "classes/base";
 @import "classes/spacing";
@@ -20,9 +20,6 @@ body {
 .brand {
   font-weight: $fw-bold;
   padding-inline: .25rem;
-  &:hover {
-    color: $color-secondary;
-  }
 }
 
 .main {
