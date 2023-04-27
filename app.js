@@ -1,14 +1,17 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const methodOverride = require('method-override');
 const questions = require('./questions');
-
-// use express static middleware
-app.use(express.static(path.join(__dirname, 'public')));
 
 // setup view engine
 app.set('view engine', 'ejs');
 app.set('ejs', path.join(__dirname, 'views'));
+
+// use express static middleware
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
+app.use(express.urlencoded({ extended: true}))
 
 app.get('/', (req, res) => {
     res.render('home');
@@ -19,10 +22,16 @@ app.get('/questions', (req, res) => {
     res.render('questions', { questions });
 });
 
-// Add a new question
+// Get new question view
 app.get('/questions/new', (req, res) => {
     res.render('new');
 });
+
+// Add new question
+app.post('/questions/new', (req, res) => {
+    console.log(req.body);
+    res.send('OK');
+})
 
 // Show questions to admin
 app.get('/questions/list', (req, res) => {
