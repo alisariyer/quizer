@@ -19,7 +19,7 @@ body {
 
 .main {
   color: $color-secondary;
-  min-height: 100vh;
+  min-height: calc(100vh - 68px);
   & .brand {
     font-size: 4.8rem;
     margin-bottom: 6rem;

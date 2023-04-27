@@ -157,6 +157,10 @@ h6 {
   display: none;
 }
 
+.min-vh-100 {
+  min-height: 100vh;
+}
+
 .mt-1 {
   margin-top: 1rem;
 }
@@ -314,7 +318,7 @@ body {
 
 .main {
   color: #3a3a3a;
-  min-height: 100vh;
+  min-height: calc(100vh - 68px);
 }
 .main .brand {
   font-size: 4.8rem;
