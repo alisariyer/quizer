@@ -2,6 +2,7 @@
 @import "utils/variables";
 @import "classes/typography";
 @import "classes/base";
+@import "classes/spacing";
 
 body {
   font-family: $default-font;
@@ -16,13 +17,19 @@ body {
   padding-inline: 3rem;
 }
 
+.brand {
+  font-weight: $fw-bold;
+  padding-inline: .25rem;
+  &:hover {
+    color: $color-secondary;
+  }
+}
+
 .main {
   color: $color-secondary;
   min-height: 100vh;
-  padding-block: 2rem;
-  &__brand {
+  & .brand {
     font-size: 4.8rem;
-    font-weight: $fw-bold;
     margin-bottom: 6rem;
   }
   &__title {

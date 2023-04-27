@@ -1,0 +1,27 @@
+@for $value from 1 through 4 {
+    .mt-#{$value} {
+        margin-top: #{$value} + rem;
+    }
+    .mb-#{$value} {
+        margin-bottom: #{$value} + rem;
+    }
+    .my-#{$value} {
+        margin-block: #{$value} + rem;
+    }
+    .mx-#{$value} {
+        margin-inline: #{$value} + rem;
+    }
+    .pt-#{$value} {
+        padding-top: #{$value} + rem;
+    }
+    .pb-#{$value} {
+        padding-bottom: #{$value} + rem;
+    }
+    .py-#{$value} {
+        padding-block: #{$value} + rem;
+    }
+    .px-#{$value} {
+        padding-inline: #{$value} + rem;
+    }
+    
+}
