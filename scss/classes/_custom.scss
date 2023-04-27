@@ -37,10 +37,12 @@
   }
 }
 
-.icon {
+.fill-primary {
   fill: $color-primary;
-  margin-right: 0.5rem;
-  display: inline;
+}
+
+.fill-light {
+  fill: $color-light;
 }
 
 .link {

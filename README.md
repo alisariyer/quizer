@@ -7,12 +7,12 @@ A quiz web application
 ## Used Technologies (Or will be used)
 - Node.js
 - **Express.js**
-- **SASS** Css Preprocessor
+- **SASS**
 - **MongoDB**
-- Ejs Html template language
-- VSCode Code Editor
+- Ejs
+- VSCode
 - Git Version Control
-- Figma UI Design Tool
+- Figma
 - Adobe Illustrator
 
 ## Specifications:
