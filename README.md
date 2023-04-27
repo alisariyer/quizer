@@ -1,5 +1,5 @@
 # Quizer
-A quiz web application | Express.js | MongoDB | SASS | Ejs | Rest | Accessibility | SEO | Figma | And more...
+A quiz web application
 
 ## Project Details:
 - Start date: 25 April 2023
