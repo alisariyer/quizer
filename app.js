@@ -17,44 +17,49 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-// Show questions to guest
+// GET questions to guest
 app.get('/questions', (req, res) => {
     res.render('questions', { questions });
 });
 
-// Get new question view
+// GET new question
 app.get('/questions/new', (req, res) => {
     res.render('new');
 });
 
-// Add new question
+// POST new question
 app.post('/questions/new', (req, res) => {
-    console.log(req.body);
-    res.send('OK');
+    const { question, answers, correct } = req.body;
+    questions.push({
+        question,
+        answers,
+        correct
+    })
+    res.redirect('/questions/list');
 })
 
-// Show questions to admin
+// GET questions for admin
 app.get('/questions/list', (req, res) => {
     res.render('questions-list', { questions });
 })
 
-// Get a specific question
+// GET a specific question
 app.get('/questions/question/:id', (req, res) => {
     const { id } = req.params;
     if (/^[0-9]+$/.test(id)) {
-        const question = questions.find(question => question.id === parseInt(id));
+        const question = questions.find(question => question.id === id);
         return res.send(question);
     }
     res.status(400).send('Unknown Id, please check it: ' + id);
     // res.render('edit', { question });
 });
 
-// Update a specific question
+// UPDATE a specific question
 app.put('/questions/question/:id', (req, res) => {
     res.send(req.params.id);
 });
 
-// Delete a specific question
+// DELETE a specific question
 app.delete('/questions/question/:id', (req, res) => {
     res.send('Deleting');
 })

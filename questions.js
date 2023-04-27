@@ -8,7 +8,7 @@ module.exports = [
             'Hyper Transmission Language',
             'Hypertext Extensible Language'
         ],
-        correct: 1
+        correct: '1'
     },
     {
         id: 1,
@@ -19,7 +19,7 @@ module.exports = [
             'Inline CSS',
             'Linkable CSS'
         ],
-        correct: 3
+        correct: '3'
     },
     {
         id: 2,
@@ -30,6 +30,6 @@ module.exports = [
             'article',
             'footer'
         ],
-        correct: 1
+        correct: '1'
     }
 ]
