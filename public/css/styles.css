@@ -78,6 +78,12 @@ a:active {
     fill: #d500e8;
   }
 }
+.icon {
+  fill: #d500e8;
+  margin-right: 0.5rem;
+  display: inline;
+}
+
 .link {
   text-decoration: underline solid transparent 0.2rem;
   color: #d500e8;
@@ -103,6 +109,10 @@ a:active {
   display: block;
 }
 
+.d-inline {
+  display: inline;
+}
+
 .d-flex {
   display: flex;
 }
@@ -125,7 +135,6 @@ a:active {
 
 .btn {
   background-color: transparent;
-  margin: 2rem;
   padding: 1.4rem 3rem;
   border-radius: 0.5rem;
   border: 0.4rem solid #d500e8;
@@ -189,6 +198,7 @@ a:active {
 }
 
 .form-select {
+  font-size: 2rem;
   padding: 0.3rem 1rem;
   line-height: 1.5;
   color: #3a3a3a;
@@ -248,6 +258,14 @@ h6 {
   margin-bottom: 1rem;
 }
 
+.ms-1 {
+  margin-left: 1rem;
+}
+
+.me-1 {
+  margin-right: 1rem;
+}
+
 .my-1 {
   margin-block: 1rem;
 }
@@ -278,6 +296,14 @@ h6 {
 
 .mb-2 {
   margin-bottom: 2rem;
+}
+
+.ms-2 {
+  margin-left: 2rem;
+}
+
+.me-2 {
+  margin-right: 2rem;
 }
 
 .my-2 {
@@ -312,6 +338,14 @@ h6 {
   margin-bottom: 3rem;
 }
 
+.ms-3 {
+  margin-left: 3rem;
+}
+
+.me-3 {
+  margin-right: 3rem;
+}
+
 .my-3 {
   margin-block: 3rem;
 }
@@ -344,6 +378,14 @@ h6 {
   margin-bottom: 4rem;
 }
 
+.ms-4 {
+  margin-left: 4rem;
+}
+
+.me-4 {
+  margin-right: 4rem;
+}
+
 .my-4 {
   margin-block: 4rem;
 }
@@ -366,6 +408,10 @@ h6 {
 
 .px-4 {
   padding-inline: 4rem;
+}
+
+.ms-auto {
+  margin-left: auto;
 }
 
 body {

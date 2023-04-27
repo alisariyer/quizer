@@ -37,6 +37,12 @@
   }
 }
 
+.icon {
+  fill: $color-primary;
+  margin-right: 0.5rem;
+  display: inline;
+}
+
 .link {
   text-decoration: underline solid transparent 0.2rem;
   color: $color-primary;

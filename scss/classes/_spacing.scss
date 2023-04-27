@@ -5,6 +5,12 @@
     .mb-#{$value} {
         margin-bottom: #{$value} + rem;
     }
+    .ms-#{$value} {
+        margin-left: #{$value} + rem;
+    }
+    .me-#{$value} {
+        margin-right: #{$value} + rem;
+    }
     .my-#{$value} {
         margin-block: #{$value} + rem;
     }
@@ -23,5 +29,8 @@
     .px-#{$value} {
         padding-inline: #{$value} + rem;
     }
-    
+}
+
+.ms-auto {
+    margin-left: auto;
 }
