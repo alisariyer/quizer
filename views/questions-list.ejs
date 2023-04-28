@@ -3,7 +3,6 @@
 
 <head>
     <%- include('partials/head', { title: 'Question List' }) %>
-    <script src="/js/scroll.js" defer></script>
 </head>
 
 <body class="bg-image">
@@ -12,7 +11,7 @@
         <h1 class="main__title text-center mt-2">Questions</h1>
         <ol class="question list-group">
         <% for (let i=0; i< questions.length; i++) { %>
-            <li class="list-group-item">
+            <li class="list-group-item p-1">
                 <span>
                     <%= i + 1 %>&rpar;&nbsp;
                 </span>

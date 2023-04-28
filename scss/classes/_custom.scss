@@ -45,6 +45,10 @@
   fill: $color-light;
 }
 
+.bg-light {
+  background-color: $color-light;
+}
+
 .link {
   text-decoration: underline solid transparent 0.2rem;
   color: $color-primary;
