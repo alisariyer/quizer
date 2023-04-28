@@ -10,7 +10,7 @@
         <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
 
             <!-- Main content goes here -->
-            <form action="/questions/new?_method=PUT" method="POST" class="my-2">
+            <form action="/questions/question/<%= question.id %>?_method=PUT" method="POST" class="my-2">
 
                 <div class="mb-2">
                     <label for="question" class="d-flex align-items-center mb-1"><%- include('components/rocket-svg') %>New Question:</label>

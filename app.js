@@ -59,7 +59,19 @@ app.get('/questions/question/:id', (req, res) => {
 
 // UPDATE a specific question
 app.put('/questions/question/:id', (req, res) => {
-    res.send(req.params.id);
+    const { id } = req.params;
+    const { question, answers, correct } = req.body;
+    if (id) {
+        const index = questions.findIndex(question => question.id === id);
+        questions[index] = {
+            id,
+            question,
+            answers,
+            correct,
+        }
+        return res.redirect('/questions/list');
+    }
+    res.status(400).send('Unknown Id, please check it: ' + id);
 });
 
 // DELETE a specific question
