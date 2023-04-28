@@ -43,6 +43,20 @@
         flex-basis:3rem;
         background-color: $color-secondary;
     }
+    & form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    & button {
+        background-color: $color-secondary;
+        padding: 0;
+        border: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+    }
 }
 
 .btn {

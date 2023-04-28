@@ -17,12 +17,14 @@
                     <%= i + 1 %>&rpar;&nbsp;
                 </span>
                 <p><%= questions[i].question %></p>
-                <span class="list-group-button" title="Edit">
+                <a href="/questions/question/<%= questions[i].id %>" class="list-group-button" title="Edit">
                     <%- include('components/edit-svg') %>
-                </span>
-                <span class="list-group-button" title="Delete">
-                    <%- include('components/delete-svg') %>
-                </span>
+                </a>
+                <form class="list-group-button" action="/questions/question/<%= questions[i].id %>?_method=DELETE" method="POST" title="Delete">
+                    <button>
+                        <%- include('components/delete-svg') %>
+                    </button>
+                </form>
             </li>
         <% } %>
         </ol>

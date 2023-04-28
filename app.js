@@ -62,7 +62,10 @@ app.put('/questions/question/:id', (req, res) => {
 
 // DELETE a specific question
 app.delete('/questions/question/:id', (req, res) => {
-    res.send('Deleting');
+    const { id } = req.params;
+    const index = questions.findIndex(el => el.id === id);
+    questions.splice(index, 1);
+    res.redirect('/questions/list');
 })
 
 const PORT = 3000;

@@ -375,6 +375,20 @@ h6 {
   flex-basis: 3rem;
   background-color: #3a3a3a;
 }
+.list-group form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list-group button {
+  background-color: #3a3a3a;
+  padding: 0;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
 
 .btn {
   background-color: transparent;
