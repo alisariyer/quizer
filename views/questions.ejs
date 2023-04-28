@@ -17,20 +17,20 @@
                     </span>
                     <%= questions[i].question %>
                 </h3>
-                <ol class="question__list" data-id="<%= questions[i].id %>" data-selected="false">
-                    <li class="question__answer">
+                <ol class="question__list" data-id="<%= questions[i].id %>">
+                    <li class="question__answer" data-choice="0">
                         <span>a&rpar; </span>
                         <%= questions[i].answers[0] %>
                     </li>
-                    <li class="question__answer">
+                    <li class="question__answer" data-choice="1">
                         <span>b&rpar; </span>
                         <%= questions[i].answers[1] %>
                     </li>
-                    <li class="question__answer">
+                    <li class="question__answer" data-choice="2">
                         <span>c&rpar; </span>
                         <%= questions[i].answers[2] %>
                     </li>
-                    <li class="question__answer">
+                    <li class="question__answer" data-choice="3">
                         <span>d&rpar; </span>
                         <%= questions[i].answers[3] %>
                     </li>
