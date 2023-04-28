@@ -17,7 +17,7 @@
                     </span>
                     <%= questions[i].question %>
                 </h3>
-                <ol class="question__list">
+                <ol class="question__list" data-id="<%= questions[i].id %>" data-selected="false">
                     <li class="question__answer">
                         <span>a&rpar; </span>
                         <%= questions[i].answers[0] %>

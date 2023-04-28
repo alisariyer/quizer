@@ -16,7 +16,7 @@ body {
 
 .brand {
   font-weight: $fw-bold;
-  padding-inline: .25rem;
+  padding-inline: 0.25rem;
 }
 
 .main {
@@ -64,6 +64,15 @@ body {
       & span {
         color: $color-primary;
       }
+    }
+  }
+  &__answered {
+    color: $color-light;
+    background-color: $color-secondary;
+    border-color: $color-secondary;
+    cursor: pointer;
+    & span {
+      color: $color-primary;
     }
   }
 }
