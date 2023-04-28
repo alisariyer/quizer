@@ -50,12 +50,11 @@ app.get('/questions/list', (req, res) => {
 // GET a specific question
 app.get('/questions/question/:id', (req, res) => {
     const { id } = req.params;
-    if (/^[0-9]+$/.test(id)) {
+    if (id) {
         const question = questions.find(question => question.id === id);
-        return res.send(question);
+        return res.render('edit', { question });
     }
     res.status(400).send('Unknown Id, please check it: ' + id);
-    // res.render('edit', { question });
 });
 
 // UPDATE a specific question

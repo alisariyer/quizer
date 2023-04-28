@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', { title: 'Edit Question' }) %>
+</head>
+
+<body class="bg-image">
+    <%- include('partials/header') %>
+        <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
+
+            <!-- Main content goes here -->
+            <form action="/questions/new?_method=PUT" method="POST" class="my-2">
+
+                <div class="mb-2">
+                    <label for="question" class="d-flex align-items-center mb-1"><%- include('components/rocket-svg') %>New Question:</label>
+                    <textarea name="question" id="question" class="form-control" rows="5"
+                        placeholder="Write question here..." required><%= question.question %></textarea>
+                </div>
+
+                <div class="mb-2 input-group">
+                    <label for="answer1" class="input-group-text">a&rpar;</label>
+                    <input type="text" id="answer1" class="form-control" name="answers[0]" placeholder="First answer" value="<%= question.answers[0] %>"
+                        required>
+                </div>
+
+                <div class="mb-2 input-group">
+                    <label for="answer2" class="input-group-text">b&rpar; </label>
+                    <input type="text" id="answer2" class="form-control" name="answers[1]" placeholder="Second answer" value="<%= question.answers[1] %>"
+                        required>
+                </div>
+
+                <div class="mb-2 input-group">
+                    <label for="answer3" class="input-group-text">c&rpar; </label>
+                    <input type="text" id="answer3" class="form-control" name="answers[2]" placeholder="Third answer" value="<%= question.answers[2] %>"
+                        required><br>
+                </div>
+
+                <div class="mb-2 input-group">
+                    <label for="answer4" class="input-group-text">d&rpar; </label>
+                    <input type="text" id="answer4" class="form-control" name="answers[3]" placeholder="Fourth answer" value="<%= question.answers[3] %>"
+                        required><br>
+                </div>
+
+                <div class="mb-2">
+                    <label for="correct">Correct Answer</label>
+                    <select name="correct" class="form-select">
+                        <option value="0" <%= question.correct === '0' ? 'selected' : ''%>>a&rpar;</option>
+                        <option value="1" <%= question.correct === '1' ? 'selected' : ''%>>b&rpar;</option>
+                        <option value="2" <%= question.correct === '2' ? 'selected' : ''%>>c&rpar;</option>
+                        <option value="3" <%= question.correct === '3' ? 'selected' : ''%>>d&rpar;</option>
+                    </select>
+                </div>
+
+                <div class="mb-2">
+                    <button class="btn ms-auto d-block">Save</button>
+                </div>
+            </form>
+
+            <%- include('partials/footer') %>
+        </main>
+</body>
+
+</html>
