@@ -87,7 +87,19 @@ a:active {
 }
 
 .bg-light {
-  background-color: #fbfbfb;
+  background-color: #fbfbfb !important;
+}
+
+.bg-primary {
+  background-color: #d500e8 !important;
+}
+
+.bg-primary-light {
+  background-color: #fef5ff !important;
+}
+
+.bg-secondary {
+  background-color: #3a3a3a !important;
 }
 
 .link {
@@ -101,6 +113,10 @@ a:active {
 
 .text-center {
   text-align: center;
+}
+
+.text-light {
+  color: #fbfbfb !important;
 }
 
 .min-vh-100 {
@@ -183,6 +199,10 @@ h6 {
 
 .fs-tiny {
   font-size: 1.4rem;
+}
+
+.fw-bold {
+  font-weight: 700;
 }
 
 .mt-1 {

@@ -46,7 +46,19 @@
 }
 
 .bg-light {
-  background-color: $color-light;
+  background-color: $color-light !important;
+}
+
+.bg-primary {
+  background-color: $color-primary !important;
+}
+
+.bg-primary-light {
+  background-color: $color-primary-light !important;
+}
+
+.bg-secondary {
+  background-color: $color-secondary !important;
 }
 
 .link {
@@ -60,6 +72,10 @@
 
 .text-center {
   text-align: center;
+}
+
+.text-light {
+  color: $color-light !important;
 }
 
 .min-vh-100 {
