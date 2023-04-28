@@ -59,6 +59,24 @@
     }
 }
 
+.btn-menu {
+  background-color: $color-primary;
+  padding: 0.1rem;
+  border-radius: $default-border-radius;
+  border: 0.4rem solid $color-primary;
+  color: $color-light;
+  line-height: 1;
+  & svg {
+    transition: transform $default-animation-duration ease-in-out;
+  }
+  &:hover {
+    cursor: pointer;
+    & svg {
+      transform: rotate(.5turn);
+    }
+  }
+}
+
 .btn {
     background-color: transparent;
     padding: 1.4rem 3rem;

@@ -1,9 +1,16 @@
-<header class="container d-flex">
-    <navbar class="hidden navbar-scroll">
-        <div class="container d-flex">
+<navbar class="w-100">
+    <div class="hidden navbar-scroll">
+        <div class="container d-flex justify-content-between align-items-center">
             <%- include('brand', { isSmall: true}) %>
+            <button class="btn-menu">
+                <%- include('../components/cog-svg') %>
+            </button>
         </div>
-    </navbar>
-
-    <%- include('brand', { isSmall: false }) %>
-</header>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+        <%- include('brand', { isSmall: false }) %>
+        <button class="btn-menu">
+            <%- include('../components/cog-svg') %>
+        </button>
+    </div>
+</navbar>

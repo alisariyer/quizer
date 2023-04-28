@@ -107,6 +107,10 @@ a:active {
   min-height: calc(100vh - 68px);
 }
 
+.w-100 {
+  width: 100%;
+}
+
 .d-block {
   display: block;
 }
@@ -125,6 +129,10 @@ a:active {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
 }
 
 .align-items-center {
@@ -388,6 +396,24 @@ h6 {
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
+}
+
+.btn-menu {
+  background-color: #d500e8;
+  padding: 0.1rem;
+  border-radius: 0.4rem;
+  border: 0.4rem solid #d500e8;
+  color: #fbfbfb;
+  line-height: 1;
+}
+.btn-menu svg {
+  transition: transform 0.2s ease-in-out;
+}
+.btn-menu:hover {
+  cursor: pointer;
+}
+.btn-menu:hover svg {
+  transform: rotate(0.5turn);
 }
 
 .btn {
