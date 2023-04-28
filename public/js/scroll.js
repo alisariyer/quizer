@@ -3,6 +3,14 @@ window.addEventListener("DOMContentLoaded", (e) => {
   const btnMenus = document.querySelectorAll(".btn-menu");
   const menuToggle = document.querySelector(".menu-toggle");
   let isMenuToggled = false;
+  let rectButton = document
+    .querySelector(".btn-menu-main")
+    .getBoundingClientRect();
+  let rectBody = document.body.getBoundingClientRect();
+  menuToggle.style.top = `${rectButton.bottom + 6}px`;
+  menuToggle.style.right = `${
+    rectBody.right - rectButton.left - rectButton.width
+  }px`;
 
   btnMenus.forEach((btn) =>
     btn.addEventListener("click", () => {
@@ -18,17 +26,23 @@ window.addEventListener("DOMContentLoaded", (e) => {
   );
 
   document.addEventListener("scroll", (e) => {
-    console.log("window.innerHeight: ", window.innerHeight);
-    console.log("window.scrollY: ", window.scrollY);
-    console.log("document.body.offsetTop", document.body.offsetTop);
-    console.log("document.body.offsetHeight", document.body.offsetHeight);
     if (window.scrollY > 60) {
       navbar.classList.remove("d-none");
-      menuToggle.style.top = `${window.scrollY + 60}px`;
+      menuToggle.style.top = `${rectButton.bottom}px`;
     } else {
       navbar.classList.add("d-none");
-      menuToggle.style.top = `${64}px`;
+      menuToggle.style.top = `${rectButton.bottom + 6}px`;
     }
   });
-});
 
+  window.addEventListener("resize", (e) => {
+    rectButton = document
+      .querySelector(".btn-menu-main")
+      .getBoundingClientRect();
+    rectBody = document.body.getBoundingClientRect();
+    menuToggle.style.top = `${rectButton.bottom + 6}px`;
+    menuToggle.style.right = `${
+      rectBody.right - rectButton.left - rectButton.width
+    }px`;
+  });
+});

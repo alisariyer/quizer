@@ -714,11 +714,11 @@ h6 {
 .menu-toggle {
   display: inline-block;
   background-color: #fbfbfb;
-  position: absolute;
+  position: fixed;
   top: 64px;
   right: 0;
   min-width: 14rem;
-  transition: top 50ms linear;
+  transition: top 50ms linear, right 50ms linear;
 }
 .menu-toggle .list-group-item {
   padding: 0.4rem 0.8rem;
