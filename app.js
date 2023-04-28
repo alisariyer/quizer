@@ -63,11 +63,13 @@ app.put('/questions/question/:id', (req, res) => {
     const { question, answers, correct } = req.body;
     if (id) {
         const index = questions.findIndex(question => question.id === id);
-        questions[index] = {
-            id,
-            question,
-            answers,
-            correct,
+        if (id > -1) {
+            questions[index] = {
+                id,
+                question,
+                answers,
+                correct,
+            }
         }
         return res.redirect('/questions/list');
     }
@@ -78,7 +80,7 @@ app.put('/questions/question/:id', (req, res) => {
 app.delete('/questions/question/:id', (req, res) => {
     const { id } = req.params;
     const index = questions.findIndex(el => el.id === id);
-    questions.splice(index, 1);
+    if (index > -1) questions.splice(index, 1);
     res.redirect('/questions/list');
 })
 
