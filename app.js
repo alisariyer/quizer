@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
+const { v4: uuidv4 } = require('uuid');
 const questions = require('./questions');
 
 // setup view engine
@@ -30,11 +31,13 @@ app.get('/questions/new', (req, res) => {
 
 // POST new question
 app.post('/questions/new', (req, res) => {
+    console.log(req.body);
     const { question, answers, correct } = req.body;
     questions.push({
         question,
         answers,
-        correct
+        correct,
+        id: uuidv4()
     })
     res.redirect('/questions/list');
 })
