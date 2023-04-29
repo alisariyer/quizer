@@ -5,16 +5,51 @@ window.addEventListener("DOMContentLoaded", (e) => {
   // question list
   const questions = document.querySelectorAll(".question__list");
 
+  // get spans keeping timing values
+  const secondSpans = document.querySelectorAll(".second");
+  const minuteSpans = document.querySelectorAll(".minute");
+
+  // helper function to pad numbers of node list
+  const updateElByPadding = (node, value) => {
+    node.forEach(el => el.innerText = (value + '').padStart(2, '0'));
+  }
+
+  // set default duration for each question
+  const defaultDuration = 10;
+  let second = (defaultDuration * questions.length) % 60;
+  let minute = Math.floor((defaultDuration * questions.length) / 60);
+
+  updateElByPadding(secondSpans, second);
+  updateElByPadding(minuteSpans, minute);
+  // secondSpan.innerText = (second + '').padStart(2, '0');
+  // minuteSpan.innerText = (minute + '').padStart(2, '0');
+
+  // Count down for quiz
+  const intervalID = setInterval(() => {
+    second--;
+    if (second <= 0) {
+      if (minute > 0) {
+        second = 59;
+        minute--;
+      } else {
+        clearInterval(intervalID);
+      }
+    }
+    updateElByPadding(secondSpans, second);
+    updateElByPadding(minuteSpans, minute);
+  }, 1000);
+
   // to keep selected list items by pairing question list
   // use question list data-id dataset and list item data-choice dataset
   const selectedAnswers = [];
 
   // two span elements keeping total answered questions and all questions number
-  const totalAnswered = document.querySelector(".total-answered");
-  const totalQuestions = document.querySelector(".total-questions");
+  const totalAnsweredSpans = document.querySelectorAll(".total-answered");
+  const totalQuestionSpans = document.querySelectorAll(".total-questions");
 
   // update once total questions number
-  totalQuestions.innerText = (questions.length + '').padStart(2, '0');
+  updateElByPadding(totalQuestionSpans, questions.length);
+  // totalQuestions.innerText = (questions.length + "").padStart(2, "0");
 
   // update function to update total answered questions
   const updateQuizState = () => {
@@ -22,7 +57,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
     selectedAnswers.forEach((answer) =>
       answer.answer !== "-1" ? totalSelectedAnswers++ : null
     );
-    totalAnswered.innerText = `${(totalSelectedAnswers + "").padStart(2, "0")}`;
+    updateElByPadding(totalAnsweredSpans, totalSelectedAnswers);
+    // totalAnswered.innerText = `${(totalSelectedAnswers + "").padStart(2, "0")}`;
   };
   updateQuizState();
 
@@ -57,7 +93,11 @@ window.addEventListener("DOMContentLoaded", (e) => {
         e.target.classList.remove("question__answered");
 
         // compare by parentEl.dataset.id so is same as selectedAnswer.id to not remove all answers
-        selectedAnswers.forEach(selectedAnswer => parentEl.dataset.id === selectedAnswer.id ? selectedAnswer.answer = "-1" : null);
+        selectedAnswers.forEach((selectedAnswer) =>
+          parentEl.dataset.id === selectedAnswer.id
+            ? (selectedAnswer.answer = "-1")
+            : null
+        );
 
         // update quiz state
         updateQuizState();
