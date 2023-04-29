@@ -34,6 +34,14 @@ window.addEventListener("DOMContentLoaded", (e) => {
       // and also using data-id send data for server
       const parentEl = e.target.parentElement;
 
+      // if list item (answer) is already selected, remove styling class
+      //  and answers from selectedAnswers array
+      if (e.target.classList.contains("question__answered")) {
+        e.target.classList.remove("question__answered");
+        selectedAnswers.forEach(answer => answer.answer = '-1');
+        return null;
+      }
+
       // clear possible selected items' styling classes
       clearSelection(parentEl);
 

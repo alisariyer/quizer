@@ -17,7 +17,7 @@ app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json());
 
-// setup morgan log
+// setup morgan logger
 const accessLogStream = fs.WriteStream(path.join(__dirname, 'access.log'), { flags: 'a'})
 app.use(morgan('tiny', { stream: accessLogStream }));
 
