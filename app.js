@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
 const { v4: uuidv4 } = require('uuid');
+const morgan = require('morgan');
+const fs = require('fs');
 const questions = require('./questions');
 
 // setup view engine
@@ -14,6 +16,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json());
+
+// setup morgan log
+const accessLogStream = fs.WriteStream(path.join(__dirname, 'access.log'), { flags: 'a'})
+app.use(morgan('tiny', { stream: accessLogStream }));
+
 
 // GET home route
 app.get('/', (req, res) => {
