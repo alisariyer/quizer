@@ -32,7 +32,6 @@ app.get('/questions/new', (req, res) => {
 
 // POST new question
 app.post('/questions/new', (req, res) => {
-    console.log(req.body);
     const { question, answers, correct } = req.body;
     questions.push({
         question,

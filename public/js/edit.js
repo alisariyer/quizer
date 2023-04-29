@@ -14,18 +14,17 @@ window.addEventListener('DOMContentLoaded', (e) => {
             correct: form.elements.correct.value };
     }
 
-    const putData = async ( url = "", data = {}) => {
-        const response = await fetch(url, {
-            method: 'PUT',
-            body: data
-        });
-        const res = await response.json();
-        return res;
-    } 
-
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        putData(`/questions/question/${questionID}`, getUpdatedQuestion())
-            .then(data => console.log(data));
+        console.log(getUpdatedQuestion());
+        const response = await fetch(`/questions/question/${questionID}`, { 
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(getUpdatedQuestion())
+        });
+        const data = await response.json()
+        console.log(data);
     })
 })
