@@ -13,6 +13,7 @@ app.set('ejs', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true}))
+app.use(express.json());
 
 // GET home route
 app.get('/', (req, res) => {
@@ -71,9 +72,9 @@ app.put('/questions/question/:id', (req, res) => {
                 correct,
             }
         }
-        return res.redirect('/questions/list');
+        return res.send({ message: 'Updated'})
     }
-    res.status(400).send('Unknown Id, please check it: ' + id);
+    res.status(400).send({ message: 'Errrorrr...'})
 });
 
 // DELETE a specific question
