@@ -1,6 +1,8 @@
 window.addEventListener('DOMContentLoaded', (e) => {
     const form = document.querySelector('.form-edit');
     const questionID = form.dataset.id;
+    const popup = document.querySelector('.popup');
+    const popupP = document.querySelector('.popup p')
 
     const getUpdatedQuestion = () => {
         return { 
@@ -14,6 +16,16 @@ window.addEventListener('DOMContentLoaded', (e) => {
             correct: form.elements.correct.value };
     }
 
+    const showTempPopup = () => {
+        popup.classList.remove('d-none');
+        popup.classList.add('animation-running');
+        setTimeout(() => {
+            popup.classList.add('d-none');
+            popup.classList.remove('animation-running')
+            popupP.innerText = "";
+        }, 1200);
+    }
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         console.log(getUpdatedQuestion());
@@ -24,7 +36,8 @@ window.addEventListener('DOMContentLoaded', (e) => {
             },
             body: JSON.stringify(getUpdatedQuestion())
         });
-        const data = await response.json()
-        console.log(data);
+        const { message } = await response.json()
+        popupP.innerText = message;
+        showTempPopup();
     })
 })

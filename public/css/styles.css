@@ -752,6 +752,36 @@ h6 {
   color: inherit;
 }
 
+.popup {
+  position: fixed;
+  z-index: 100;
+  bottom: 10rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  animation: popup 1s ease-in-out paused;
+}
+.popup p {
+  display: inline-block;
+  background-color: #d500e8;
+  color: #fbfbfb;
+  padding: 1rem;
+  border-radius: 0.4rem;
+}
+
+.animation-running {
+  animation-play-state: running;
+}
+
+@keyframes popup {
+  0%, 100% {
+    opacity: 0;
+  }
+  30%, 70% {
+    opacity: 100%;
+  }
+}
 body {
   font-family: "Sen", sans-serif;
   font-weight: 400;
