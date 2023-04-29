@@ -9,6 +9,23 @@ window.addEventListener("DOMContentLoaded", (e) => {
   // use question list data-id dataset and list item data-choice dataset
   const selectedAnswers = [];
 
+  // two span elements keeping total answered questions and all questions number
+  const totalAnswered = document.querySelector(".total-answered");
+  const totalQuestions = document.querySelector(".total-questions");
+
+  // update once total questions number
+  totalQuestions.innerText = (questions.length + '').padStart(2, '0');
+
+  // update function to update total answered questions
+  const updateQuizState = () => {
+    let totalSelectedAnswers = 0;
+    selectedAnswers.forEach((answer) =>
+      answer.answer !== "-1" ? totalSelectedAnswers++ : null
+    );
+    totalAnswered.innerText = `${(totalSelectedAnswers + "").padStart(2, "0")}`;
+  };
+  updateQuizState();
+
   // initial selected answers list
   // if not selected answer is -1
   questions.forEach((question) =>
@@ -38,7 +55,12 @@ window.addEventListener("DOMContentLoaded", (e) => {
       //  and answers from selectedAnswers array
       if (e.target.classList.contains("question__answered")) {
         e.target.classList.remove("question__answered");
-        selectedAnswers.forEach(answer => answer.answer = '-1');
+
+        // compare by parentEl.dataset.id so is same as selectedAnswer.id to not remove all answers
+        selectedAnswers.forEach(selectedAnswer => parentEl.dataset.id === selectedAnswer.id ? selectedAnswer.answer = "-1" : null);
+
+        // update quiz state
+        updateQuizState();
         return null;
       }
 
@@ -59,6 +81,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
         ...selectedAnswers[questionIndex],
         answer: e.target.dataset.choice,
       };
+
+      updateQuizState();
     })
   );
 });

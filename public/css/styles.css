@@ -31,6 +31,8 @@ input, textarea, button, select {
 
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -115,8 +117,16 @@ a:active {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .text-light {
   color: #fbfbfb !important;
+}
+
+.text-primary {
+  color: #d500e8;
 }
 
 .min-vh-100 {
@@ -169,32 +179,26 @@ a:active {
 
 h1 {
   font-size: 2.6rem;
-  margin-bottom: 1rem;
 }
 
 h2 {
   font-size: 2.2rem;
-  margin-bottom: 1rem;
 }
 
 h3 {
   font-size: 1.8rem;
-  margin-bottom: 1rem;
 }
 
 h4 {
   font-size: 1.4rem;
-  margin-bottom: 1rem;
 }
 
 h5 {
   font-size: 1rem;
-  margin-bottom: 1rem;
 }
 
 h6 {
   font-size: 0.6rem;
-  margin-bottom: 1rem;
 }
 
 .fs-tiny {

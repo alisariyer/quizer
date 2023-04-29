@@ -74,8 +74,16 @@
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .text-light {
   color: $color-light !important;
+}
+
+.text-primary {
+  color: $color-primary;
 }
 
 .min-vh-100 {
