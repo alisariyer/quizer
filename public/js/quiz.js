@@ -1,4 +1,6 @@
 window.addEventListener("DOMContentLoaded", (e) => {
+
+  showTempPopup('Quiz has started!')
   // answer list items
   const answers = document.querySelectorAll(".question__answer");
 
@@ -27,12 +29,15 @@ window.addEventListener("DOMContentLoaded", (e) => {
   // Count down for quiz
   const intervalID = setInterval(() => {
     second--;
+    if (minute === 0 && second === 10) showTempPopup('Last 10 seconds!')
+    if (minute === 0 && second === 5) showTempPopup('Last 5 seconds!')
     if (second <= 0) {
       if (minute > 0) {
         second = 59;
         minute--;
       } else {
         clearInterval(intervalID);
+        showTempPopup('Quiz finished!')
       }
     }
     updateElByPadding(secondSpans, second);

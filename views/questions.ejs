@@ -3,6 +3,7 @@
 
 <head>
     <%- include('partials/head', { title: 'Questions' }) %>
+    <script src="/js/popup.js" defer></script>
     <script src="/js/quiz.js" defer></script>
 </head>
 
@@ -39,7 +40,8 @@
                 </ol>
             </div>
             <% } %>
-                <%- include('partials/footer') %>
+            <%- include('partials/popup') %>
+            <%- include('partials/footer') %>
     </main>
 </body>
 
