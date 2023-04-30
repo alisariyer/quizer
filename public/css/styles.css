@@ -177,6 +177,10 @@ a:active {
   align-items: center;
 }
 
+.justify-content-end {
+  justify-content: flex-end;
+}
+
 h1 {
   font-size: 2.6rem;
 }
@@ -661,6 +665,13 @@ h6 {
 .btn:hover {
   color: #d500e8;
   cursor: pointer;
+}
+.btn-primary {
+  background-color: #d500e8;
+  color: #fbfbfb;
+}
+.btn-primary:hover {
+  color: #3a3a3a;
 }
 
 .form-control {

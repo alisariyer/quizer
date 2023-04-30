@@ -95,6 +95,13 @@
     color: $color-primary;
     cursor: pointer;
   }
+  &-primary {
+    background-color: $color-primary;
+    color: $color-light;
+    &:hover {
+      color: $color-secondary;
+    }
+  }
 }
 
 .form-control {
