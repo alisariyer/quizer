@@ -97,3 +97,13 @@
 .w-100 {
   width: 100%;
 }
+
+.correct {
+  color: $color-success !important;
+  border: .5rem solid $color-success !important;
+}
+
+.incorrect {
+  color: $color-danger !important;
+  border: .5rem solid $color-danger !important;
+}

@@ -141,6 +141,16 @@ a:active {
   width: 100%;
 }
 
+.correct {
+  color: #55d300 !important;
+  border: 0.5rem solid #55d300 !important;
+}
+
+.incorrect {
+  color: #ff0040 !important;
+  border: 0.5rem solid #ff0040 !important;
+}
+
 .d-block {
   display: block;
 }

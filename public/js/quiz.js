@@ -1,6 +1,4 @@
 window.addEventListener("DOMContentLoaded", (e) => {
-
-  showTempPopup('Quiz has started!')
   // answer list items
   const answers = document.querySelectorAll(".question__answer");
 
@@ -11,10 +9,46 @@ window.addEventListener("DOMContentLoaded", (e) => {
   const secondSpans = document.querySelectorAll(".second");
   const minuteSpans = document.querySelectorAll(".minute");
 
+  showTempPopup("Quiz has started!");
+
+  // start and end flag
+  // let hasQuizStarted = false;
+  let hasQuizFinished = false;
+
+  const setQuizResult = () => {
+    fetch(`/questions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedAnswers),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        styleCorrectAnswers(data.answers);
+        showTempPopup(data.message);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // helper function to style correct answers
+  const styleCorrectAnswers = (answers) => {
+    answers.forEach((answer) => {
+      questions.forEach(question => {
+        if (answer.id === question.dataset.id) {
+          question.children[parseInt(answer.correct)].classList.add('correct')
+          if (answer.answer !== '-1' && answer.answer !== answer.correct) {
+            question.children[parseInt(answer.answer)].classList.add('incorrect')
+          }
+        }
+      })
+    });
+  };
+
   // helper function to pad numbers of node list
   const updateElByPadding = (node, value) => {
-    node.forEach(el => el.innerText = (value + '').padStart(2, '0'));
-  }
+    node.forEach((el) => (el.innerText = (value + "").padStart(2, "0")));
+  };
 
   // set default duration for each question
   const defaultDuration = 10;
@@ -28,16 +62,19 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
   // Count down for quiz
   const intervalID = setInterval(() => {
+    // if the quiz has finished, stop setInterval
+    if (hasQuizFinished) clearInterval(intervalID);
+
     second--;
-    if (minute === 0 && second === 10) showTempPopup('Last 10 seconds!')
-    if (minute === 0 && second === 5) showTempPopup('Last 5 seconds!')
+    if (minute === 0 && second === 10) showTempPopup("Last 10 seconds!");
+    if (minute === 0 && second === 5) showTempPopup("Last 5 seconds!");
     if (second <= 0) {
       if (minute > 0) {
         second = 59;
         minute--;
       } else {
         clearInterval(intervalID);
-        showTempPopup('Quiz finished!')
+        setQuizResult();
       }
     }
     updateElByPadding(secondSpans, second);
@@ -130,4 +167,13 @@ window.addEventListener("DOMContentLoaded", (e) => {
       updateQuizState();
     })
   );
+
+  const btnFinish = document.querySelector(".btn-finish");
+  btnFinish.addEventListener("click", (e) => {
+    if (!hasQuizFinished) {
+      hasQuizFinished = true;
+      clearInterval(intervalID);
+      setQuizResult();
+    }
+  });
 });

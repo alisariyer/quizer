@@ -32,6 +32,20 @@ app.get('/questions', (req, res) => {
     res.render('questions', { questions });
 });
 
+// POST questions answers
+app.post('/questions', (req, res) => {
+    const answers = req.body;
+    questions.forEach(question => {
+        answers.forEach(answer => {
+            if (question.id === answer.id) {
+                const { correct } = question;
+                answer.correct = correct;
+            }
+        })
+    })
+    res.send({ message: 'Success', answers });
+})
+
 // GET new question
 app.get('/questions/new', (req, res) => {
     res.render('new');
