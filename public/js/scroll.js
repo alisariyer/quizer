@@ -8,6 +8,15 @@ window.addEventListener("DOMContentLoaded", (e) => {
   // flag to use if menu opened or not in case of scrolled navbar menu button clicked again
   let isMenuToggled = false;
 
+  // set default top length for toggle menu top value
+  const DEFAULT_MENU_TOP_LENGTH = "50px";
+
+  // if windows is loaded while scrolled down update toggle navbar state
+  if (window.scrollY > 60) {
+    navbar.classList.remove("d-none");
+    menuToggle.style.top = DEFAULT_MENU_TOP_LENGTH;
+  }
+
   // menu button coordinates to place toggle menu by these values
   let rectButton = document
     .querySelector(".btn-menu-main")
@@ -17,7 +26,11 @@ window.addEventListener("DOMContentLoaded", (e) => {
   let rectBody = document.body.getBoundingClientRect();
 
   // set toggle menu display top value to below menu button plus a bit of space
-  menuToggle.style.top = `${rectButton.bottom + 6}px`;
+  if (window.scrollY > 60) {
+    menuToggle.style.top = DEFAULT_MENU_TOP_LENGTH;
+  } else {
+    menuToggle.style.top = `${rectButton.bottom + 6}px`;
+  }
 
   // set menu display right value by body width minus menu button width
   // note that display right is distance by right side not from left to right distance
@@ -44,9 +57,13 @@ window.addEventListener("DOMContentLoaded", (e) => {
   // in case of scrolling manage hidden navbar
   // and change top value of menu
   document.addEventListener("scroll", (e) => {
+    rectButton = document
+      .querySelector(".btn-menu-main")
+      .getBoundingClientRect();
+
     if (window.scrollY > 60) {
       navbar.classList.remove("d-none");
-      menuToggle.style.top = `${rectButton.bottom}px`;
+      menuToggle.style.top = DEFAULT_MENU_TOP_LENGTH;
     } else {
       navbar.classList.add("d-none");
       menuToggle.style.top = `${rectButton.bottom + 6}px`;
@@ -58,8 +75,14 @@ window.addEventListener("DOMContentLoaded", (e) => {
     rectButton = document
       .querySelector(".btn-menu-main")
       .getBoundingClientRect();
+
     rectBody = document.body.getBoundingClientRect();
-    menuToggle.style.top = `${rectButton.bottom + 6}px`;
+
+    if (window.scrollY > 60) {
+      menuToggle.style.top = DEFAULT_MENU_TOP_LENGTH;
+    } else {
+      menuToggle.style.top = `${rectButton.bottom + 6}px`;
+    }
     menuToggle.style.right = `${
       rectBody.right - rectButton.left - rectButton.width
     }px`;
