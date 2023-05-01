@@ -2,7 +2,7 @@
 A quiz web application
 
 ## Quizer screenshot
-![Quizer screenshot](https://github.com/alisariyer/quizer/blob/main/screeenshot.png)
+![Quizer screenshot](https://github.com/alisariyer/quizer/blob/main/screenshot.png)
 
 ## Project Details:
 - Start date: 25 April 2023
