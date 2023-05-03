@@ -7,15 +7,64 @@ const morgan = require("morgan");
 const fs = require("fs");
 const questions = require("./questions");
 const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 // Establish MongoDB Connection
 const main = async () => {
-  const db = await mongoose.connect("mongodb://127.0.0.1:27017/test");
+  await mongoose.connect("mongodb://127.0.0.1:27017/quiz");
 };
 
 main()
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log(err));
+
+// Create a new Schema for quiz
+const questionSchema = new Schema({
+    id: {
+      type: String,
+      required: true
+    },
+    question: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    answers: {
+      type: [ String ],
+      required: true,
+      trim: true
+    },
+    correct: {
+      type: Number,
+      enum: [0, 1, 2, 3],
+      required: true,
+      trim: true
+    }
+})
+
+// Create a mongoose model by using mongoose Schema
+const Quiz = model('Quiz', questionSchema)
+// Quiz.deleteMany({}).then(data => console.log(data));
+const quiz = new Quiz({ 
+    id: uuidv4(),
+    question: '   Which is sibling css selector?   ',
+    answers: [
+        '+',
+        '~',
+        ' ',
+        '>'
+    ],
+    correct: 3
+});
+quiz.save();
+
+// Quiz.insertMany([
+//     { id: uuidv4(), question: 'Q1?', answers: ['a', 'b', 'c', 'd'], correct: 0},
+//     { id: uuidv4(), question: 'Q2?', answers: ['a2', 'b2', 'c2', 'd2'], correct: 1},
+//     { id: uuidv4(), question: 'Q3?', answers: ['a3', 'b3', 'c3', 'd3'], correct: 2},
+//     { id: uuidv4(), question: 'Q4?', answers: ['a4', 'b4', 'c4', 'd4'], correct: 3},
+// ]).then(data => console.log('Success: ', data))
+
 
 // setup view engine
 app.set("view engine", "ejs");
