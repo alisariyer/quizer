@@ -159,3 +159,14 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+process.on('SIGINT', () => {
+  try {
+    mongoose.connection.close();
+    console.log('Mongoose connection disconnected');
+  } catch (err) {
+    console.log('Mongoose disconnection error: ', err.message);
+  } finally {
+    process.exit(0);
+  }
+})
