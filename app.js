@@ -41,13 +41,13 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-// GET questions to guest
+// GET questions (send all questions to client side from DB)
 app.get("/questions", async (req, res) => {
   const questions = await Question.find({})
   res.render("questions", { questions });
 });
 
-// POST questions answers
+// POST answers (and send back with correct answers to client side)
 app.post("/questions", async (req, res) => {
   const questions = await Question.find({});
   const answers = req.body;
@@ -67,7 +67,7 @@ app.get("/questions/new", (req, res) => {
   res.render("new");
 });
 
-// POST new question
+// POST new question (and save in DB)
 app.post("/questions/new", async (req, res) => {
   const { question, answers, correct } = req.body;
   const newQuestion = new Question({
@@ -76,13 +76,11 @@ app.post("/questions/new", async (req, res) => {
     answers,
     correct: parseInt(correct),
   });
-  console.log(newQuestion);
-  const response = await newQuestion.save();
-  console.log('res: ', response);
+  await newQuestion.save();
   res.redirect("/questions/list");
 });
 
-// GET questions for admin
+// GET questions (send all questions to show as a list)
 app.get("/questions/list", async (req, res) => {
   const questions = await Question.find({});
   res.render("questions-list", { questions });
@@ -93,7 +91,6 @@ app.get("/questions/question/:id", async (req, res) => {
   const { id } = req.params;
   if (id) {
     const question = await Question.findOne({ id });
-    console.log(question);
     return res.render("edit", { question });
   }
   res.status(400).send("Unknown Id, please check it: " + id);
@@ -103,9 +100,8 @@ app.get("/questions/question/:id", async (req, res) => {
 app.put("/questions/question/:id", async (req, res) => {
   const { id } = req.params;
   const { question, answers, correct } = req.body;
-  console.log(question, answers, correct);
   if (id) {
-    await Question.updateOne({ id }, { $set: { question, answers, correct: parseInt(correct) }})
+    await Question.updateOne({ id }, { $set: { question, answers, correct: parseInt(correct) }}, { runValidators: true, new: true});
     return res.send({ message: "Updated" });
   }
   res.status(400).send({ message: "Errrorrr..." });
@@ -115,8 +111,7 @@ app.put("/questions/question/:id", async (req, res) => {
 app.delete("/questions/question/:id", async (req, res) => {
   const { id } = req.params;
   if (id) {
-    const response = await Question.deleteOne({ id })
-    console.log(response);
+    await Question.deleteOne({ id })
   }
   res.redirect("/questions/list");
 });
