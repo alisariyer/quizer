@@ -2,7 +2,9 @@
     <div class="d-none navbar-scroll">
         <div class="container d-flex justify-content-between align-items-center">
             <%- include('brand', { isSmall: true}) %>
-            <%- include('info') %>
+            <% if (isQuiz) { %>
+                <%- include('info') %>
+            <% } %>
             <button class="btn-menu ms-1">
                 <%- include('../components/cog-svg') %>
             </button>

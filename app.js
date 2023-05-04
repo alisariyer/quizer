@@ -83,7 +83,7 @@ app.post("/questions/new", async (req, res) => {
 // GET questions (send all questions to show as a list)
 app.get("/questions/list", async (req, res) => {
   const questions = await Question.find({});
-  res.render("questions-list", { questions });
+  res.render("question-list", { questions });
 });
 
 // GET a specific question

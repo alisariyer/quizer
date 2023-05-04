@@ -49,7 +49,7 @@ const Question = model("Question", questionSchema);
 async function cleanup() {
   await Question.deleteMany({});
   await Question.insertMany(questions);
-  await mongoose.connection.close();
+  mongoose.connection.close();
   process.exit(0);
 }
 
