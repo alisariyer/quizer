@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', { title: 'Questions' }) %>
+    <script src="/js/popup.js" defer></script>
+    <script src="/js/quiz.js" defer></script>
+</head>
+
+<body class="bg-image">
+    <%- include('partials/header', { isQuiz: true }) %>
+    <main class="container main d-flex d-flex-col justify-content-center ">
+        <%- include('partials/info') %>
+        <h1 class="main__title text-center mt-2">Questions</h1>
+        <% for (let i=0; i< questions.length; i++) { %>
+            <div class="question">
+                <h3 class="question__title">
+                    <span>
+                        <%= i + 1 %>&rpar;
+                    </span>
+                    <%= questions[i].question %>
+                </h3>
+                <ol class="question__list" data-id="<%= questions[i].id %>">
+                    <li class="question__answer" data-choice="0">
+                        <span>a&rpar; </span>
+                        <%= questions[i].answers[0] %>
+                    </li>
+                    <li class="question__answer" data-choice="1">
+                        <span>b&rpar; </span>
+                        <%= questions[i].answers[1] %>
+                    </li>
+                    <li class="question__answer" data-choice="2">
+                        <span>c&rpar; </span>
+                        <%= questions[i].answers[2] %>
+                    </li>
+                    <li class="question__answer" data-choice="3">
+                        <span>d&rpar; </span>
+                        <%= questions[i].answers[3] %>
+                    </li>
+                </ol>
+            </div>
+            <% } %>
+            <div class="d-flex justify-content-end mb-8">
+                <a href="/quiz" class="btn btn-primary d-block">New Quiz</a>
+                <button class="btn d-block ms-4 btn-finish">Finish</button>
+            </div>
+            <%- include('partials/popup') %>
+            <%- include('partials/footer') %>
+    </main>
+</body>
+
+</html>

@@ -42,13 +42,13 @@ app.get("/", (req, res) => {
 });
 
 // GET questions (send all questions to client side from DB)
-app.get("/questions", async (req, res) => {
+app.get("/quiz", async (req, res) => {
   const questions = await Question.find({})
-  res.render("questions", { questions });
+  res.render("quiz", { questions });
 });
 
 // POST answers (and send back with correct answers to client side)
-app.post("/questions", async (req, res) => {
+app.post("/quiz", async (req, res) => {
   const questions = await Question.find({});
   const answers = req.body;
   questions.forEach((question) => {
@@ -77,17 +77,17 @@ app.post("/questions/new", async (req, res) => {
     correct: parseInt(correct),
   });
   await newQuestion.save();
-  res.redirect("/questions/list");
+  res.redirect("/questions");
 });
 
 // GET questions (send all questions to show as a list)
-app.get("/questions/list", async (req, res) => {
+app.get("/questions", async (req, res) => {
   const questions = await Question.find({});
-  res.render("question-list", { questions });
+  res.render("questions", { questions });
 });
 
 // GET a specific question
-app.get("/questions/question/:id", async (req, res) => {
+app.get("/questions/:id", async (req, res) => {
   const { id } = req.params;
   if (id) {
     const question = await Question.findOne({ id });
@@ -97,7 +97,7 @@ app.get("/questions/question/:id", async (req, res) => {
 });
 
 // UPDATE a specific question
-app.put("/questions/question/:id", async (req, res) => {
+app.put("/questions/:id", async (req, res) => {
   const { id } = req.params;
   const { question, answers, correct } = req.body;
   if (id) {
@@ -108,12 +108,12 @@ app.put("/questions/question/:id", async (req, res) => {
 });
 
 // DELETE a specific question
-app.delete("/questions/question/:id", async (req, res) => {
+app.delete("/questions/:id", async (req, res) => {
   const { id } = req.params;
   if (id) {
     await Question.deleteOne({ id })
   }
-  res.redirect("/questions/list");
+  res.redirect("/questions");
 });
 
 app.use((err, req, res, next) => {

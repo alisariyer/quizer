@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const response = await fetch(`/questions/question/${questionID}`, {
+    const response = await fetch(`/questions/${questionID}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

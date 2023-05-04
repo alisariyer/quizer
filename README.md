@@ -24,7 +24,7 @@ A quiz web application
 
 ## Project Structure:
 - Homepage
-  - Questions
+  - Quiz
 - Login
 - Registration
 - Admin
@@ -34,8 +34,9 @@ A quiz web application
 
 ## REST Structure
 - GET /                           : welcome page
-- GET /questions                  : get all questions
+- GET /quiz                       : new quiz
+- POST /quiz                      : post quiz answers
 - GET /questions/new              : add a new question
-- GET /questions/question/:id     : get a specific question
-- PUT /questions/question/:id     : update a specific question
-- DELETE /questions/question/:id  : delete a specific question
+- GET /questions/:id              : get a specific question
+- PUT /questions/:id              : update a specific question
+- DELETE /questions/:id           : delete a specific question

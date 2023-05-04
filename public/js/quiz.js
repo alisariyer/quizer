@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
   let hasQuizFinished = false;
 
   const setQuizResult = () => {
-    fetch(`/questions`, {
+    fetch(`/quiz`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

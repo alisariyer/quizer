@@ -2,50 +2,37 @@
 <html lang="en">
 
 <head>
-    <%- include('partials/head', { title: 'Questions' }) %>
-    <script src="/js/popup.js" defer></script>
-    <script src="/js/quiz.js" defer></script>
+    <%- include('partials/head', { title: 'Question List' }) %>
 </head>
 
 <body class="bg-image">
-    <%- include('partials/header', { isQuiz: true }) %>
-    <main class="container main d-flex d-flex-col justify-content-center ">
-        <%- include('partials/info') %>
+    <%- include('partials/header', { isQuiz: false }) %>
+    <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
         <h1 class="main__title text-center mt-2">Questions</h1>
+        <ol class="question list-group">
         <% for (let i=0; i< questions.length; i++) { %>
-            <div class="question">
-                <h3 class="question__title">
-                    <span>
-                        <%= i + 1 %>&rpar;
-                    </span>
-                    <%= questions[i].question %>
-                </h3>
-                <ol class="question__list" data-id="<%= questions[i].id %>">
-                    <li class="question__answer" data-choice="0">
-                        <span>a&rpar; </span>
-                        <%= questions[i].answers[0] %>
-                    </li>
-                    <li class="question__answer" data-choice="1">
-                        <span>b&rpar; </span>
-                        <%= questions[i].answers[1] %>
-                    </li>
-                    <li class="question__answer" data-choice="2">
-                        <span>c&rpar; </span>
-                        <%= questions[i].answers[2] %>
-                    </li>
-                    <li class="question__answer" data-choice="3">
-                        <span>d&rpar; </span>
-                        <%= questions[i].answers[3] %>
-                    </li>
-                </ol>
-            </div>
-            <% } %>
-            <div class="d-flex justify-content-end mb-8">
-                <a href="/questions" class="btn btn-primary d-block">New Quiz</a>
-                <button class="btn d-block ms-4 btn-finish">Finish</button>
-            </div>
-            <%- include('partials/popup') %>
-            <%- include('partials/footer') %>
+            <li class="list-group-item p-1">
+                <span>
+                    <%= i + 1 %>&rpar;&nbsp;
+                </span>
+                <p><%= questions[i].question %></p>
+                <a href="/questions/<%= questions[i].id %>" class="list-group-button" title="Edit">
+                    <%- include('components/edit-svg') %>
+                </a>
+                <form class="list-group-button" action="/questions/<%= questions[i].id %>?_method=DELETE" method="POST" title="Delete">
+                    <button>
+                        <%- include('components/delete-svg') %>
+                    </button>
+                </form>
+            </li>
+        <% } %>
+        </ol>
+
+        <div class="d-flex justify-content-end my-4">
+            <a href="/" class="btn btn-primary d-block">Home</a>
+            <a href="/questions/new" class="btn d-block ms-4">Add New</a>
+        </div>
+        <%- include('partials/footer') %>
     </main>
 </body>
 
