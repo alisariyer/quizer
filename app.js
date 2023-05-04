@@ -67,7 +67,7 @@ app.post("/login", (req, res) => {
   res.status(401).send('Wrong credentials!!!');
 })
 
-app.get('/logout', (req, res) => {
+app.get('/logout', login, (req, res) => {
   isLoggedIn = false;
   res.redirect('/');
 })
