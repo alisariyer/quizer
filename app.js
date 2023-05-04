@@ -5,7 +5,6 @@ const methodOverride = require("method-override");
 const { v4: uuidv4 } = require("uuid");
 const morgan = require("morgan");
 const fs = require("fs");
-const questions = require("./questions");
 const mongoose = require("mongoose");
 const { model } = require("mongoose");
 const questionSchema = require("./model/quiz")
@@ -19,7 +18,7 @@ main()
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log(err));
 
-const Quiz = model('Quiz', questionSchema);
+const Question = model('Question', questionSchema);
 
 // setup view engine
 app.set("view engine", "ejs");
@@ -44,13 +43,13 @@ app.get("/", (req, res) => {
 
 // GET questions to guest
 app.get("/questions", async (req, res) => {
-  const quiz = await Quiz.find({})
-  console.log(quiz);
-  res.render("questions", { questions: quiz });
+  const questions = await Question.find({})
+  res.render("questions", { questions });
 });
 
 // POST questions answers
-app.post("/questions", (req, res) => {
+app.post("/questions", async (req, res) => {
+  const questions = await Question.find({});
   const answers = req.body;
   questions.forEach((question) => {
     answers.forEach((answer) => {
@@ -69,56 +68,56 @@ app.get("/questions/new", (req, res) => {
 });
 
 // POST new question
-app.post("/questions/new", (req, res) => {
+app.post("/questions/new", async (req, res) => {
   const { question, answers, correct } = req.body;
-  questions.push({
+  const newQuestion = new Question({
     id: uuidv4(),
     question,
     answers,
     correct: parseInt(correct),
   });
+  console.log(newQuestion);
+  const response = await newQuestion.save();
+  console.log('res: ', response);
   res.redirect("/questions/list");
 });
 
 // GET questions for admin
-app.get("/questions/list", (req, res) => {
+app.get("/questions/list", async (req, res) => {
+  const questions = await Question.find({});
   res.render("questions-list", { questions });
 });
 
 // GET a specific question
-app.get("/questions/question/:id", (req, res) => {
+app.get("/questions/question/:id", async (req, res) => {
   const { id } = req.params;
   if (id) {
-    const question = questions.find((question) => question.id === id);
+    const question = await Question.findOne({ id });
+    console.log(question);
     return res.render("edit", { question });
   }
   res.status(400).send("Unknown Id, please check it: " + id);
 });
 
 // UPDATE a specific question
-app.put("/questions/question/:id", (req, res) => {
+app.put("/questions/question/:id", async (req, res) => {
   const { id } = req.params;
   const { question, answers, correct } = req.body;
+  console.log(question, answers, correct);
   if (id) {
-    const index = questions.findIndex((question) => question.id === id);
-    if (id > -1) {
-      questions[index] = {
-        id,
-        question,
-        answers,
-        correct,
-      };
-    }
+    await Question.updateOne({ id }, { $set: { question, answers, correct: parseInt(correct) }})
     return res.send({ message: "Updated" });
   }
   res.status(400).send({ message: "Errrorrr..." });
 });
 
 // DELETE a specific question
-app.delete("/questions/question/:id", (req, res) => {
+app.delete("/questions/question/:id", async (req, res) => {
   const { id } = req.params;
-  const index = questions.findIndex((el) => el.id === id);
-  if (index > -1) questions.splice(index, 1);
+  if (id) {
+    const response = await Question.deleteOne({ id })
+    console.log(response);
+  }
   res.redirect("/questions/list");
 });
 

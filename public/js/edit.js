@@ -17,7 +17,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    console.log(getUpdatedQuestion());
     const response = await fetch(`/questions/question/${questionID}`, {
       method: "PUT",
       headers: {

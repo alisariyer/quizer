@@ -47,10 +47,10 @@
                 <div class="mb-2">
                     <label for="correct">Correct Answer</label>
                     <select name="correct" class="form-select">
-                        <option value="0" <%= question.correct === '0' ? 'selected' : ''%>>a&rpar;</option>
-                        <option value="1" <%= question.correct === '1' ? 'selected' : ''%>>b&rpar;</option>
-                        <option value="2" <%= question.correct === '2' ? 'selected' : ''%>>c&rpar;</option>
-                        <option value="3" <%= question.correct === '3' ? 'selected' : ''%>>d&rpar;</option>
+                        <option value="0" <%= question.correct === 0 ? 'selected' : ''%>>a&rpar;</option>
+                        <option value="1" <%= question.correct === 1 ? 'selected' : ''%>>b&rpar;</option>
+                        <option value="2" <%= question.correct === 2 ? 'selected' : ''%>>c&rpar;</option>
+                        <option value="3" <%= question.correct === 3 ? 'selected' : ''%>>d&rpar;</option>
                     </select>
                 </div>
 
