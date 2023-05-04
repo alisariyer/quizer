@@ -8,7 +8,6 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const { model } = require("mongoose");
 const questionSchema = require("./model/quiz");
-const { parseArgs } = require("util");
 
 // Establish MongoDB Connection
 const main = async () => {

@@ -84,13 +84,18 @@
 
 .btn {
   background-color: transparent;
-  padding: 1.4rem 3rem;
+  padding: 1rem 2rem;
   border-radius: 0.5rem;
   border: 0.4rem solid $color-primary;
+  font-size: $fs-smaller;
   font-weight: $fw-bold;
   color: $color-secondary;
   text-decoration: none;
   transition: color $default-animation-duration ease-in-out;
+  &-lg {
+    padding: 1.4rem 3rem;
+    font-size: $fs-regular;
+  }
   &:hover {
     color: $color-primary;
     cursor: pointer;
@@ -102,6 +107,12 @@
       color: $color-secondary;
     }
   }
+}
+
+.form-text {
+  display: block;
+  margin-block: 0.25rem;
+  color: $color-secondary;
 }
 
 .form-control {

@@ -664,13 +664,18 @@ h6 {
 
 .btn {
   background-color: transparent;
-  padding: 1.4rem 3rem;
+  padding: 1rem 2rem;
   border-radius: 0.5rem;
   border: 0.4rem solid #d500e8;
+  font-size: 1.72rem;
   font-weight: 700;
   color: #3a3a3a;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
+}
+.btn-lg {
+  padding: 1.4rem 3rem;
+  font-size: 2rem;
 }
 .btn:hover {
   color: #d500e8;
@@ -681,6 +686,12 @@ h6 {
   color: #fbfbfb;
 }
 .btn-primary:hover {
+  color: #3a3a3a;
+}
+
+.form-text {
+  display: block;
+  margin-block: 0.25rem;
   color: #3a3a3a;
 }
 
