@@ -7,7 +7,8 @@ const morgan = require("morgan");
 const fs = require("fs");
 const questions = require("./questions");
 const mongoose = require("mongoose");
-const { Schema, model } = require("mongoose");
+const { model } = require("mongoose");
+const questionSchema = require("./model/quiz")
 
 // Establish MongoDB Connection
 const main = async () => {
@@ -17,39 +18,6 @@ const main = async () => {
 main()
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log(err));
-
-// Create a new Schema for quiz
-const questionSchema = new Schema({
-    id: {
-      type: String,
-      required: true
-    },
-    question: {
-      type: String,
-      required: [true, 'Question must not be empty!'],
-      trim: true,
-    },
-    answers: {
-      type: [ String ],
-      validate: {
-        validator: function(v) {
-          return v.length > 3;
-        },
-        message: () => `Must be 4 answers at least for the question!`
-      },
-      trim: true
-    },
-    correct: {
-      type: Number,
-      default: 0,
-      enum: {
-        values: [0, 1, 2, 3],
-        message: 'The correct answer must be between 0-3, {VALUE} is not valid!'
-      },
-      required: true,
-      trim: true
-    }
-})
 
 const Quiz = model('Quiz', questionSchema);
 
