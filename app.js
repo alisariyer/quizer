@@ -26,45 +26,32 @@ const questionSchema = new Schema({
     },
     question: {
       type: String,
-      required: true,
+      required: [true, 'Question must not be empty!'],
       trim: true,
     },
     answers: {
       type: [ String ],
-      required: true,
+      validate: {
+        validator: function(v) {
+          return v.length > 3;
+        },
+        message: () => `Must be 4 answers at least for the question!`
+      },
       trim: true
     },
     correct: {
       type: Number,
-      enum: [0, 1, 2, 3],
+      default: 0,
+      enum: {
+        values: [0, 1, 2, 3],
+        message: 'The correct answer must be between 0-3, {VALUE} is not valid!'
+      },
       required: true,
       trim: true
     }
 })
 
-// Create a mongoose model by using mongoose Schema
-const Quiz = model('Quiz', questionSchema)
-// Quiz.deleteMany({}).then(data => console.log(data));
-const quiz = new Quiz({ 
-    id: uuidv4(),
-    question: '   Which is sibling css selector?   ',
-    answers: [
-        '+',
-        '~',
-        ' ',
-        '>'
-    ],
-    correct: 3
-});
-quiz.save();
-
-// Quiz.insertMany([
-//     { id: uuidv4(), question: 'Q1?', answers: ['a', 'b', 'c', 'd'], correct: 0},
-//     { id: uuidv4(), question: 'Q2?', answers: ['a2', 'b2', 'c2', 'd2'], correct: 1},
-//     { id: uuidv4(), question: 'Q3?', answers: ['a3', 'b3', 'c3', 'd3'], correct: 2},
-//     { id: uuidv4(), question: 'Q4?', answers: ['a4', 'b4', 'c4', 'd4'], correct: 3},
-// ]).then(data => console.log('Success: ', data))
-
+const Quiz = model('Quiz', questionSchema);
 
 // setup view engine
 app.set("view engine", "ejs");
@@ -88,8 +75,10 @@ app.get("/", (req, res) => {
 });
 
 // GET questions to guest
-app.get("/questions", (req, res) => {
-  res.render("questions", { questions });
+app.get("/questions", async (req, res) => {
+  const quiz = await Quiz.find({})
+  console.log(quiz);
+  res.render("questions", { questions: quiz });
 });
 
 // POST questions answers
@@ -115,10 +104,10 @@ app.get("/questions/new", (req, res) => {
 app.post("/questions/new", (req, res) => {
   const { question, answers, correct } = req.body;
   questions.push({
+    id: uuidv4(),
     question,
     answers,
-    correct,
-    id: uuidv4(),
+    correct: parseInt(correct),
   });
   res.redirect("/questions/list");
 });

@@ -1,35 +1,103 @@
+const { v4: uuidv4 } = require("uuid");
+
 module.exports = [
     {
-        id: "0",
-        question: 'How is HTML standing?',
+        id: uuidv4(),
+        question: 'Which one is not a possible img attribute?',
         answers: [
-            'Hyper Transfer Markup',
-            'Hypertext Markup Language',
-            'Hyper Transmission Language',
-            'Hypertext Extensible Language'
+            'class',
+            'alt',
+            'target',
+            'style'
         ],
-        correct: '1'
+        correct: 2
     },
     {
-        id: "1",
-        question: 'Which is a invalid CSS usage?',
+        id: uuidv4(),
+        question: 'Which HTML term is not about images?',
         answers: [
-            'Internal CSS',
-            'External CSS',
-            'Inline CSS',
-            'Linkable CSS'
+            'figcaption',
+            'image',
+            'picture',
+            'figure'
         ],
-        correct: '3'
+        correct: 1
     },
     {
-        id: "2",
-        question: 'Which HTML element does not have a semantic meaning?',
+        id: uuidv4(),
+        question: 'Which attribute lets to add a tooltip to an element?',
         answers: [
-            'main',
-            'span',
-            'article',
-            'footer'
+            'name',
+            'popup',
+            'label',
+            'title'
         ],
-        correct: '1'
+        correct: 3
+    },
+    {
+        id: uuidv4(),
+        question: 'What does HTML stand for?',
+        answers: [
+            'Hyper Transfer Markup Labeling',
+            'High Transfer XML Language',
+            'Hyper Text Markup Language',
+            'Hyper Text XML Labeling'
+        ],
+        correct: 2
+    },
+    {
+        id: uuidv4(),
+        question: 'What year was the www invented?',
+        answers: [
+            '1990',
+            '1989',
+            '1991',
+            '1988'
+        ],
+        correct: 1
+    },
+    {
+        id: uuidv4(),
+        question: 'Which element can not be used in head tag?',
+        answers: [
+            'nav',
+            'link',
+            'script',
+            'meta'
+        ],
+        correct: 0
+    },
+    {
+        id: uuidv4(),
+        question: 'Which one is not a valid src attribute value of an image element?',
+        answers: [
+            'http://www.sitename.com/a.jpg',
+            'www.sitename.org/a.jpg',
+            'c://username/user/a.jpg',
+            '/a.jpg'
+        ],
+        correct: 0
+    },
+    {
+        id: uuidv4(),
+        question: 'Which one is a block element?',
+        answers: [
+            'img',
+            'picture',
+            'canvas',
+            'figure'
+        ],
+        correct: 3
+    },
+    {
+        id: uuidv4(),
+        question: 'Which one is not a valid src attribute value of an image element?',
+        answers: [
+            'http://www.sitename.com/a.jpg',
+            'www.sitename.org/a.jpg',
+            'c://username/user/a.jpg',
+            '/a.jpg'
+        ],
+        correct: 0
     }
 ]

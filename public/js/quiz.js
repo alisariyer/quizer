@@ -36,8 +36,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
     answers.forEach((answer) => {
       questions.forEach(question => {
         if (answer.id === question.dataset.id) {
-          question.children[parseInt(answer.correct)].classList.add('correct')
-          if (answer.answer !== '-1' && answer.answer !== answer.correct) {
+          question.children[answer.correct].classList.add('correct')
+          if (answer.answer !== '-1' && answer.answer !== answer.correct + '') {
             question.children[parseInt(answer.answer)].classList.add('incorrect')
           }
         }

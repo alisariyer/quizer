@@ -10,6 +10,9 @@ lerna-debug.log*
 # Test purpose folder
 test
 
+# Script code blocks
+codes.js
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 

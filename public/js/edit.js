@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
         form.elements["answers[2]"].value,
         form.elements["answers[3]"].value,
       ],
-      correct: form.elements.correct.value,
+      correct: parseInt(form.elements.correct.value),
     };
   };
 
