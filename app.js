@@ -52,6 +52,11 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+// app.get("/error", (req, res) => {
+//   throw new Error('heyyyyy erorrrsfjsldjfalsdjf')
+//   res.send('heello');
+// })
+
 app.get("/login", (req, res) => {
   res.render("login");
 })
@@ -72,15 +77,25 @@ app.get('/logout', login, (req, res) => {
 })
 
 // GET questions (send all questions to client side from DB)
-app.get("/quiz", login, async (req, res) => {
-  const questions = await Question.find({})
+app.get("/quiz", login, async (req, res, next) => {
+  let questions;
+  try {
+    questions = await Question.find({})
+  } catch (err) {
+    return next(err);
+  }
   res.render("quiz", { questions });
 });
 
 // POST answers (and send back with correct answers to client side)
-app.post("/quiz", login, async (req, res) => {
-  const questions = await Question.find({});
+app.post("/quiz", login, async (req, res, next) => {
+  let questions;
   const answers = req.body;
+  try {
+    questions = await Question.find({});
+  } catch (err) {
+    return next(err);
+  }
   questions.forEach((question) => {
     answers.forEach((answer) => {
       if (question.id === answer.id) {
@@ -98,7 +113,7 @@ app.get("/questions/new", login, (req, res) => {
 });
 
 // POST new question (and save in DB)
-app.post("/questions/new", login, async (req, res) => {
+app.post("/questions/new", login, async (req, res, next) => {
   const { question, answers, correct } = req.body;
   const newQuestion = new Question({
     id: uuidv4(),
@@ -106,42 +121,64 @@ app.post("/questions/new", login, async (req, res) => {
     answers,
     correct: parseInt(correct),
   });
-  await newQuestion.save();
+  try {
+    await newQuestion.save();
+  } catch (err) {
+    return next(err);
+  }
   res.redirect("/questions");
 });
 
 // GET questions (send all questions to show as a list)
-app.get("/questions", login, async (req, res) => {
-  const questions = await Question.find({});
+app.get("/questions", login, async (req, res, next) => {
+  let questions;
+  try {
+    questions = await Question.find({});
+  } catch (err) {
+    next(err);
+  }
   res.render("questions", { questions });
 });
 
 // GET a specific question
-app.get("/questions/:id", login, async (req, res) => {
+app.get("/questions/:id", login, async (req, res, next) => {
   const { id } = req.params;
+  let question;
   if (id) {
-    const question = await Question.findOne({ id });
+    try {
+      question = await Question.findOne({ id });
+    } catch (err) {
+      return next(err);
+    }
     return res.render("edit", { question });
   }
   res.status(400).send("Unknown Id, please check it: " + id);
 });
 
 // UPDATE a specific question
-app.put("/questions/:id", login, async (req, res) => {
+app.put("/questions/:id", login, async (req, res, next) => {
   const { id } = req.params;
   const { question, answers, correct } = req.body;
   if (id) {
-    await Question.updateOne({ id }, { $set: { question, answers, correct: parseInt(correct) }}, { runValidators: true, new: true});
+    try {
+      await Question.updateOne({ id }, { $set: { question, answers, correct: parseInt(correct) }}, { runValidators: true, new: true});
+    } catch (err) {
+      return next(err);
+    }
     return res.send({ message: "Updated" });
   }
   res.status(400).send({ message: "Errrorrr..." });
 });
 
 // DELETE a specific question
-app.delete("/questions/:id", login, async (req, res) => {
+app.delete("/questions/:id", login, async (req, res, next) => {
   const { id } = req.params;
   if (id) {
-    await Question.deleteOne({ id })
+    try {
+      await Question.deleteOne({ id })
+    } catch (err) {
+      next(err);
+    }
   }
   res.redirect("/questions");
 });
@@ -152,6 +189,7 @@ app.use((err, req, res, next) => {
   console.log('error 404.....');
   const { status = 500, message = "Something went wrong" } = err;
   res.status(status).send(message);
+  // next(err);
 });
 
 const PORT = 3000;
