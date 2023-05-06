@@ -4,9 +4,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const { v4: uuidv4 } = require("uuid");
 const morgan = require("morgan");
-const fs = require("fs");
 const mongoose = require("mongoose");
-const { model } = require("mongoose");
 const Question = require("./db/models/question");
 const AppError = require("./AppError");
 require("dotenv").config();
@@ -52,11 +50,6 @@ const login = (req, res, next) => {
 app.get("/", (req, res) => {
   res.render("home");
 });
-
-// app.get("/error", (req, res) => {
-//   throw new Error('heyyyyy erorrrsfjsldjfalsdjf')
-//   res.send('heello');
-// })
 
 app.get("/signup", (req, res) => {
   res.render("signup");
