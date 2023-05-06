@@ -8,10 +8,14 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const { model } = require("mongoose");
 const questionSchema = require("./model/quiz");
+require('dotenv').config();
 
 // Establish MongoDB Connection
+const DB_HOST = process.env.DB_HOST;
+const DB_PORT = process.env.DB_PORT;
+const DB_NAME = process.env.DB_NAME;
 const main = async () => {
-  await mongoose.connect("mongodb://127.0.0.1:27017/quiz");
+  await mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`);
 };
 
 main()
@@ -38,8 +42,6 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 let isLoggedIn = false;
-const EMAIL = 'test@gmail.com';
-const PASSWORD = 'admin.123';
 
 const login = (req, res, next) => {
   if (isLoggedIn) return next();
@@ -60,6 +62,9 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login");
 })
+
+const EMAIL = process.env.EMAIL;
+const PASSWORD = process.env.PASS;
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
@@ -192,7 +197,7 @@ app.use((err, req, res, next) => {
   // next(err);
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
