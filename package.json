@@ -1,7 +1,7 @@
 {
   "name": "quizer",
   "version": "1.0.0",
-  "description": "A quiz web app",
+  "description": "A quiz web app that lets to save questions, edit and delete them, and make a quiz for registered users",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",

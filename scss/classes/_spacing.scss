@@ -1,41 +1,44 @@
 $default-multiplier: 0.5;
 
 @for $value from 1 through 8 {
-    .mt-#{$value} {
-        margin-top: #{$value * $default-multiplier} + rem;
-    }
-    .mb-#{$value} {
-        margin-bottom: #{$value * $default-multiplier} + rem;
-    }
-    .ms-#{$value} {
-        margin-left: #{$value * $default-multiplier} + rem;
-    }
-    .me-#{$value} {
-        margin-right: #{$value * $default-multiplier} + rem;
-    }
-    .my-#{$value} {
-        margin-block: #{$value * $default-multiplier} + rem;
-    }
-    .mx-#{$value} {
-        margin-inline: #{$value * $default-multiplier} + rem;
-    }
-    .p-#{$value} {
-        padding: #{$value * $default-multiplier} + rem;
-    }
-    .pt-#{$value} {
-        padding-top: #{$value * $default-multiplier} + rem;
-    }
-    .pb-#{$value} {
-        padding-bottom: #{$value * $default-multiplier} + rem;
-    }
-    .py-#{$value} {
-        padding-block: #{$value * $default-multiplier} + rem;
-    }
-    .px-#{$value} {
-        padding-inline: #{$value * $default-multiplier} + rem;
-    }
+  .m-#{$value} {
+    margin: #{$value * $default-multiplier} + rem;
+  }
+  .mt-#{$value} {
+    margin-top: #{$value * $default-multiplier} + rem;
+  }
+  .mb-#{$value} {
+    margin-bottom: #{$value * $default-multiplier} + rem;
+  }
+  .ms-#{$value} {
+    margin-left: #{$value * $default-multiplier} + rem;
+  }
+  .me-#{$value} {
+    margin-right: #{$value * $default-multiplier} + rem;
+  }
+  .my-#{$value} {
+    margin-block: #{$value * $default-multiplier} + rem;
+  }
+  .mx-#{$value} {
+    margin-inline: #{$value * $default-multiplier} + rem;
+  }
+  .p-#{$value} {
+    padding: #{$value * $default-multiplier} + rem;
+  }
+  .pt-#{$value} {
+    padding-top: #{$value * $default-multiplier} + rem;
+  }
+  .pb-#{$value} {
+    padding-bottom: #{$value * $default-multiplier} + rem;
+  }
+  .py-#{$value} {
+    padding-block: #{$value * $default-multiplier} + rem;
+  }
+  .px-#{$value} {
+    padding-inline: #{$value * $default-multiplier} + rem;
+  }
 }
 
 .ms-auto {
-    margin-left: auto;
+  margin-left: auto;
 }

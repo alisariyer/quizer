@@ -58,6 +58,16 @@ app.get("/", (req, res) => {
 //   res.send('heello');
 // })
 
+app.get("/signup", (req, res) => {
+  res.render("signup");
+})
+
+app.post("/signup", (req, res) => {
+  const { email, password, passwordConfirm } = req.body;
+  console.log(req.body);
+  return res.send('Success');
+})
+
 app.get("/login", (req, res) => {
   res.render("login");
 });

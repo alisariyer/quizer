@@ -215,12 +215,24 @@ h6 {
   font-size: 0.6rem;
 }
 
+.fs-small {
+  font-size: 1.6rem;
+}
+
+.fs-regular {
+  font-size: 2rem;
+}
+
 .fs-tiny {
   font-size: 1.4rem;
 }
 
 .fw-bold {
   font-weight: 700;
+}
+
+.m-1 {
+  margin: 0.5rem;
 }
 
 .mt-1 {
@@ -267,6 +279,10 @@ h6 {
   padding-inline: 0.5rem;
 }
 
+.m-2 {
+  margin: 1rem;
+}
+
 .mt-2 {
   margin-top: 1rem;
 }
@@ -309,6 +325,10 @@ h6 {
 
 .px-2 {
   padding-inline: 1rem;
+}
+
+.m-3 {
+  margin: 1.5rem;
 }
 
 .mt-3 {
@@ -355,6 +375,10 @@ h6 {
   padding-inline: 1.5rem;
 }
 
+.m-4 {
+  margin: 2rem;
+}
+
 .mt-4 {
   margin-top: 2rem;
 }
@@ -397,6 +421,10 @@ h6 {
 
 .px-4 {
   padding-inline: 2rem;
+}
+
+.m-5 {
+  margin: 2.5rem;
 }
 
 .mt-5 {
@@ -443,6 +471,10 @@ h6 {
   padding-inline: 2.5rem;
 }
 
+.m-6 {
+  margin: 3rem;
+}
+
 .mt-6 {
   margin-top: 3rem;
 }
@@ -487,6 +519,10 @@ h6 {
   padding-inline: 3rem;
 }
 
+.m-7 {
+  margin: 3.5rem;
+}
+
 .mt-7 {
   margin-top: 3.5rem;
 }
@@ -529,6 +565,10 @@ h6 {
 
 .px-7 {
   padding-inline: 3.5rem;
+}
+
+.m-8 {
+  margin: 4rem;
 }
 
 .mt-8 {
@@ -666,7 +706,7 @@ h6 {
   background-color: transparent;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
-  border: 0.4rem solid #d500e8;
+  border: 0.4rem solid #f0b5ff;
   font-size: 1.72rem;
   font-weight: 700;
   color: #3a3a3a;
@@ -674,6 +714,7 @@ h6 {
   transition: color 0.2s ease-in-out;
 }
 .btn-lg {
+  border: 0.4rem solid #d500e8;
   padding: 1.4rem 3rem;
   font-size: 2rem;
 }
@@ -683,13 +724,21 @@ h6 {
 }
 .btn-primary {
   background-color: #d500e8;
+  border: 0.4rem solid #d500e8;
   color: #fbfbfb;
 }
 .btn-primary:hover {
   color: #3a3a3a;
 }
 
+.form {
+  background-color: white;
+  border: 1rem solid #fef5ff;
+  border-radius: 0.4rem;
+}
+
 .form-text {
+  font-size: 1.6rem;
   display: block;
   margin-block: 0.25rem;
   color: #3a3a3a;
@@ -705,7 +754,7 @@ h6 {
   color: #3a3a3a;
   background-color: #fbfbfb;
   background-clip: padding-box;
-  border: 0.2rem solid #d500e8;
+  border: 0.2rem solid #f0b5ff;
   border-radius: 0.4rem;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -720,7 +769,7 @@ h6 {
 }
 .form-control:focus {
   outline: 0;
-  box-shadow: 0 0 0 0.25rem #d500e8;
+  box-shadow: 0 0 0 0.25rem #f0b5ff;
 }
 
 .input-group {

@@ -86,13 +86,14 @@
   background-color: transparent;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
-  border: 0.4rem solid $color-primary;
-  font-size: $fs-smaller;
+  border: 0.4rem solid $color-primary-soft;
+  font-size: $fs-medium;
   font-weight: $fw-bold;
   color: $color-secondary;
   text-decoration: none;
   transition: color $default-animation-duration ease-in-out;
   &-lg {
+    border: 0.4rem solid $color-primary;
     padding: 1.4rem 3rem;
     font-size: $fs-regular;
   }
@@ -102,6 +103,7 @@
   }
   &-primary {
     background-color: $color-primary;
+    border: 0.4rem solid $color-primary;
     color: $color-light;
     &:hover {
       color: $color-secondary;
@@ -109,7 +111,14 @@
   }
 }
 
+.form {
+  background-color: white;
+  border: 1rem solid $color-primary-light;
+  border-radius: $default-border-radius;
+}
+
 .form-text {
+  font-size: $fs-small;
   display: block;
   margin-block: 0.25rem;
   color: $color-secondary;
@@ -119,13 +128,13 @@
   display: block;
   width: 100%;
   padding: 0.5rem;
-  font-size: $fs-smaller;
+  font-size: $fs-medium;
   font-weight: $fw-regular;
   line-height: 1.5;
   color: $color-secondary;
   background-color: $color-light;
   background-clip: padding-box;
-  border: $default-border-width solid $color-primary;
+  border: $default-border-width solid $color-primary-soft;
   border-radius: $default-border-radius;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -138,7 +147,7 @@
   }
   &:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.25rem $color-primary;
+    box-shadow: 0 0 0 0.25rem $color-primary-soft;
   }
 }
 
