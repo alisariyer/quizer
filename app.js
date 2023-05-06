@@ -7,8 +7,9 @@ const morgan = require("morgan");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const { model } = require("mongoose");
-const questionSchema = require("./model/quiz");
-require('dotenv').config();
+const Question = require("./db/models/question");
+const AppError = require("./AppError");
+require("dotenv").config();
 
 // Establish MongoDB Connection
 const DB_HOST = process.env.DB_HOST;
@@ -21,8 +22,6 @@ const main = async () => {
 main()
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log(err));
-
-const Question = model('Question', questionSchema);
 
 // setup view engine
 app.set("view engine", "ejs");
@@ -46,8 +45,8 @@ let isLoggedIn = false;
 const login = (req, res, next) => {
   if (isLoggedIn) return next();
   // 303: Redirect for undefined reason
-  return res.redirect(303, '/login');
-}
+  return res.redirect(303, "/login");
+};
 
 // GET home route
 app.get("/", (req, res) => {
@@ -61,7 +60,7 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
   res.render("login");
-})
+});
 
 const EMAIL = process.env.EMAIL;
 const PASSWORD = process.env.PASS;
@@ -70,22 +69,22 @@ app.post("/login", (req, res) => {
   const { email, password } = req.body;
   if (email === EMAIL && password === PASSWORD) {
     isLoggedIn = true;
-    return res.redirect(302, '/');
+    return res.redirect(302, "/");
   }
   // 401 Unauthorized
-  res.status(401).send('Wrong credentials!!!');
-})
+  res.status(401).send("Wrong credentials!!!");
+});
 
-app.get('/logout', login, (req, res) => {
+app.get("/logout", login, (req, res) => {
   isLoggedIn = false;
-  res.redirect('/');
-})
+  res.redirect("/");
+});
 
 // GET questions (send all questions to client side from DB)
 app.get("/quiz", login, async (req, res, next) => {
   let questions;
   try {
-    questions = await Question.find({})
+    questions = await Question.find({});
   } catch (err) {
     return next(err);
   }
@@ -95,20 +94,24 @@ app.get("/quiz", login, async (req, res, next) => {
 // POST answers (and send back with correct answers to client side)
 app.post("/quiz", login, async (req, res, next) => {
   let questions;
-  const answers = req.body;
+  const { answers } = req.body;
   try {
-    questions = await Question.find({});
+    if (answers) {
+      questions = await Question.find({});
+      questions.forEach((question) => {
+        answers.forEach((answer) => {
+          if (question.id === answer.id) {
+            const { correct } = question;
+            answer.correct = correct;
+          }
+        });
+      });
+    } else {
+      throw new AppError('Missing answers...', 401);
+    }
   } catch (err) {
     return next(err);
   }
-  questions.forEach((question) => {
-    answers.forEach((answer) => {
-      if (question.id === answer.id) {
-        const { correct } = question;
-        answer.correct = correct;
-      }
-    });
-  });
   res.send({ message: "Success", answers });
 });
 
@@ -120,13 +123,13 @@ app.get("/questions/new", login, (req, res) => {
 // POST new question (and save in DB)
 app.post("/questions/new", login, async (req, res, next) => {
   const { question, answers, correct } = req.body;
-  const newQuestion = new Question({
-    id: uuidv4(),
-    question,
-    answers,
-    correct: parseInt(correct),
-  });
   try {
+    const newQuestion = new Question({
+      id: uuidv4(),
+      question,
+      answers,
+      correct: parseInt(correct),
+    });
     await newQuestion.save();
   } catch (err) {
     return next(err);
@@ -140,7 +143,7 @@ app.get("/questions", login, async (req, res, next) => {
   try {
     questions = await Question.find({});
   } catch (err) {
-    next(err);
+    return next(err);
   }
   res.render("questions", { questions });
 });
@@ -149,49 +152,57 @@ app.get("/questions", login, async (req, res, next) => {
 app.get("/questions/:id", login, async (req, res, next) => {
   const { id } = req.params;
   let question;
-  if (id) {
-    try {
+  try {
+    if (id) {
       question = await Question.findOne({ id });
-    } catch (err) {
-      return next(err);
+    } else {
+      throw new AppError("Missing Id...", 401);
     }
-    return res.render("edit", { question });
+  } catch (err) {
+    return next(err);
   }
-  res.status(400).send("Unknown Id, please check it: " + id);
+  res.render("edit", { question });
 });
 
 // UPDATE a specific question
 app.put("/questions/:id", login, async (req, res, next) => {
   const { id } = req.params;
   const { question, answers, correct } = req.body;
-  if (id) {
-    try {
-      await Question.updateOne({ id }, { $set: { question, answers, correct: parseInt(correct) }}, { runValidators: true, new: true});
-    } catch (err) {
-      return next(err);
+  try {
+    if (id) {
+      await Question.updateOne(
+        { id },
+        { $set: { question, answers, correct: parseInt(correct) } },
+        { runValidators: true, new: true }
+      );
+    } else {
+      throw new AppError("Unauthorized", 401);
     }
-    return res.send({ message: "Updated" });
+  } catch (err) {
+    return next(err);
   }
-  res.status(400).send({ message: "Errrorrr..." });
+  return res.send({ message: "Updated" });
 });
 
 // DELETE a specific question
 app.delete("/questions/:id", login, async (req, res, next) => {
   const { id } = req.params;
-  if (id) {
-    try {
-      await Question.deleteOne({ id })
-    } catch (err) {
-      next(err);
+  try {
+    if (id) {
+      await Question.deleteOne({ id });
+    } else {
+      throw new AppError("Missing Id...", 400);
     }
+  } catch (err) {
+    return next(err);
   }
   res.redirect("/questions");
 });
 
-app.all('*', login);
+app.all("*", login);
 
 app.use((err, req, res, next) => {
-  console.log('error 404.....');
+  console.log("error 404.....");
   const { status = 500, message = "Something went wrong" } = err;
   res.status(status).send(message);
   // next(err);
@@ -203,13 +214,13 @@ app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
-process.on('SIGINT', () => {
+process.on("SIGINT", () => {
   try {
     mongoose.connection.close();
-    console.log('Mongoose connection disconnected');
+    console.log("Mongoose connection disconnected");
   } catch (err) {
-    console.log('Mongoose disconnection error: ', err.message);
+    console.log("Mongoose disconnection error: ", err.message);
   } finally {
     process.exit(0);
   }
-})
+});
