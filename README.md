@@ -5,11 +5,11 @@ A quiz web application
 - Start date: 25 April 2023
 
 ## Project Screenshots
-![Login Page](./screenshot-login.jpg)
+![Login Page](./screenshots/screenshot-login.jpg)
 *** 
-![Login Page](./screenshot-quiz.jpg)
+![Quiz Page](./screenshots/screenshot-quiz.jpg)
 ***
-![Login Page](./screenshot-new.jpg)
+![New Question Page](./screenshots/screenshot-new.jpg)
 
 ## Used Technologies (Or will be used)
 - Node.js
