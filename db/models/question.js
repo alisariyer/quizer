@@ -18,8 +18,7 @@ const questionSchema = new Schema({
           return v.length > 3;
         },
         message: () => `Must be 4 answers at least for the question!`
-      },
-      trim: true
+      }
     },
     correct: {
       type: Number,
@@ -28,8 +27,7 @@ const questionSchema = new Schema({
         values: [0, 1, 2, 3],
         message: 'The correct answer must be between 0-3, {VALUE} is not valid!'
       },
-      required: true,
-      trim: true
+      required: true
     }
 })
 

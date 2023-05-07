@@ -8,7 +8,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const Question = require("./db/models/question");
 const User = require("./db/models/user");
-const AppError = require("./AppError");
+const ExpressError = require("./utils/ExpressError");
+const { catchAsync } = require("./utils/catchAsync");
 require("dotenv").config();
 // for bcrypt hashing
 const saltRounds = 10;
@@ -59,9 +60,11 @@ app.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-app.post("/signup", async (req, res, next) => {
-  const { email, password, passwordConfirm } = req.body;
-  try {
+app.post(
+  "/signup",
+  catchAsync(async (req, res, next) => {
+    const { email, password, passwordConfirm } = req.body;
+
     if (!email || !password || !passwordConfirm) {
       return res.status(400).send({
         success: false,
@@ -96,21 +99,20 @@ app.post("/signup", async (req, res, next) => {
         message: "Your account has been created, please log in now.",
       });
     } else {
-      throw new AppError("Internal server error", 500);
+      throw new ExpressError("Internal server error", 500);
     }
-  } catch (err) {
-    return next(err);
-  }
-});
+  })
+);
 
 app.get("/login", (req, res) => {
   res.render("login");
 });
 
-app.post("/login", async (req, res, next) => {
-  const { email, password } = req.body;
+app.post(
+  "/login",
+  catchAsync(async (req, res, next) => {
+    const { email, password } = req.body;
 
-  try {
     if (!email || !password) {
       return res.status(400).send({
         success: false,
@@ -139,10 +141,8 @@ app.post("/login", async (req, res, next) => {
     // });
     isLoggedIn = true;
     return res.redirect(302, "/");
-  } catch (err) {
-    return next(err);
-  }
-});
+  })
+);
 
 app.get("/logout", login, (req, res) => {
   isLoggedIn = false;
@@ -150,21 +150,23 @@ app.get("/logout", login, (req, res) => {
 });
 
 // GET questions (send all questions to client side from DB)
-app.get("/quiz", login, async (req, res, next) => {
-  let questions;
-  try {
+app.get(
+  "/quiz",
+  login,
+  catchAsync(async (req, res, next) => {
+    let questions;
     questions = await Question.find({});
-  } catch (err) {
-    return next(err);
-  }
-  res.render("quiz", { questions });
-});
+    res.render("quiz", { questions });
+  })
+);
 
 // POST answers (and send back with correct answers to client side)
-app.post("/quiz", login, async (req, res, next) => {
-  let questions;
-  const { answers } = req.body;
-  try {
+app.post(
+  "/quiz",
+  login,
+  catchAsync(async (req, res, next) => {
+    let questions;
+    const { answers } = req.body;
     if (answers) {
       questions = await Question.find({});
       questions.forEach((question) => {
@@ -176,13 +178,11 @@ app.post("/quiz", login, async (req, res, next) => {
         });
       });
     } else {
-      throw new AppError("Missing answers...", 401);
+      throw new ExpressError("Missing answers...", 401);
     }
-  } catch (err) {
-    return next(err);
-  }
-  res.send({ message: "Success", answers });
-});
+    res.send({ message: "Success", answers });
+  })
+);
 
 // GET new question
 app.get("/questions/new", login, (req, res) => {
@@ -190,9 +190,11 @@ app.get("/questions/new", login, (req, res) => {
 });
 
 // POST new question (and save in DB)
-app.post("/questions/new", login, async (req, res, next) => {
-  const { question, answers, correct } = req.body;
-  try {
+app.post(
+  "/questions/new",
+  login,
+  catchAsync(async (req, res, next) => {
+    const { question, answers, correct } = req.body;
     const newQuestion = new Question({
       id: uuidv4(),
       question,
@@ -200,78 +202,68 @@ app.post("/questions/new", login, async (req, res, next) => {
       correct: parseInt(correct),
     });
     await newQuestion.save();
-  } catch (err) {
-    return next(err);
-  }
-  res.redirect("/questions");
-});
+    res.redirect("/questions");
+  })
+);
 
 // GET questions (send all questions to show as a list)
-app.get("/questions", login, async (req, res, next) => {
-  let questions;
-  try {
+app.get(
+  "/questions",
+  login,
+  catchAsync(async (req, res, next) => {
+    let questions;
     questions = await Question.find({});
-  } catch (err) {
-    return next(err);
-  }
-  res.render("questions", { questions });
-});
+    res.render("questions", { questions });
+  })
+);
 
 // GET a specific question
-app.get("/questions/:id", login, async (req, res, next) => {
-  const { id } = req.params;
-  let question;
-  try {
-    if (id) {
-      question = await Question.findOne({ id });
-    } else {
-      throw new AppError("Missing Id...", 401);
-    }
-  } catch (err) {
-    return next(err);
-  }
-  res.render("edit", { question });
-});
+app.get(
+  "/questions/:id",
+  login,
+  catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const question = await Question.findOne({ id });
+    res.render("edit", { question });
+  })
+);
 
 // UPDATE a specific question
-app.put("/questions/:id", login, async (req, res, next) => {
-  const { id } = req.params;
-  const { question, answers, correct } = req.body;
-  try {
-    if (id) {
-      await Question.updateOne(
-        { id },
-        { $set: { question, answers, correct: parseInt(correct) } },
-        { runValidators: true, new: true }
-      );
-    } else {
-      throw new AppError("Unauthorized", 401);
-    }
-  } catch (err) {
-    return next(err);
-  }
-  return res.send({ message: "Updated" });
-});
+app.put(
+  "/questions/:id",
+  login,
+  catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const { question, answers, correct } = req.body;
+    await Question.updateOne(
+      { id },
+      { $set: { question, answers, correct: parseInt(correct) } },
+      { runValidators: true, new: true }
+    );
+    return res.send({ message: "Updated" });
+  })
+);
 
 // DELETE a specific question
-app.delete("/questions/:id", login, async (req, res, next) => {
-  const { id } = req.params;
-  try {
-    if (id) {
-      await Question.deleteOne({ id });
-    } else {
-      throw new AppError("Missing Id...", 400);
-    }
-  } catch (err) {
-    return next(err);
-  }
-  res.redirect("/questions");
-});
+app.delete(
+  "/questions/:id",
+  login,
+  catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    await Question.deleteOne({ id });
+    res.redirect("/questions");
+  })
+);
 
-app.all("*", login);
+// app.all("*", login);
+app.all("*", (req, res, next) => {
+  next(new ExpressError('Page not found!', 404));
+})
 
 app.use((err, req, res, next) => {
   console.log("error 404.....");
+  // Mongoose errors: ValidationError, CastError, 
+  // if (err.name === 'ValidationError') err = handleValidationErr(err);
   const { status = 500, message = "Something went wrong" } = err;
   res.status(status).send(message);
   // next(err);
