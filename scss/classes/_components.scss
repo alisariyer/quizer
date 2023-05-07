@@ -134,7 +134,7 @@
   color: $color-secondary;
   background-color: $color-light;
   background-clip: padding-box;
-  border: $default-border-width solid $color-primary-soft;
+  border: $default-border-width solid $color-primary;
   border-radius: $default-border-radius;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -147,7 +147,7 @@
   }
   &:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.25rem $color-primary-soft;
+    box-shadow: 0 0 0 0.25rem $color-primary;
   }
 }
 

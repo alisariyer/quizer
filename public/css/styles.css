@@ -754,7 +754,7 @@ h6 {
   color: #3a3a3a;
   background-color: #fbfbfb;
   background-clip: padding-box;
-  border: 0.2rem solid #f0b5ff;
+  border: 0.2rem solid #d500e8;
   border-radius: 0.4rem;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -769,7 +769,7 @@ h6 {
 }
 .form-control:focus {
   outline: 0;
-  box-shadow: 0 0 0 0.25rem #f0b5ff;
+  box-shadow: 0 0 0 0.25rem #d500e8;
 }
 
 .input-group {

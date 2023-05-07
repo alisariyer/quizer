@@ -4,6 +4,13 @@ A quiz web application
 ## Project Details:
 - Start date: 25 April 2023
 
+## Project Screenshots
+![Login Page](./screenshot-login.jpg)
+*** 
+![Login Page](./screenshot-quiz.jpg)
+***
+![Login Page](./screenshot-new.jpg)
+
 ## Used Technologies (Or will be used)
 - Node.js
 - **Express.js**
