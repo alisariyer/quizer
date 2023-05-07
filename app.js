@@ -5,9 +5,13 @@ const methodOverride = require("method-override");
 const { v4: uuidv4 } = require("uuid");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const Question = require("./db/models/question");
+const User = require("./db/models/user");
 const AppError = require("./AppError");
 require("dotenv").config();
+// for bcrypt hashing
+const saltRounds = 10;
 
 // Establish MongoDB Connection
 const DB_HOST = process.env.DB_HOST;
@@ -55,10 +59,37 @@ app.get("/signup", (req, res) => {
   res.render("signup");
 })
 
-app.post("/signup", (req, res) => {
+app.post("/signup", async (req, res, next) => {
   const { email, password, passwordConfirm } = req.body;
-  console.log(req.body);
-  return res.send('Success');
+  try {
+    if (!email || !password || !passwordConfirm) {
+      throw new AppError('Email and password are required!', 401);
+    } else if (!(password === passwordConfirm)) {
+      throw new AppError('Passwords does not match', 401);
+    }
+
+    const u = await User.findOne({ email });
+    if (u) return res.send('This email is used!');
+
+    let newUser;
+    const hash = await bcrypt.hash(password, saltRounds);
+    if (hash) {
+      newUser = {
+        email,
+        password: hash
+      }
+      const user = User.create(newUser);
+      if (user) {
+        return res.redirect(302, '/login');
+      } else {
+        throw new AppError('Internal server error', 500);
+      }
+    } else {
+      throw new AppError('Internal server error', 500);
+    }
+  } catch (err) {
+    return next(err);
+  }
 })
 
 app.get("/login", (req, res) => {
