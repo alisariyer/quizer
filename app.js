@@ -57,56 +57,91 @@ app.get("/", (req, res) => {
 
 app.get("/signup", (req, res) => {
   res.render("signup");
-})
+});
 
 app.post("/signup", async (req, res, next) => {
   const { email, password, passwordConfirm } = req.body;
   try {
     if (!email || !password || !passwordConfirm) {
-      throw new AppError('Email and password are required!', 401);
-    } else if (!(password === passwordConfirm)) {
-      throw new AppError('Passwords does not match', 401);
+      return res.status(400).send({
+        success: false,
+        message: "Email or password can not be empty!",
+      });
     }
 
-    const u = await User.findOne({ email });
-    if (u) return res.send('This email is used!');
+    if (password !== passwordConfirm) {
+      return res.status(400).send({
+        success: false,
+        message: "Passwords do not match!",
+      });
+    }
 
-    let newUser;
+    // if email is already registered, reject it
+    const foundUser = await User.findOne({ email });
+    if (foundUser)
+      return res.send({
+        success: false,
+        message: "Incorrect email address!",
+      });
+
     const hash = await bcrypt.hash(password, saltRounds);
-    if (hash) {
-      newUser = {
-        email,
-        password: hash
-      }
-      const user = User.create(newUser);
-      if (user) {
-        return res.redirect(302, '/login');
-      } else {
-        throw new AppError('Internal server error', 500);
-      }
+    const newUser = {
+      email,
+      password: hash,
+    };
+    const user = await User.create(newUser);
+    if (user) {
+      return res.send({
+        success: true,
+        message: "Your account has been created, please log in now.",
+      });
     } else {
-      throw new AppError('Internal server error', 500);
+      throw new AppError("Internal server error", 500);
     }
   } catch (err) {
     return next(err);
   }
-})
+});
 
 app.get("/login", (req, res) => {
   res.render("login");
 });
 
-const EMAIL = process.env.EMAIL;
-const PASSWORD = process.env.PASS;
-
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
-  if (email === EMAIL && password === PASSWORD) {
+
+  try {
+    if (!email || !password) {
+      return res.status(400).send({
+        success: false,
+        message: "Username or password can not be empty!",
+      });
+    }
+
+    const foundUser = await User.findByEmail(email);
+    if (!foundUser) {
+      return res.status(400).send({
+        success: false,
+        message: "Incorrect email or password!",
+      });
+    }
+
+    const confirmPassword = await bcrypt.compare(password, foundUser.password);
+    if (!confirmPassword) {
+      return res.status(400).send({
+        success: false,
+        message: "Incorrect username or password!",
+      });
+    }
+
+    // return res.send({
+    //   success: true,
+    // });
     isLoggedIn = true;
     return res.redirect(302, "/");
+  } catch (err) {
+    return next(err);
   }
-  // 401 Unauthorized
-  res.status(401).send("Wrong credentials!!!");
 });
 
 app.get("/logout", login, (req, res) => {
@@ -141,7 +176,7 @@ app.post("/quiz", login, async (req, res, next) => {
         });
       });
     } else {
-      throw new AppError('Missing answers...', 401);
+      throw new AppError("Missing answers...", 401);
     }
   } catch (err) {
     return next(err);

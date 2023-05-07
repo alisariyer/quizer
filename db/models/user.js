@@ -11,6 +11,12 @@ const userSchema = new Schema({
     }
 });
 
+userSchema.statics.findByEmail = async (email) => {
+    const user = await User.findOne({ email });
+    if (!user) return false;
+    return user;
+}
+
 const User = model('user', userSchema);
 
 module.exports = User;
