@@ -6,7 +6,9 @@ const { v4: uuidv4 } = require("uuid");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { userValidationSchema } = require("./utils/validationSchemas");
+const { userValidationSchema, 
+        answersValidationSchema,
+        questionValidationSchema } = require("./utils/validationSchemas");
 const Question = require("./db/models/question");
 const User = require("./db/models/user");
 const ExpressError = require("./utils/ExpressError");
@@ -66,9 +68,15 @@ app.post(
   catchAsync(async (req, res, next) => {
     const { email, password, passwordRepeat } = req.body;
 
-    const { error } = userValidationSchema.validate({ email, password, passwordRepeat });
+    const { error } = userValidationSchema.validate({
+      email,
+      password,
+      passwordRepeat,
+    });
     if (error) {
-      const messages = error.details.map(detail => detail.message).join(',\n');
+      const messages = error.details
+        .map((detail) => detail.message)
+        .join(", ");
       throw new ExpressError(messages, 400);
     }
 
@@ -174,20 +182,24 @@ app.post(
   catchAsync(async (req, res, next) => {
     let questions;
     const { answers } = req.body;
-    if (answers) {
-      questions = await Question.find({});
-      questions.forEach((question) => {
-        answers.forEach((answer) => {
-          if (question.id === answer.id) {
-            const { correct } = question;
-            answer.correct = correct;
-          }
-        });
-      });
-    } else {
-      throw new ExpressError("Missing answers...", 401);
+    const { error } = answersValidationSchema.validate({ answers });
+
+    if (error) {
+      const message = error.details.map(detail => detail.message).join(', ');
+      return res.send({ success: false, message })
     }
-    res.send({ message: "Success", answers });
+
+    questions = await Question.find({});
+    questions.forEach((question) => {
+      answers.forEach((answer) => {
+        if (question.id === answer.id) {
+          const { correct } = question;
+          answer.correct = correct;
+        }
+      });
+    });
+
+    res.send({ success: true, answers });
   })
 );
 
@@ -202,6 +214,11 @@ app.post(
   login,
   catchAsync(async (req, res, next) => {
     const { question, answers, correct } = req.body;
+    const { error } = questionValidationSchema.validate({ question, answers, correct });
+    if (error) {
+      const message = error.details.map(detail => detail.message).join(', ');
+      return res.status(400).send({ success: false, message });
+    }
     const newQuestion = new Question({
       id: uuidv4(),
       question,
@@ -242,12 +259,19 @@ app.put(
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const { question, answers, correct } = req.body;
+
+    const { error } = questionValidationSchema.validate({ question, answers, correct });
+    if (error) {
+      const message = error.details.map(detail => detail.message).join(', ');
+      res.status(400).send({ success: false, message });
+    }
+
     await Question.updateOne(
       { id },
       { $set: { question, answers, correct: parseInt(correct) } },
       { runValidators: true, new: true }
     );
-    return res.send({ message: "Updated" });
+    return res.send({ success: true, message: "Updated" });
   })
 );
 
