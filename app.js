@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const { userValidationSchema } = require("./utils/validationSchemas");
 const Question = require("./db/models/question");
 const User = require("./db/models/user");
 const ExpressError = require("./utils/ExpressError");
@@ -63,21 +64,27 @@ app.get("/signup", (req, res) => {
 app.post(
   "/signup",
   catchAsync(async (req, res, next) => {
-    const { email, password, passwordConfirm } = req.body;
+    const { email, password, passwordRepeat } = req.body;
 
-    if (!email || !password || !passwordConfirm) {
-      return res.status(400).send({
-        success: false,
-        message: "Email or password can not be empty!",
-      });
+    const { error } = userValidationSchema.validate({ email, password, passwordRepeat });
+    if (error) {
+      const messages = error.details.map(detail => detail.message).join(',\n');
+      throw new ExpressError(messages, 400);
     }
 
-    if (password !== passwordConfirm) {
-      return res.status(400).send({
-        success: false,
-        message: "Passwords do not match!",
-      });
-    }
+    // if (!email || !password || !passwordRepeat) {
+    //   return res.status(400).send({
+    //     success: false,
+    //     message: "Email or password can not be empty!",
+    //   });
+    // }
+
+    // if (password !== passwordRepeat) {
+    //   return res.status(400).send({
+    //     success: false,
+    //     message: "Passwords do not match!",
+    //   });
+    // }
 
     // if email is already registered, reject it
     const foundUser = await User.findOne({ email });
@@ -257,12 +264,12 @@ app.delete(
 
 // app.all("*", login);
 app.all("*", (req, res, next) => {
-  next(new ExpressError('Page not found!', 404));
-})
+  next(new ExpressError("Page not found!", 404));
+});
 
 app.use((err, req, res, next) => {
   console.log("error 404.....");
-  // Mongoose errors: ValidationError, CastError, 
+  // Mongoose errors: ValidationError, CastError,
   // if (err.name === 'ValidationError') err = handleValidationErr(err);
   const { status = 500, message = "Something went wrong" } = err;
   res.status(status).send(message);
