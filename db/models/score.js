@@ -13,5 +13,5 @@ const scoreSchema = new Schema({
 
 const Score = model('Score', scoreSchema);
 
-exports.module = Score;
+module.exports = Score;
 

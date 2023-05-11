@@ -11,6 +11,7 @@ const { userValidationSchema,
         questionValidationSchema } = require("./utils/validationSchemas");
 const Question = require("./db/models/question");
 const User = require("./db/models/user");
+const Score = require("./db/models/score");
 const ExpressError = require("./utils/ExpressError");
 const { catchAsync } = require("./utils/catchAsync");
 require("dotenv").config();
@@ -206,9 +207,15 @@ app.post(
 
     console.log('Total duration: ', quizDuration);
     clearInterval(quizDurationInterval);
+    const currentScore = (corrects / questions.length * 10).toFixed(2);
+    
+    const user = await User.findByEmail(currentUserEmail);
+    const score = new Score({ score: currentScore , seconds: quizDuration });
+    user.scores.push(score);
+    await score.save();
+    await user.save();
     quizDuration = 0;
-    const score = (corrects / questions.length * 10).toFixed(2);
-
+    
     res.send({ success: true, answers, message: 'Confirmed' });
   })
 );
