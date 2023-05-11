@@ -21,16 +21,16 @@ module.exports = {
   }),
 
   answersValidationSchema: Joi.object({
-    answers: Joi.array()
-      .items(
-        Joi.object({
-          id: Joi.string().required(),
-          answer: Joi.string().pattern(new RegExp("^([0-3]|-1)$")).required(),
-        })
-      )
-      .min(1)
-      .required(),
-  }),
+    answers: Joi.array().items(
+      Joi.object({
+        id: Joi.string().required(),
+        answer: Joi.string().pattern(new RegExp("^([0-3]|-1)$")).required(),
+      })
+    )
+    .min(1)
+    .required()
+  })
+ ,
 
   questionValidationSchema: Joi.object({
     question: Joi.string().min(1).max(500).required(),

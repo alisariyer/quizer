@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(selectedAnswers),
+      body: JSON.stringify({ answers: selectedAnswers }),
     })
       .then((res) => res.json())
       .then((data) => {

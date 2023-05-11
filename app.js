@@ -189,29 +189,27 @@ app.post(
     let questions;
     const { answers } = req.body;
     const { error } = answersValidationSchema.validate({ answers });
-
     if (error) {
       const message = error.details.map(detail => detail.message).join(', ');
       return res.send({ success: false, message })
     }
 
-    const corrects = 0;
+    let corrects = 0;
 
     questions = await Question.find({});
     questions.forEach((question) => {
       answers.forEach((answer) => {
         if (question.id === answer.id) {
-          corrects++;
+          if (question.correct + '' === answer.answer) corrects++;
           const { correct } = question;
           answer.correct = correct;
         }
       });
     });
 
-    const score = (corrects / questions.length).toFixed(2);
-    console.log(score); 
+    const score = (corrects / questions.length * 10).toFixed(2);
 
-    res.send({ success: true, answers });
+    res.send({ success: true, answers, message: 'Confirmed' });
   })
 );
 
