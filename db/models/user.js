@@ -8,6 +8,10 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    scores: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Score'
     }
 });
 

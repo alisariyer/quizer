@@ -47,6 +47,7 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 let isLoggedIn = false;
+let currentUserEmail;
 
 const login = (req, res, next) => {
   if (isLoggedIn) return next();
@@ -106,6 +107,7 @@ app.post(
     const newUser = {
       email,
       password: hash,
+      scores: []
     };
     const user = await User.create(newUser);
     if (user) {
@@ -154,6 +156,7 @@ app.post(
     // return res.send({
     //   success: true,
     // });
+    currentUserEmail = email;
     isLoggedIn = true;
     return res.redirect(302, "/");
   })
@@ -189,15 +192,21 @@ app.post(
       return res.send({ success: false, message })
     }
 
+    const corrects = 0;
+
     questions = await Question.find({});
     questions.forEach((question) => {
       answers.forEach((answer) => {
         if (question.id === answer.id) {
+          corrects++;
           const { correct } = question;
           answer.correct = correct;
         }
       });
     });
+
+    const score = (corrects / questions.length).toFixed(2);
+    console.log(score); 
 
     res.send({ success: true, answers });
   })
