@@ -4,8 +4,10 @@
         <li class="list-group-item"><a href="/quiz">New quiz</a></li>
         <li class="list-group-item"><a href="#">Score table</a></li>
         <li class="list-group-item"><a href="/questions">Edit questions</a></li>
-        <li class="list-group-item"><a href="/signup">Sign up</a></li>
-        <li class="list-group-item"><a href="/login">Login</a></li>
-        <li class="list-group-item bg-primary-light fw-bold"><a href="/logout">Log out</a></li>
+        <% if (!isLoggedIn) { %>
+            <li class="list-group-item bg-primary-light fw-bold"><a href="/login">Login</a></li>
+        <% } else { %>
+            <li class="list-group-item bg-primary-light fw-bold"><a href="/logout">Log out</a></li>
+        <% } %>
     </ul>
 </div>

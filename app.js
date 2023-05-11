@@ -16,6 +16,9 @@ const { catchAsync } = require("./utils/catchAsync");
 require("dotenv").config();
 // for bcrypt hashing
 const saltRounds = 10;
+// login flags and details
+let isLoggedIn = false;
+let currentUserEmail;
 
 // Establish MongoDB Connection
 const DB_HOST = process.env.DB_HOST;
@@ -46,9 +49,6 @@ app.use(express.json());
 // app.use(morgan("tiny", { stream: accessLogStream }));
 app.use(morgan("tiny"));
 
-let isLoggedIn = false;
-let currentUserEmail;
-
 const login = (req, res, next) => {
   if (isLoggedIn) return next();
   // 303: Redirect for undefined reason
@@ -57,11 +57,13 @@ const login = (req, res, next) => {
 
 // GET home route
 app.get("/", (req, res) => {
-  res.render("home");
+  console.log('user logged in: ', isLoggedIn);
+  res.render("home", { isLoggedIn });
 });
 
 app.get("/signup", (req, res) => {
-  res.render("signup");
+  if (isLoggedIn) return res.redirect(302, '/');
+  res.render("signup", { isLoggedIn });
 });
 
 app.post(
@@ -122,7 +124,8 @@ app.post(
 );
 
 app.get("/login", (req, res) => {
-  res.render("login");
+  if (isLoggedIn) return res.redirect(303, '/');
+  res.render("login", { isLoggedIn });
 });
 
 app.post(
@@ -174,7 +177,7 @@ app.get(
   catchAsync(async (req, res, next) => {
     let questions;
     questions = await Question.find({});
-    res.render("quiz", { questions });
+    res.render("quiz", { questions, isLoggedIn });
   })
 );
 
@@ -214,7 +217,7 @@ app.post(
 
 // GET new question
 app.get("/questions/new", login, (req, res) => {
-  res.render("new");
+  res.render("new", { isLoggedIn });
 });
 
 // POST new question (and save in DB)
@@ -246,7 +249,7 @@ app.get(
   catchAsync(async (req, res, next) => {
     let questions;
     questions = await Question.find({});
-    res.render("questions", { questions });
+    res.render("questions", { questions, isLoggedIn });
   })
 );
 
@@ -257,7 +260,7 @@ app.get(
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const question = await Question.findOne({ id });
-    res.render("edit", { question });
+    res.render("edit", { question, isLoggedIn });
   })
 );
 
