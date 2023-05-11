@@ -6,9 +6,11 @@ const { v4: uuidv4 } = require("uuid");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { userValidationSchema, 
-        answersValidationSchema,
-        questionValidationSchema } = require("./utils/validationSchemas");
+const {
+  userValidationSchema,
+  answersValidationSchema,
+  questionValidationSchema,
+} = require("./utils/validationSchemas");
 const Question = require("./db/models/question");
 const User = require("./db/models/user");
 const Score = require("./db/models/score");
@@ -52,6 +54,7 @@ app.use(express.json());
 // app.use(morgan("tiny", { stream: accessLogStream }));
 app.use(morgan("tiny"));
 
+// temp login checking middleware
 const login = (req, res, next) => {
   if (isLoggedIn) return next();
   // 303: Redirect for undefined reason
@@ -65,11 +68,13 @@ app.get("/", (req, res) => {
   res.render("home", { isLoggedIn });
 });
 
+// GET signup
 app.get("/signup", (req, res) => {
-  if (isLoggedIn) return res.redirect(302, '/');
+  if (isLoggedIn) return res.redirect(302, "/");
   res.render("signup", { isLoggedIn });
 });
 
+// POST signup
 app.post(
   "/signup",
   catchAsync(async (req, res, next) => {
@@ -81,9 +86,7 @@ app.post(
       passwordRepeat,
     });
     if (error) {
-      const messages = error.details
-        .map((detail) => detail.message)
-        .join(", ");
+      const messages = error.details.map((detail) => detail.message).join(", ");
       throw new ExpressError(messages, 400);
     }
 
@@ -99,7 +102,7 @@ app.post(
     const newUser = {
       email,
       password: hash,
-      scores: []
+      scores: [],
     };
     const user = await User.create(newUser);
     if (user) {
@@ -113,11 +116,13 @@ app.post(
   })
 );
 
+// GET login
 app.get("/login", (req, res) => {
-  if (isLoggedIn) return res.redirect(303, '/');
+  if (isLoggedIn) return res.redirect(303, "/");
   res.render("login", { isLoggedIn });
 });
 
+// POST login
 app.post(
   "/login",
   catchAsync(async (req, res, next) => {
@@ -152,17 +157,19 @@ app.post(
   })
 );
 
+// GET logout
 app.get("/logout", login, (req, res) => {
   isLoggedIn = false;
   res.redirect("/");
 });
 
+// Calculate quiz duration
 const startQuizDuration = () => {
   quizDuration = 0;
   quizDurationInterval = setInterval(() => {
     quizDuration++;
   }, 1000);
-}
+};
 
 // GET questions (send all questions to client side from DB)
 app.get(
@@ -188,8 +195,8 @@ app.post(
     const { answers } = req.body;
     const { error } = answersValidationSchema.validate({ answers });
     if (error) {
-      const message = error.details.map(detail => detail.message).join(', ');
-      return res.send({ success: false, message })
+      const message = error.details.map((detail) => detail.message).join(", ");
+      return res.send({ success: false, message });
     }
 
     let corrects = 0;
@@ -198,25 +205,25 @@ app.post(
     questions.forEach((question) => {
       answers.forEach((answer) => {
         if (question.id === answer.id) {
-          if (question.correct + '' === answer.answer) corrects++;
+          if (question.correct + "" === answer.answer) corrects++;
           const { correct } = question;
           answer.correct = correct;
         }
       });
     });
 
-    console.log('Total duration: ', quizDuration);
+    console.log("Total duration: ", quizDuration);
     clearInterval(quizDurationInterval);
-    const currentScore = (corrects / questions.length * 10).toFixed(2);
-    
+    const currentScore = ((corrects / questions.length) * 10).toFixed(2);
+
     const user = await User.findByEmail(currentUserEmail);
-    const score = new Score({ score: currentScore , seconds: quizDuration });
+    const score = new Score({ score: currentScore, seconds: quizDuration });
     user.scores.push(score);
     await score.save();
     await user.save();
     quizDuration = 0;
-    
-    res.send({ success: true, answers, message: 'Confirmed' });
+
+    res.send({ success: true, answers, message: "Confirmed" });
   })
 );
 
@@ -231,9 +238,13 @@ app.post(
   login,
   catchAsync(async (req, res, next) => {
     const { question, answers, correct } = req.body;
-    const { error } = questionValidationSchema.validate({ question, answers, correct });
+    const { error } = questionValidationSchema.validate({
+      question,
+      answers,
+      correct,
+    });
     if (error) {
-      const message = error.details.map(detail => detail.message).join(', ');
+      const message = error.details.map((detail) => detail.message).join(", ");
       return res.status(400).send({ success: false, message });
     }
     const newQuestion = new Question({
@@ -277,9 +288,13 @@ app.put(
     const { id } = req.params;
     const { question, answers, correct } = req.body;
 
-    const { error } = questionValidationSchema.validate({ question, answers, correct });
+    const { error } = questionValidationSchema.validate({
+      question,
+      answers,
+      correct,
+    });
     if (error) {
-      const message = error.details.map(detail => detail.message).join(', ');
+      const message = error.details.map((detail) => detail.message).join(", ");
       res.status(400).send({ success: false, message });
     }
 
@@ -303,11 +318,22 @@ app.delete(
   })
 );
 
+// GET score table
+app.get(
+  "/scores",
+  login,
+  catchAsync(async (req, res, next) => {
+    const scores = await User.getScores(currentUserEmail);
+    res.render('scores', { scores, isLoggedIn });
+  })
+);
+
 // app.all("*", login);
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page not found!", 404));
 });
 
+// Generic error middleware
 app.use((err, req, res, next) => {
   console.log("error 404.....");
   // Mongoose errors: ValidationError, CastError,
@@ -323,6 +349,7 @@ app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
+// Close db when exiting
 process.on("SIGINT", () => {
   try {
     mongoose.connection.close();
