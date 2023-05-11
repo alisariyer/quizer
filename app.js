@@ -19,6 +19,8 @@ const saltRounds = 10;
 // login flags and details
 let isLoggedIn = false;
 let currentUserEmail;
+let quizDuration = 0;
+let quizDurationInterval;
 
 // Establish MongoDB Connection
 const DB_HOST = process.env.DB_HOST;
@@ -57,7 +59,8 @@ const login = (req, res, next) => {
 
 // GET home route
 app.get("/", (req, res) => {
-  console.log('user logged in: ', isLoggedIn);
+  quizDuration = 0;
+  quizDurationInterval = 0;
   res.render("home", { isLoggedIn });
 });
 
@@ -82,20 +85,6 @@ app.post(
         .join(", ");
       throw new ExpressError(messages, 400);
     }
-
-    // if (!email || !password || !passwordRepeat) {
-    //   return res.status(400).send({
-    //     success: false,
-    //     message: "Email or password can not be empty!",
-    //   });
-    // }
-
-    // if (password !== passwordRepeat) {
-    //   return res.status(400).send({
-    //     success: false,
-    //     message: "Passwords do not match!",
-    //   });
-    // }
 
     // if email is already registered, reject it
     const foundUser = await User.findOne({ email });
@@ -156,9 +145,6 @@ app.post(
       });
     }
 
-    // return res.send({
-    //   success: true,
-    // });
     currentUserEmail = email;
     isLoggedIn = true;
     return res.redirect(302, "/");
@@ -170,11 +156,22 @@ app.get("/logout", login, (req, res) => {
   res.redirect("/");
 });
 
+const startQuizDuration = () => {
+  quizDuration = 0;
+  quizDurationInterval = setInterval(() => {
+    quizDuration++;
+  }, 1000);
+}
+
 // GET questions (send all questions to client side from DB)
 app.get(
   "/quiz",
   login,
   catchAsync(async (req, res, next) => {
+    // if the page is requested, start the quiz duration
+    // As the quiz starts just after load of the quiz page
+    // So we calculate duration on backend
+    startQuizDuration();
     let questions;
     questions = await Question.find({});
     res.render("quiz", { questions, isLoggedIn });
@@ -207,6 +204,9 @@ app.post(
       });
     });
 
+    console.log('Total duration: ', quizDuration);
+    clearInterval(quizDurationInterval);
+    quizDuration = 0;
     const score = (corrects / questions.length * 10).toFixed(2);
 
     res.send({ success: true, answers, message: 'Confirmed' });
