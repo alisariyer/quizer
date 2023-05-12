@@ -9,7 +9,32 @@
     <%- include('partials/header', { isQuiz: false, isLoggedIn }) %>
     <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
         <h1 class="main__title text-center mt-2">Score Table</h1>
-
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">seconds</th>
+                    <th scope="col">score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (scores) { %>
+                    <% for (let i = 0; i < scores.length; i++) { %>
+                    <tr>
+                        <th scope="row"><%= i + 1 %></th>
+                        <td><%= scores[i].seconds %></td>
+                        <td><%= scores[i].score %></td>
+                    </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>0</td>
+                        <td>Any score</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
 
         <%- include('partials/footer') %>
     </main>

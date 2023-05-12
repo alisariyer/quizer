@@ -867,6 +867,32 @@ h6 {
     opacity: 100%;
   }
 }
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #3a3a3a;
+  vertical-align: top;
+  text-align: center;
+  border-collapse: collapse;
+  background-color: #fbfbfb;
+  border: 5px solid #fef5ff;
+  border-radius: 0.4rem;
+}
+.table tbody {
+  vertical-align: inherit;
+}
+.table thead {
+  vertical-align: inherit;
+  background-color: #fef5ff;
+}
+.table th, .table td {
+  border: 1px solid #f0b5ff;
+  padding: 5px;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+  color: #d500e8;
+}
+
 body {
   font-family: "Sen", sans-serif;
   font-weight: 400;

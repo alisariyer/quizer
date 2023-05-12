@@ -324,6 +324,7 @@ app.get(
   login,
   catchAsync(async (req, res, next) => {
     const scores = await User.getScores(currentUserEmail);
+    console.log(scores);
     res.render('scores', { scores, isLoggedIn });
   })
 );
