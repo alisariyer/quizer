@@ -11,7 +11,6 @@ const QuestionsController = {
 
   // POST new question (and save in DB)
   postNew: async (req, res, next) => {
-
     const { question, answers, correct } = req.body;
     const { error } = questionValidationSchema.validate({
       question,
@@ -21,7 +20,9 @@ const QuestionsController = {
 
     if (error) {
       const message = error.details.map((detail) => detail.message).join(", ");
-      return res.status(400).send({ success: false, message });
+      req.flash("error", message);
+      return res.redirect(302, "/questions/new");
+      // return res.status(400).send({ success: false, message });
     }
 
     const newQuestion = new Question({
@@ -34,9 +35,11 @@ const QuestionsController = {
     try {
       await newQuestion.save();
     } catch (err) {
-      return next(err);
+      req.flash("error", err);
+      return res.redirect(302, "/questions/new");
+      // return next(err);
     }
-    res.redirect("/questions");
+    res.redirect(302, "/questions");
   },
 
   // GET questions (send all questions to show as a list)
@@ -46,7 +49,9 @@ const QuestionsController = {
     try {
       questions = await Question.find({});
     } catch (err) {
-      return next(err);
+      req.flash("error", err);
+      return res.redirect(302, "/");
+      // return next(err);
     }
     const isLoggedIn = !!req.session.user_id;
     res.render("questions", { questions, isLoggedIn });
@@ -60,7 +65,9 @@ const QuestionsController = {
     try {
       question = await Question.findOne({ id });
     } catch (err) {
-      return next(err);
+      req.flash("error", err);
+      return res.redirect(302, "/questions");
+      // return next(err);
     }
 
     const isLoggedIn = !!req.session.user_id;
@@ -71,7 +78,7 @@ const QuestionsController = {
   updateOne: async (req, res, next) => {
     const { id } = req.params;
     const { question, answers, correct } = req.body;
-    console.log(req.body);
+
     const { error } = questionValidationSchema.validate({
       question,
       answers,
@@ -79,7 +86,9 @@ const QuestionsController = {
     });
     if (error) {
       const message = error.details.map((detail) => detail.message).join(", ");
-      return res.status(400).send({ success: false, message });
+      req.flash("error", message);
+      return res.redirect(302, `/questions/${id}`);
+      // return res.status(400).send({ success: false, message });
     }
 
     try {
@@ -89,10 +98,14 @@ const QuestionsController = {
         { runValidators: true, new: true }
       );
     } catch (err) {
-      return next(err);
+      req.flash("error", err);
+      return res.redirect(302, `/questions/${id}`);
+      // return next(err);
     }
 
-    return res.send({ success: true, message: "Updated" });
+    // return res.send({ success: true, message: "Updated" });
+    req.flash("success", "Successfully updated!");
+    res.redirect(302, `/questions/${id}`);
   },
 
   // DELETE a specific question
@@ -102,10 +115,13 @@ const QuestionsController = {
     try {
       await Question.deleteOne({ id });
     } catch (err) {
-      return next(err);
+      // return next(err);
+      req.flash("error", err);
+      return res.redirect(302, `/questions/${id}`);
     }
-    
-    res.redirect("/questions");
+
+    req.flash("success", "Successfully deleted!");
+    res.redirect(302, "/questions");
   },
 };
 

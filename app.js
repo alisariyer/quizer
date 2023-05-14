@@ -4,10 +4,11 @@ const path = require("path");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const session = require('express-session');
+const session = require("express-session");
+const flash = require("connect-flash");
 const ExpressError = require("./utils/ExpressError");
 require("dotenv").config();
-const indexRouter = require('./routes/index');
+const indexRouter = require("./routes/index");
 
 // Establish MongoDB Connection
 const DB_HOST = process.env.DB_HOST;
@@ -26,10 +27,17 @@ app.set("view engine", "ejs");
 app.set("ejs", path.join(__dirname, "views"));
 
 // use middlewares
+// const accessLogStream = fs.WriteStream(path.join(__dirname, "access.log"), {
+//   flags: "a",
+// });
+// app.use(morgan("tiny", { stream: accessLogStream }));
+// setup morgan logger
+app.use(morgan("tiny"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(flash());
 
 const sessionConfig = {
   secret: process.env.ACCESS_TOKEN_SECRET,
@@ -37,20 +45,22 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    expires: Date.now() + (1000 * 60 * 60 * 24 * 7),
-    maxAge: 1000 * 60 * 60 * 24 * 7
-  }
-}
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+};
 app.use(session(sessionConfig));
 
-// setup morgan logger
-// const accessLogStream = fs.WriteStream(path.join(__dirname, "access.log"), {
-//   flags: "a",
-// });
-// app.use(morgan("tiny", { stream: accessLogStream }));
-app.use(morgan("tiny"));
+// setup flash middleware
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  // second option
+  // res.render('a_view', { success: req.flash('success') });
+  next();
+})
 
-app.use('/', indexRouter);
+app.use("/", indexRouter);
 
 // app.all("*", login);
 app.all("*", (req, res, next) => {

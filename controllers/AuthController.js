@@ -1,9 +1,7 @@
 const User = require("../db/models/user");
 const { userValidationSchema } = require("../utils/validationSchemas");
-const ExpressError = require("../utils/ExpressError");
+// const ExpressError = require("../utils/ExpressError");
 const bcrypt = require("bcrypt");
-// for bcrypt hashing
-const saltRounds = 10;
 
 const AuthController = {
   getSignUp: (req, res) => {
@@ -22,7 +20,9 @@ const AuthController = {
 
     if (error) {
       const messages = error.details.map((detail) => detail.message).join(", ");
-      throw new ExpressError(messages, 400);
+      // throw new ExpressError(messages, 400);
+      req.flash("error", messages);
+      return res.redirect(302, "/signup");
     }
 
     // if email is already registered, reject it
@@ -30,15 +30,21 @@ const AuthController = {
     try {
       foundUser = await User.findByEmail(email);
     } catch (err) {
-      return next(err);
+      // return next(err);
+      req.flash("error", err);
+      return res.redirect(302, "/signup");
     }
 
-    if (foundUser)
-      return res.send({
-        success: false,
-        message: "Incorrect email address!",
-      });
+    if (foundUser) {
+      req.flash("error", "Incorrect email address!");
+      return res.redirect(302, "/signup");
+    }
+    // return res.send({
+    //   success: false,
+    //   message: "Incorrect email address!",
+    // });
 
+    const saltRounds = 10;
     const hash = await bcrypt.hash(password, saltRounds);
     const newUser = {
       email,
@@ -50,16 +56,22 @@ const AuthController = {
     try {
       user = await User.create(newUser);
     } catch (err) {
-      return next(err);
+      req.flash("error", err);
+      return res.redirect(302, "/signup");
+      // return next(err);
     }
 
     if (user) {
-      return res.send({
-        success: true,
-        message: "Your account has been created, please log in now.",
-      });
+      req.flash("success", "Your account has been created, please login");
+      return res.redirect(302, "/login");
+      // return res.send({
+      //   success: true,
+      //   message: "Your account has been created, please log in now.",
+      // });
     } else {
-      throw new ExpressError("Internal server error", 500);
+      req.flash("error", "Unknown error, please try later again!");
+      return res.redirect(302, "/signup");
+      // throw new ExpressError("Internal server error", 500);
     }
   },
 
@@ -72,35 +84,43 @@ const AuthController = {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).send({
-        success: false,
-        message: "Username or password can not be empty!",
-      });
+      req.flash("error", "Username or password can not be empty!");
+      return res.redirect(302, "/login");
+      // return res.status(400).send({
+      //   success: false,
+      //   message: "Username or password can not be empty!",
+      // });
     }
 
     let foundUser;
     try {
       foundUser = await User.findByEmail(email);
     } catch (err) {
-      return next(err);
+      req.flash("error", err);
+      return res.redirect(302, "/login");
+      // return next(err);
     }
 
     if (!foundUser) {
-      return res.status(400).send({
-        success: false,
-        message: "Incorrect email or password!",
-      });
+      req.flash("error", "Incorrect email or password!");
+      return res.redirect(302, "/login");
+      // return res.status(400).send({
+      //   success: false,
+      //   message: "Incorrect email or password!",
+      // });
     }
 
     const confirmPassword = await bcrypt.compare(password, foundUser.password);
     if (!confirmPassword) {
-      return res.status(400).send({
-        success: false,
-        message: "Incorrect username or password!",
-      });
+      req.flash("error", "Incorrect email or password!")
+      return res.redirect(302, '/login');
+      // return res.status(400).send({
+      //   success: false,
+      //   message: "Incorrect username or password!",
+      // });
     }
     req.session.user_id = foundUser._id;
-    res.redirect(302, '/');
+    res.redirect(302, "/");
   },
 
   logout: (req, res) => {
