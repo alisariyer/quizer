@@ -7,7 +7,7 @@
     "start": "nodemon app.js",
     "seed": "node ./db/seed/index.js",
     "scss": "sass scss:public/css --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "debug": "set DEBUG=express:* & nodemon app.js"
   },
   "repository": {
     "type": "git",
