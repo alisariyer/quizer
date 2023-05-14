@@ -71,15 +71,15 @@ const QuestionsController = {
   updateOne: async (req, res, next) => {
     const { id } = req.params;
     const { question, answers, correct } = req.body;
-
+    console.log(req.body);
     const { error } = questionValidationSchema.validate({
       question,
       answers,
-      correct,
+      correct: String(correct),
     });
     if (error) {
       const message = error.details.map((detail) => detail.message).join(", ");
-      res.status(400).send({ success: false, message });
+      return res.status(400).send({ success: false, message });
     }
 
     try {
