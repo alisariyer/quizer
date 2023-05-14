@@ -1,8 +1,8 @@
-const authenticateToken = (req, res, next) => {
+const authenticateUser = (req, res, next) => {
   if (req.session.user_id) {
     return next();
   }
-  res.redirect('/login');
+  res.redirect(302, '/login');
 }
 
-module.exports = authenticateToken;
+module.exports = authenticateUser;

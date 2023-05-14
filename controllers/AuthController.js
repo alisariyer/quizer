@@ -28,7 +28,7 @@ const AuthController = {
     // if email is already registered, reject it
     let foundUser;
     try {
-      foundUser = await User.findOne({ email });
+      foundUser = await User.findByEmail(email);
     } catch (err) {
       return next(err);
     }
@@ -100,11 +100,7 @@ const AuthController = {
       });
     }
     req.session.user_id = foundUser._id;
-    res.status(200).send({
-      success: true
-    })
-
-    // return res.redirect(302, "/");
+    res.redirect(302, '/');
   },
 
   logout: (req, res) => {

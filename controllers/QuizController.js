@@ -2,7 +2,6 @@ const Question = require("../db/models/question");
 const User = require("../db/models/user");
 const Score = require("../db/models/score");
 const { answersValidationSchema } = require("../utils/validationSchemas");
-// let { isLoggedIn, currentUserEmail } = require('../routes/login');
 
 let quizDuration = 0;
 let quizDurationInterval;

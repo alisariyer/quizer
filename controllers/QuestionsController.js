@@ -1,7 +1,6 @@
 const Question = require("../db/models/question");
 const { v4: uuidv4 } = require("uuid");
 const { questionValidationSchema } = require("../utils/validationSchemas");
-// const { isLoggedIn } = require('../routes/login');
 
 const QuestionsController = {
   // GET new question
@@ -12,16 +11,19 @@ const QuestionsController = {
 
   // POST new question (and save in DB)
   postNew: async (req, res, next) => {
+
     const { question, answers, correct } = req.body;
     const { error } = questionValidationSchema.validate({
       question,
       answers,
       correct,
     });
+
     if (error) {
       const message = error.details.map((detail) => detail.message).join(", ");
       return res.status(400).send({ success: false, message });
     }
+
     const newQuestion = new Question({
       id: uuidv4(),
       question,
@@ -46,8 +48,8 @@ const QuestionsController = {
     } catch (err) {
       return next(err);
     }
-
-    res.render("questions", { questions, isLoggedIn: true });
+    const isLoggedIn = !!req.session.user_id;
+    res.render("questions", { questions, isLoggedIn });
   },
 
   // GET a specific question
@@ -61,7 +63,8 @@ const QuestionsController = {
       return next(err);
     }
 
-    res.render("edit", { question, isLoggedIn: true });
+    const isLoggedIn = !!req.session.user_id;
+    res.render("edit", { question, isLoggedIn });
   },
 
   // UPDATE a specific question
