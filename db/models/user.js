@@ -21,8 +21,8 @@ userSchema.statics.findByEmail = async (email) => {
     return user;
 }
 
-userSchema.statics.getScores = async (email) => {
-    const user = await User.findOne({ email}).populate('scores');
+userSchema.statics.getScores = async (user_id) => {
+    const user = await User.findById(user_id).populate('scores');
     if (!user) return false;
     return user.scores;
 }
