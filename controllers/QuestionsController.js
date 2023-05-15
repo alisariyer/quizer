@@ -22,7 +22,6 @@ const QuestionsController = {
       const message = error.details.map((detail) => detail.message).join(", ");
       req.flash("error", message);
       return res.redirect(302, "/questions/new");
-      // return res.status(400).send({ success: false, message });
     }
 
     const newQuestion = new Question({
@@ -37,8 +36,9 @@ const QuestionsController = {
     } catch (err) {
       req.flash("error", err);
       return res.redirect(302, "/questions/new");
-      // return next(err);
     }
+
+    req.flash("success", "New question has been successfully added!");
     res.redirect(302, "/questions");
   },
 
