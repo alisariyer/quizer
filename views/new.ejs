@@ -8,7 +8,7 @@
 <body class="bg-image">
     <%- include('partials/header', { isQuiz: false, isLoggedIn }) %>
         <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
-            <%- include('partials/flash') %>
+
             <!-- Main content goes here -->
             <form action="/questions/new?_method=POST" method="POST" class="my-2">
 
@@ -57,6 +57,8 @@
                     <button class="btn btn-primary d-block ms-4">Save</button>
                 </div>
             </form>
+
+            <%- include('partials/flash') %>
             <%- include('partials/footer') %>
         </main>
 </body>

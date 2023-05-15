@@ -10,7 +10,7 @@
 <body class="bg-image">
     <%- include('partials/header', { isQuiz: false, isLoggedIn }) %>
         <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
-            <%- include('partials/flash') %>
+
             <!-- Main content goes here -->
             <form action="#" method="POST" class="form-edit my-2" data-id="<%= question.id %>">
 
@@ -59,6 +59,7 @@
                     <button class="btn btn-primary d-block ms-4">Save</button>
                 </div>
             </form>
+            <%- include('partials/flash') %>
             <%- include('partials/popup') %>
             <%- include('partials/footer') %>
         </main>

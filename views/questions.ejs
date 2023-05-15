@@ -8,7 +8,7 @@
 <body class="bg-image">
     <%- include('partials/header', { isQuiz: false, isLoggedIn }) %>
     <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
-        <%- include('partials/flash') %>
+
         <h1 class="main__title text-center mt-2">Questions</h1>
         <ol class="question list-group">
         <% for (let i=0; i< questions.length; i++) { %>
@@ -33,6 +33,8 @@
             <a href="/" class="btn d-block">Home</a>
             <a href="/questions/new" class="btn btn-primary d-block ms-4">Add New</a>
         </div>
+
+        <%- include('partials/flash') %>
         <%- include('partials/footer') %>
     </main>
 </body>
