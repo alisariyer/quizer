@@ -51,7 +51,6 @@ const QuestionsController = {
     } catch (err) {
       req.flash("error", err);
       return res.redirect(302, "/");
-      // return next(err);
     }
     const isLoggedIn = !!req.session.user_id;
     res.render("questions", { questions, isLoggedIn });
@@ -67,7 +66,6 @@ const QuestionsController = {
     } catch (err) {
       req.flash("error", err);
       return res.redirect(302, "/questions");
-      // return next(err);
     }
 
     const isLoggedIn = !!req.session.user_id;
@@ -88,7 +86,6 @@ const QuestionsController = {
       const message = error.details.map((detail) => detail.message).join(", ");
       req.flash("error", message);
       return res.redirect(302, `/questions/${id}`);
-      // return res.status(400).send({ success: false, message });
     }
 
     try {
@@ -100,10 +97,8 @@ const QuestionsController = {
     } catch (err) {
       req.flash("error", err);
       return res.redirect(302, `/questions/${id}`);
-      // return next(err);
     }
 
-    // return res.send({ success: true, message: "Updated" });
     req.flash("success", "Successfully updated!");
     res.redirect(302, `/questions/${id}`);
   },
@@ -115,7 +110,6 @@ const QuestionsController = {
     try {
       await Question.deleteOne({ id });
     } catch (err) {
-      // return next(err);
       req.flash("error", err);
       return res.redirect(302, `/questions/${id}`);
     }

@@ -6,7 +6,8 @@ const ScoresController = {
     try {
       scores = await User.getScores(req.session.user_id);
     } catch (err) {
-      return next(err);
+      req.flash('error', err);
+      return res.redirect('/');
     }
     const isLoggedIn = !!req.session.user_id;
     res.render("scores", { scores, isLoggedIn });

@@ -25,7 +25,8 @@ const QuizController = {
     try {
       questions = await Question.find({});
     } catch (err) {
-      return next(err);
+      req.flash('error', err);
+      return res.redirect('/');
     }
     const isLoggedIn = !!req.session.user_id;
     res.render("quiz", { questions, isLoggedIn });
@@ -37,7 +38,8 @@ const QuizController = {
     const { error } = answersValidationSchema.validate({ answers });
     if (error) {
       const message = error.details.map((detail) => detail.message).join(", ");
-      return res.send({ success: false, message });
+      req.flash('error', message);
+      return res.redirect(302, '/quiz');
     }
 
     let corrects = 0;
@@ -54,7 +56,8 @@ const QuizController = {
         });
       });
     } catch (err) {
-      return next(err);
+      req.flash('error', err);
+      return res.redirect(302, '/quiz');
     }
     
     clearInterval(quizDurationInterval);
@@ -68,7 +71,8 @@ const QuizController = {
       await score.save();
       await user.save();
     } catch (err) {
-      return next(err);
+      req.flash('error', err);
+      return res.redirect(302, '/quiz');
     }
     
     quizDuration = 0;
