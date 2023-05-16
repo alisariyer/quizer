@@ -6,10 +6,10 @@
     display: flex;
     align-items: flex-start;
     line-height: 1.5;
-    border: $default-border-width solid $color-primary;
+    border: $default-border-width solid $color-grayish;
   }
   &-item:hover {
-    background-color: $color-primary-light;
+    background-color: $color-secondary-light;
   }
   &-item + .list-group-item {
     border-top-width: 0;
@@ -78,7 +78,7 @@
   }
   &:active {
     border-color: $color-secondary;
-    background-color: $color-secondary;
+    background-color: $color-primary;
   }
 }
 
@@ -89,7 +89,7 @@
   border: 0.4rem solid $color-primary-soft;
   font-size: $fs-medium;
   font-weight: $fw-bold;
-  color: $color-secondary;
+  color: $color-grayish;
   text-decoration: none;
   transition: color $default-animation-duration ease-in-out;
   &-lg {
@@ -131,8 +131,8 @@
   font-size: $fs-medium;
   font-weight: $fw-regular;
   line-height: 1.5;
-  color: $color-secondary;
-  background-color: $color-light;
+  color: $color-light;
+  background-color: $color-secondary-light;
   background-clip: padding-box;
   border: $default-border-width solid $color-primary;
   border-radius: $default-border-radius;
@@ -196,7 +196,8 @@
 
 .menu-toggle {
   display: inline-block;
-  background-color: $color-light;
+  color: $color-light;
+  background-color: $color-secondary-light;
   position: fixed;
   top: 64px;
   right: 0;
@@ -251,18 +252,20 @@
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: $color-secondary;
+  color: $color-light;
   vertical-align: top;
   text-align: center;
   border-collapse: collapse;
-  background-color: $color-light;
+  background-color: $color-secondary-light;
   border: 5px solid $color-primary-light;
   border-radius: $default-border-radius;
+  overflow: hidden;
   & tbody {
     vertical-align: inherit;
   }
   & thead {
     vertical-align: inherit;
+    color: $color-secondary;
     background-color: $color-primary-light;
   }
   & th,
@@ -294,4 +297,15 @@
   justify-content: center;
   align-items: center;
   gap: 1.25rem;
+}
+
+.close-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  &:hover {
+    background-color: $color-secondary-light;
+    border-radius: $default-border-radius;
+    cursor: pointer;
+  }
 }

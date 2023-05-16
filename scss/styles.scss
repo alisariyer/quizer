@@ -7,6 +7,7 @@
 @import "classes/components";
 
 body {
+  color: $color-light;
   font-family: $default-font;
   font-weight: $fw-regular;
   font-size: $fs-regular;
@@ -20,7 +21,6 @@ body {
 }
 
 .main {
-  color: $color-secondary;
   & .brand {
     font-size: 4.8rem;
     margin-bottom: 6rem;
@@ -51,7 +51,7 @@ body {
   }
   &__answer {
     border: 2px solid $color-primary;
-    background-color: $color-light;
+    background-color: $color-secondary-light;
     margin-bottom: 1rem;
     padding: 1rem 0.5rem;
     border-radius: 0.3rem;

@@ -94,11 +94,13 @@ const AuthController = {
       return res.redirect(302, '/login');
     }
     req.session.user_id = foundUser._id;
+    req.flash('success', 'Welcome to Quizer App')
     res.redirect(302, "/");
   },
 
   logout: (req, res) => {
-    req.session.destroy();
+    req.session.user_id = null;
+    req.flash('success', 'Successfully logged out');
     res.redirect("/");
   },
 };

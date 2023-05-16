@@ -84,8 +84,10 @@ const QuestionsController = {
     });
     if (error) {
       const message = error.details.map((detail) => detail.message).join(", ");
-      req.flash("error", message);
-      return res.redirect(302, `/questions/${id}`);
+      return res.send({
+        success: false,
+        message
+      })
     }
 
     try {
@@ -95,12 +97,16 @@ const QuestionsController = {
         { runValidators: true, new: true }
       );
     } catch (err) {
-      req.flash("error", err);
-      return res.redirect(302, `/questions/${id}`);
+      return res.send({
+        success: false,
+        message: err
+      })
     }
 
-    req.flash("success", "Successfully updated!");
-    res.redirect(302, `/questions/${id}`);
+    return res.send({
+      success: true,
+      message: 'Successfully updated!'
+    })
   },
 
   // DELETE a specific question
@@ -111,7 +117,7 @@ const QuestionsController = {
       await Question.deleteOne({ id });
     } catch (err) {
       req.flash("error", err);
-      return res.redirect(302, `/questions/${id}`);
+      return res.redirect(302, `/questions`);
     }
 
     req.flash("success", "Successfully deleted!");
