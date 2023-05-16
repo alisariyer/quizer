@@ -4,6 +4,27 @@ A quiz web application
 ## About
 This project is built in order to practice mostly backend web structure.
 
+## NOTE
+**THIS PROJECT IS STILL IN DEVELOPMENT**. DO NOT USE AS A FULL WORKING APPLICATION. BUT ACTUAL VERSION CAN BE RUN LOCALLY.
+
+## How to install locally
+1. You need to install node.js, mongodb, and git on your computer.
+2. Open a terminal.
+3. Go into folder where you want to setup project.
+4. Run this command to copy repository locally: `git clone https://github.com/alisariyer/quizer.git`
+5. Go into project folder by running this command: `cd quizer`
+6. As we need to run database and server, it's fine to open project in vscode. To do this run in terminal: `code .`
+7. Open terminal in VSCode by using shortcut: **CTLR+`**
+8. Then install all dependencies: `npm install`
+9. Run your mongo database: `mongod` (for windows)
+10. Open a second terminal in VSCode terminal panel.
+11. Check current folder and be sure to in project folder.
+12. Copy .env.example file and rename as **.env** and change db name(If you want port, db_port or secret)
+13. Seed the database by sample data: `npm run seed`
+14. Run server app: `npm start`
+15. Voilà. Go to http://localhost:3000 page to see project.
+16. Now you sign up and test yourself.
+
 ## Used Technologies
 - Node.js
 - **Express.js**
