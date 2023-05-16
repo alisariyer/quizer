@@ -1,17 +1,10 @@
 # Quizer
-A quiz web application
+A quiz web application 
 
-## Project Details:
-- Start date: 25 April 2023
+## About
+This project is built in order to practice mostly backend web structure.
 
-## Project Screenshots
-![Login Page](./screenshots/screenshot-login.jpg)
-*** 
-![Quiz Page](./screenshots/screenshot-quiz.jpg)
-***
-![New Question Page](./screenshots/screenshot-new.jpg)
-
-## Used Technologies (Or will be used)
+## Used Technologies
 - Node.js
 - **Express.js**
 - **SASS**
@@ -23,27 +16,24 @@ A quiz web application
 - Adobe Illustrator
 
 ## Specifications:
-- A randomize front-end quiz for guest.
-- User must be enregistered.
-- Admin can add more questions and edit them.
-- Score table shows current scores
-- Data will be stored in a MongoDB
+- A random quiz (actually only front-end questions)
+- User registration/login
+- Score table
+- Add/Edit/Delete questions
 
-## Project Structure:
-- Homepage
-  - Quiz
-- Login
-- Registration
-- Admin
-  - New
-  - Edit
-- About
-
-## REST Structure
-- GET /                           : welcome page
-- GET /quiz                       : new quiz
-- POST /quiz                      : post quiz answers
-- GET /questions/new              : add a new question
-- GET /questions/:id              : get a specific question
-- PUT /questions/:id              : update a specific question
-- DELETE /questions/:id           : delete a specific question
+## RESTful Routes (Route vs Request result)
+- GET /                           : Home page
+- GET /login                      : Login page
+- POST /login                     : Login process
+- GET /signup                     : Registration page
+- POST /signup                    : Registration process
+- GET /logout                     : Logout process
+- GET /quiz                       : Quiz page
+- POST /quiz                      : Submit answers
+- GET /questions/new              : New question page
+- POST /questions/new             : Add new question process
+- GET /questions                  : All questions page (for admin)
+- GET /questions/:id              : Specified question page
+- PUT /questions/:id              : Update a question process
+- DELETE /questions/:id           : Delete a question process
+- GET /scores                     : User scores table page
