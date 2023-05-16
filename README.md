@@ -13,13 +13,13 @@ This project is built in order to practice mostly backend web structure.
 3. Go into folder where you want to setup project.
 4. Run this command to copy repository locally: `git clone https://github.com/alisariyer/quizer.git`
 5. Go into project folder by running this command: `cd quizer`
-6. As we need to run database and server, it's fine to open project in vscode. To do this run in terminal: `code .`
+6. As we need to run database and server, it's fine to open project in VSCode. To do this run in terminal: `code .`
 7. Open terminal in VSCode by using shortcut: **CTLR+`**
 8. Then install all dependencies: `npm install`
 9. Run your mongo database: `mongod` (for windows)
 10. Open a second terminal in VSCode terminal panel.
-11. Check current folder and be sure to in project folder.
-12. Copy .env.example file and rename as **.env** and change db name(If you want port, db_port or secret)
+11. Check current folder and be sure to be in project folder.
+12. Copy .env.example file and rename as **.env**. Then in .env file modify environment variables. (You can just change DB_NAME now).
 13. Seed the database by sample data: `npm run seed`
 14. Run server app: `npm start`
 15. Voilà. Go to http://localhost:3000 page to see project.
