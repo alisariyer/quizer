@@ -50,8 +50,12 @@ a:active {
 }
 
 .bg-image {
-  background-color: #fbfbfb;
-  background-image: url("../assets/images/pattern.png");
+  background: center/cover no-repeat url("../assets/images/bg-mobile.png");
+}
+@media screen and (min-width: 576px) {
+  .bg-image {
+    background: center/cover no-repeat url("../assets/images/bg-desktop.png");
+  }
 }
 
 .logo {

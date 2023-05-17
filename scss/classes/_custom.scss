@@ -6,8 +6,11 @@
 }
 
 .bg-image {
-  background-color: $color-light;
-  background-image: url($background-image);
+  // background-color: $color-light;
+  background: center / cover no-repeat url($bg-mobile-image);
+  @media screen and (min-width: 576px) {
+    background: center / cover no-repeat url($bg-desktop-image);
+  }
 }
 
 .logo {
