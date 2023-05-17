@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', { title: 'Question List' }) %>
+</head>
+
+<body class="bg-image">
+    <%- include('partials/header', { isQuiz: false, isLoggedIn }) %>
+    <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center align-items-center text center">
+
+        <h1 class="fs-huge text-primary mt-8"><%= status %></h1>
+        <p class="fs-big mt-4"><%= message %></p>
+        <%- include('partials/footer') %>
+    </main>
+</body>
+
+</html>

@@ -73,8 +73,9 @@ app.use((err, req, res, next) => {
   // Mongoose errors: ValidationError, CastError,
   // if (err.name === 'ValidationError') err = handleValidationErr(err);
   const { status = 500, message = "Something went wrong" } = err;
-  res.status(status).send(message);
-  // next(err);
+  const isLoggedIn = false;
+  if (req.session.user_id) isLoggedIn = true;
+  res.status(status).render('404', { status, message, isLoggedIn });
 });
 
 const PORT = process.env.PORT || 3000;

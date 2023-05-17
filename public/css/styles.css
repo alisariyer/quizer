@@ -252,6 +252,14 @@ h6 {
   font-size: 1.4rem;
 }
 
+.fs-big {
+  font-size: 3rem;
+}
+
+.fs-huge {
+  font-size: 16vw;
+}
+
 .fw-bold {
   font-weight: 700;
 }
