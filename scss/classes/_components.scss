@@ -179,8 +179,8 @@
   font-size: $fs-regular;
   padding: 0.3rem 1rem;
   line-height: 1.5;
-  color: $color-secondary;
-  background-color: $color-light;
+  color: $color-light;
+  background-color: $color-secondary;
   border: $default-border-width solid $color-primary;
   border-radius: $default-border-radius;
   -webkit-appearance: none;
@@ -300,15 +300,18 @@
   margin-right: 2rem;
   margin-bottom: 2rem;
   padding: 2rem;
-  border: $default-border-width solid $color-light;
+  border: $default-border-width solid $color-primary;
   border-radius: $default-border-radius;
-  background-color: $color-light;
   box-shadow: 0 0 1rem 0.1rem $color-secondary-light;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1.25rem;
+  backdrop-filter: blur(5px);
+  @supports not (backdrop-filter: blur(5px)) {
+    background-color: $color-transparent-black;
+  }
 }
 
 .close-icon {
@@ -316,7 +319,7 @@
   top: 1rem;
   right: 1rem;
   &:hover {
-    background-color: $color-secondary-light;
+    background-color: $color-light;
     border-radius: $default-border-radius;
     cursor: pointer;
   }

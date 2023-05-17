@@ -159,7 +159,6 @@ a:active {
 }
 
 .correct {
-  color: #C8FE5C !important;
   border: 0.5rem solid #C8FE5C !important;
 }
 
@@ -816,8 +815,8 @@ h6 {
   font-size: 2rem;
   padding: 0.3rem 1rem;
   line-height: 1.5;
-  color: #3a3a3a;
-  background-color: #dcdcdc;
+  color: #dcdcdc;
+  background-color: #3a3a3a;
   border: 0.2rem solid #7883ff;
   border-radius: 0.4rem;
   -webkit-appearance: none;
@@ -934,15 +933,20 @@ h6 {
   margin-right: 2rem;
   margin-bottom: 2rem;
   padding: 2rem;
-  border: 0.2rem solid #dcdcdc;
+  border: 0.2rem solid #7883ff;
   border-radius: 0.4rem;
-  background-color: #dcdcdc;
   box-shadow: 0 0 1rem 0.1rem rgba(58, 58, 58, 0.2274509804);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1.25rem;
+  backdrop-filter: blur(5px);
+}
+@supports not (backdrop-filter: blur(5px)) {
+  .modal {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 }
 
 .close-icon {
@@ -951,7 +955,7 @@ h6 {
   right: 1rem;
 }
 .close-icon:hover {
-  background-color: rgba(58, 58, 58, 0.2274509804);
+  background-color: #dcdcdc;
   border-radius: 0.4rem;
   cursor: pointer;
 }
