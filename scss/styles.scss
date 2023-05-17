@@ -58,7 +58,7 @@ body {
     transition: background-color $default-animation-duration ease;
     &:hover {
       color: $color-light;
-      background-color: $color-secondary;
+      background-color: $color-secondary-light;
       border-color: $color-secondary;
       cursor: pointer;
       & span {
@@ -67,9 +67,9 @@ body {
     }
   }
   &__answered {
-    color: $color-light;
-    background-color: $color-secondary;
-    border-color: $color-secondary;
+    color: $color-secondary;
+    background-color: $color-light;
+    border-color: $color-light;
     cursor: pointer;
     & span {
       color: $color-primary;

@@ -64,6 +64,13 @@
   background-color: $color-secondary !important;
 }
 
+.bg-blur {
+  backdrop-filter: blur(5px);
+  @supports not (backdrop-filter: blur(5px)) {
+    background-color: $color-transparent-black;
+  }
+}
+
 .link {
   text-decoration: underline solid transparent 0.2rem;
   color: $color-primary;
@@ -111,6 +118,5 @@
 }
 
 .incorrect {
-  color: $color-danger !important;
   border: .5rem solid $color-danger !important;
 }
