@@ -66,7 +66,7 @@ a:active {
   animation-play-state: paused;
 }
 .logo circle {
-  fill: #fbfbfb;
+  fill: #dcdcdc;
   animation-name: signal;
   animation-timing-function: linear;
   animation-duration: 2s;
@@ -78,7 +78,7 @@ a:active {
 
 @keyframes signal {
   0% {
-    fill: #fbfbfb;
+    fill: #dcdcdc;
   }
   50% {
     fill: #7883ff;
@@ -89,11 +89,11 @@ a:active {
 }
 
 .fill-light {
-  fill: #fbfbfb;
+  fill: #dcdcdc;
 }
 
 .bg-light {
-  background-color: #fbfbfb !important;
+  background-color: #dcdcdc !important;
 }
 
 .bg-primary {
@@ -126,7 +126,7 @@ a:active {
 }
 
 .text-light {
-  color: #fbfbfb !important;
+  color: #dcdcdc !important;
 }
 
 .text-secondary {
@@ -692,7 +692,7 @@ h6 {
   padding: 0.1rem;
   border-radius: 0.4rem;
   border: 0.4rem solid #7883ff;
-  color: #fbfbfb;
+  color: #dcdcdc;
   line-height: 1;
   transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
@@ -714,10 +714,10 @@ h6 {
   background-color: transparent;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
-  border: 0.4rem solid #96d0ff;
+  border: 0.4rem solid #b4b5ff;
   font-size: 1.72rem;
   font-weight: 700;
-  color: #484848;
+  color: #dcdcdc;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
@@ -733,14 +733,14 @@ h6 {
 .btn-primary {
   background-color: #7883ff;
   border: 0.4rem solid #7883ff;
-  color: #fbfbfb;
+  color: #dcdcdc;
 }
 .btn-primary:hover {
   color: #3a3a3a;
 }
 
 .form {
-  background-color: white;
+  backdrop-filter: blur(5px);
   border: 1rem solid #b4b5ff;
   border-radius: 0.4rem;
 }
@@ -749,7 +749,7 @@ h6 {
   font-size: 1.6rem;
   display: block;
   margin-block: 0.25rem;
-  color: #3a3a3a;
+  color: #dcdcdc;
 }
 
 .form-control {
@@ -759,8 +759,8 @@ h6 {
   font-size: 1.72rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #fbfbfb;
-  background-color: rgba(58, 58, 58, 0.2274509804);
+  color: #dcdcdc;
+  background-color: transparent;
   background-clip: padding-box;
   border: 0.2rem solid #7883ff;
   border-radius: 0.4rem;
@@ -779,6 +779,9 @@ h6 {
   outline: 0;
   box-shadow: 0 0 0 0.25rem #7883ff;
 }
+.form-control::placeholder {
+  color: #484848;
+}
 
 .input-group {
   display: flex;
@@ -789,7 +792,7 @@ h6 {
   display: flex;
   align-items: center;
   padding: 0.3rem 0.5rem;
-  color: #fbfbfb;
+  color: #dcdcdc;
   background-color: #7883ff;
   border: 0.2rem solid #7883ff;
   border-radius: 0.4rem 0 0 0.4rem;
@@ -806,7 +809,7 @@ h6 {
   padding: 0.3rem 1rem;
   line-height: 1.5;
   color: #3a3a3a;
-  background-color: #fbfbfb;
+  background-color: #dcdcdc;
   border: 0.2rem solid #7883ff;
   border-radius: 0.4rem;
   -webkit-appearance: none;
@@ -826,7 +829,7 @@ h6 {
 
 .menu-toggle {
   display: inline-block;
-  color: #fbfbfb;
+  color: #dcdcdc;
   background-color: rgba(58, 58, 58, 0.2274509804);
   position: fixed;
   top: 64px;
@@ -859,7 +862,7 @@ h6 {
 .popup p {
   display: inline-block;
   background-color: #7883ff;
-  color: #fbfbfb;
+  color: #dcdcdc;
   padding: 1rem;
   border-radius: 0.4rem;
 }
@@ -879,7 +882,7 @@ h6 {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #fbfbfb;
+  color: #dcdcdc;
   vertical-align: top;
   text-align: center;
   border-collapse: collapse;
@@ -914,9 +917,9 @@ h6 {
   margin-right: 2rem;
   margin-bottom: 2rem;
   padding: 2rem;
-  border: 0.2rem solid #fbfbfb;
+  border: 0.2rem solid #dcdcdc;
   border-radius: 0.4rem;
-  background-color: #fbfbfb;
+  background-color: #dcdcdc;
   box-shadow: 0 0 1rem 0.1rem rgba(58, 58, 58, 0.2274509804);
   display: flex;
   flex-direction: column;
@@ -937,7 +940,7 @@ h6 {
 }
 
 body {
-  color: #fbfbfb;
+  color: #dcdcdc;
   font-family: "Sen", sans-serif;
   font-weight: 400;
   font-size: 2rem;
@@ -949,7 +952,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #fbfbfb;
+  background-color: #dcdcdc;
   border-bottom: 0.2rem solid #7883ff;
   opacity: 0;
   animation: appear 0.2s ease-in-out forwards;
@@ -1002,7 +1005,7 @@ body {
   transition: background-color 0.2s ease;
 }
 .question__answer:hover {
-  color: #fbfbfb;
+  color: #dcdcdc;
   background-color: #3a3a3a;
   border-color: #3a3a3a;
   cursor: pointer;
@@ -1011,7 +1014,7 @@ body {
   color: #7883ff;
 }
 .question__answered {
-  color: #fbfbfb;
+  color: #dcdcdc;
   background-color: #3a3a3a;
   border-color: #3a3a3a;
   cursor: pointer;

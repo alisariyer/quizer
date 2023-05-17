@@ -86,10 +86,10 @@
   background-color: transparent;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
-  border: 0.4rem solid $color-primary-soft;
+  border: 0.4rem solid $color-primary-light;
   font-size: $fs-medium;
   font-weight: $fw-bold;
-  color: $color-grayish;
+  color: $color-light;
   text-decoration: none;
   transition: color $default-animation-duration ease-in-out;
   &-lg {
@@ -112,7 +112,7 @@
 }
 
 .form {
-  background-color: white;
+  backdrop-filter: blur(5px);
   border: 1rem solid $color-primary-light;
   border-radius: $default-border-radius;
 }
@@ -121,7 +121,7 @@
   font-size: $fs-small;
   display: block;
   margin-block: 0.25rem;
-  color: $color-secondary;
+  color: $color-light;
 }
 
 .form-control {
@@ -132,7 +132,7 @@
   font-weight: $fw-regular;
   line-height: 1.5;
   color: $color-light;
-  background-color: $color-secondary-light;
+  background-color: transparent;
   background-clip: padding-box;
   border: $default-border-width solid $color-primary;
   border-radius: $default-border-radius;
@@ -140,7 +140,7 @@
   -moz-appearance: none;
   appearance: none;
   transition: border-color $default-animation-duration ease-in-out,
-    box-shadow $default-animation-duration ease-in-out;
+  box-shadow $default-animation-duration ease-in-out;
   resize: vertical;
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -148,6 +148,9 @@
   &:focus {
     outline: 0;
     box-shadow: 0 0 0 0.25rem $color-primary;
+  }
+  &::placeholder {
+    color: $color-grayish;
   }
 }
 
