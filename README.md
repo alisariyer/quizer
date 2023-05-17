@@ -5,10 +5,10 @@ A quiz web application
 ![Quizer Screenshot](./screenshots/screenshot.png)
 
 ## About
-This project is built in order to practice mostly backend web structure.
+The goal of this project is to implement and consolidate the backend web structure.
 
 ## NOTE
-**THIS PROJECT IS STILL IN DEVELOPMENT**. DO NOT USE AS A FULL WORKING APPLICATION. BUT ACTUAL VERSION CAN BE RUN LOCALLY.
+**THIS PROJECT IS STILL IN DEVELOPMENT**. DO NOT USE AS A FULLY WORKING APPLICATION. HOWEVER ACTUAL VERSION CAN BE RUN LOCALLY.
 
 ## How to install locally
 1. You need to install node.js, mongodb, and git on your computer.
@@ -16,7 +16,7 @@ This project is built in order to practice mostly backend web structure.
 3. Go into folder where you want to setup project.
 4. Run this command to copy repository locally: `git clone https://github.com/alisariyer/quizer.git`
 5. Go into project folder by running this command: `cd quizer`
-6. As we need to run database and server, it's recommended to open project in VSCode. To do this run in terminal: `code .`
+6. As we need to run database and server, it's recommended to open project in VSCode. To do this, run in terminal: `code .`
 7. Open terminal in VSCode by using shortcut: **CTLR+`**
 8. Then install all dependencies: `npm install`
 9. Run your mongo database: `mongod` (for windows)
@@ -28,7 +28,7 @@ This project is built in order to practice mostly backend web structure.
 15. Voilà. Go to http://localhost:3000 page to see project.
 16. Now you sign up and test yourself.
 
-## Used Technologies
+## Used Technologies & Dependencies
 - Node.js
 - **Express.js**
 - **SASS**
@@ -38,6 +38,8 @@ This project is built in order to practice mostly backend web structure.
 - Git Version Control
 - Figma
 - Adobe Illustrator
+- Nodemon
+- Joi
 
 ## Specifications:
 - A random quiz (actually only front-end questions)
