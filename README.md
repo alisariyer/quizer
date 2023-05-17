@@ -28,18 +28,12 @@ The goal of this project is to implement and consolidate the backend web structu
 15. Voilà. Go to http://localhost:3000 page to see project.
 16. Now you sign up and test yourself.
 
-## Used Technologies & Dependencies
+## Used Technologies (Top 5)
 - Node.js
 - **Express.js**
 - **SASS**
 - **MongoDB**
 - Ejs
-- VSCode
-- Git Version Control
-- Figma
-- Adobe Illustrator
-- Nodemon
-- Joi
 
 ## Specifications:
 - A random quiz (actually only front-end questions)
