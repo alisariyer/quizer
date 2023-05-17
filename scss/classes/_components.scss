@@ -6,7 +6,7 @@
     display: flex;
     align-items: flex-start;
     line-height: 1.5;
-    border: $default-border-width solid $color-grayish;
+    border: $default-border-width solid $color-secondary;
   }
   &-item:hover {
     background-color: $color-secondary-light;
@@ -200,8 +200,8 @@
 .menu-toggle {
   display: inline-block;
   color: $color-light;
-  background-color: $color-secondary-light;
   position: fixed;
+  z-index: 1000;
   top: 64px;
   right: 0;
   min-width: 14rem;
@@ -209,10 +209,19 @@
   & .list-group-item {
     padding: 0.4rem 0.8rem;
     justify-content: flex-end;
+    background-color: $color-transparent-black;
+    border: none;
+    border-bottom: $default-border-width solid $color-primary;
     cursor: pointer;
   }
+  & .list-group-item:last-child {
+    border-bottom: none;
+  }
   & .list-group-item:hover a {
-    color: $color-primary;
+    color: $color-primary-light;
+  }
+  & .list-group-item:last-child:hover a {
+    color: $color-secondary;
   }
   & a {
     color: inherit;
