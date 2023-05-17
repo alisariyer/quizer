@@ -6,10 +6,19 @@
 }
 
 .bg-image {
-  // background-color: $color-light;
-  background: center / cover no-repeat url($bg-mobile-image);
-  @media screen and (min-width: 576px) {
-    background: center / cover no-repeat url($bg-desktop-image);
+  position: relative;
+  &::after {
+    content: "";
+    position: fixed;
+    z-index: -1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: center / cover no-repeat url($bg-mobile-image);
+    @media screen and (min-width: 576px) {
+      background: center / cover no-repeat url($bg-desktop-image);
+    }
   }
 }
 
@@ -113,9 +122,9 @@
 }
 
 .correct {
-  border: .5rem solid $color-success !important;
+  border: 0.5rem solid $color-success !important;
 }
 
 .incorrect {
-  border: .5rem solid $color-danger !important;
+  border: 0.5rem solid $color-danger !important;
 }
