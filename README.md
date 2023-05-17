@@ -1,6 +1,9 @@
 # Quizer
 A quiz web application 
 
+## Screenshot
+![Quizer Screenshot](./screenshots/screenshot.png)
+
 ## About
 This project is built in order to practice mostly backend web structure.
 
