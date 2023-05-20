@@ -57,8 +57,9 @@ const AuthController = {
     }
 
     if (user) {
-      req.flash("success", "Your account has been created, please login");
-      return res.redirect(302, "/login");
+      req.session.user_id = user._id;
+      req.flash("success", "Your account has been created, Welcome to Quizer App");
+      return res.redirect(302, "/");
     } else {
       req.flash("error", "Unknown error, please try later again!");
       return res.redirect(302, "/signup");
