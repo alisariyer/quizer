@@ -1,9 +1,17 @@
 const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        minLength: 5,
+        trim: true
+    },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -14,12 +22,6 @@ const userSchema = new Schema({
         ref: 'Score'
     }
 });
-
-userSchema.statics.findByEmail = async (email) => {
-    const user = await User.findOne({ email });
-    if (!user) return false;
-    return user;
-}
 
 userSchema.statics.getScores = async (user_id) => {
     const user = await User.findById(user_id).populate('scores');

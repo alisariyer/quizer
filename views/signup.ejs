@@ -10,16 +10,22 @@
         <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
 
             <!-- Main content goes here -->
-            <form action="/signup?_method=POST" method="POST" class="m-8 p-8 form" autocomplete="off">
+            <form action="/signup?_method=POST" method="POST" class="m-8 p-6 form" autocomplete="off">
                 <h1 class="text-center mb-4">Sign up</h1>
 
-                <div class="mb-4">
+                <div class="mb-2">
+                    <label for="username" class="form-text pb-1">Enter your username</label>
+                    <input type="username" id="username" class="form-control" name="username" placeholder="username"
+                        required>
+                </div>
+
+                <div class="mb-2">
                     <label for="email" class="form-text pb-1">Enter your email</label>
                     <input type="email" id="email" class="form-control" name="email" placeholder="emailaddress@domain.com"
                         required>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-2">
                     <label for="password" class="form-text pb-1">Enter a password</label>
                     <input type="password" id="password" class="form-control" name="password" placeholder="$s8*-3dh;?3pdfn."
                         required>
@@ -33,7 +39,7 @@
 
                 <a class="link fs-small d-block text-right" href="/login">I have an account. Login...</a>
 
-                <div class="d-flex justify-content-end my-8">
+                <div class="d-flex justify-content-end mt-8">
                     <a href="/" class="btn d-block">Home</a>
                     <button type="reset" class="btn d-block ms-2">Clear</button>
                     <button type="submit" class="btn btn-primary d-block ms-2">Sign up</button>

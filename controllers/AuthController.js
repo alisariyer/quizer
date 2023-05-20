@@ -8,9 +8,10 @@ const AuthController = {
   },
 
   postSignUp: async (req, res, next) => {
-    const { email, password, passwordRepeat } = req.body;
+    const { username, email, password, passwordRepeat } = req.body;
 
     const { error } = userValidationSchema.validate({
+      username,
       email,
       password,
       passwordRepeat,
@@ -25,20 +26,23 @@ const AuthController = {
     // if email is already registered, reject it
     let foundUser;
     try {
-      foundUser = await User.findByEmail(email);
+      foundUser = await User.find({ $or: [{ username }, { email }]});
+      console.log(foundUser);
     } catch (err) {
-      req.flash("error", err);
+      req.flash("error", err.message);
       return res.redirect(302, "/signup");
     }
 
-    if (foundUser) {
-      req.flash("error", "Incorrect email address!");
+    if (foundUser && foundUser.length > 0) {
+      console.log('in foundUser', foundUser);
+      req.flash("error", "Invalid username or passport!");
       return res.redirect(302, "/signup");
     }
 
     const saltRounds = 10;
     const hash = await bcrypt.hash(password, saltRounds);
     const newUser = {
+      username,
       email,
       password: hash,
       scores: [],
@@ -66,29 +70,29 @@ const AuthController = {
   },
 
   postLogin: async (req, res, next) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!email || !password) {
+    if (!username || !password) {
       req.flash("error", "Username or password can not be empty!");
       return res.redirect(302, "/login");
     }
 
     let foundUser;
     try {
-      foundUser = await User.findByEmail(email);
+      foundUser = await User.findOne({ username });
     } catch (err) {
       req.flash("error", err);
       return res.redirect(302, "/login");
     }
 
     if (!foundUser) {
-      req.flash("error", "Incorrect email or password!");
+      req.flash("error", "Incorrect username or password!");
       return res.redirect(302, "/login");
     }
 
     const confirmPassword = await bcrypt.compare(password, foundUser.password);
     if (!confirmPassword) {
-      req.flash("error", "Incorrect email or password!")
+      req.flash("error", "Incorrect username or password!")
       return res.redirect(302, '/login');
     }
     req.session.user_id = foundUser._id;
