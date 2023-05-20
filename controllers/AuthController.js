@@ -1,6 +1,6 @@
+const bcrypt = require("bcrypt");
 const User = require("../db/models/user");
 const { userValidationSchema } = require("../utils/validationSchemas");
-const bcrypt = require("bcrypt");
 
 const AuthController = {
   getSignUp: (req, res) => {
@@ -26,7 +26,7 @@ const AuthController = {
     // if email is already registered, reject it
     let foundUser;
     try {
-      foundUser = await User.find({ $or: [{ username }, { email }]});
+      foundUser = await User.find({ $or: [{ username }, { email }] });
       console.log(foundUser);
     } catch (err) {
       req.flash("error", err.message);
@@ -34,7 +34,7 @@ const AuthController = {
     }
 
     if (foundUser && foundUser.length > 0) {
-      console.log('in foundUser', foundUser);
+      console.log("in foundUser", foundUser);
       req.flash("error", "Invalid username or passport!");
       return res.redirect(302, "/signup");
     }
@@ -58,7 +58,10 @@ const AuthController = {
 
     if (user) {
       req.session.user_id = user._id;
-      req.flash("success", "Your account has been created, Welcome to Quizer App");
+      req.flash(
+        "success",
+        "Your account has been created, Welcome to Quizer App"
+      );
       return res.redirect(302, "/");
     } else {
       req.flash("error", "Unknown error, please try later again!");
@@ -93,17 +96,18 @@ const AuthController = {
 
     const confirmPassword = await bcrypt.compare(password, foundUser.password);
     if (!confirmPassword) {
-      req.flash("error", "Incorrect username or password!")
-      return res.redirect(302, '/login');
+      req.flash("error", "Incorrect username or password!");
+      return res.redirect(302, "/login");
     }
     req.session.user_id = foundUser._id;
-    req.flash('success', 'Welcome to Quizer App')
-    res.redirect(302, "/");
+    req.flash("success", "Welcome to Quizer App");
+    const redirectUrl = res.locals.returnTo || "/";
+    res.redirect(302, redirectUrl);
   },
 
   logout: (req, res) => {
     req.session.user_id = null;
-    req.flash('success', 'Successfully logged out');
+    req.flash("success", "Successfully logged out");
     res.redirect("/");
   },
 };

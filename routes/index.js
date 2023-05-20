@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const QuestionsController = require("../controllers/QuestionsController");
-const { authenticateUser } = require("../middlewares");
+const { authenticateUser, storeReturnTo } = require("../middlewares");
 const AuthController = require("../controllers/AuthController");
 const QuizController = require("../controllers/QuizController");
 const ScoresController = require("../controllers/ScoresController");
@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", AuthController.getLogin);
-router.post("/login", AuthController.postLogin);
+router.post("/login", storeReturnTo, AuthController.postLogin);
 router.get("/signup", AuthController.getSignUp);
 router.post("/signup", AuthController.postSignUp);
 router.get("/logout", authenticateUser, AuthController.logout);
