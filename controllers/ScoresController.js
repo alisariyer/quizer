@@ -9,8 +9,7 @@ const ScoresController = {
       req.flash('error', err);
       return res.redirect('/');
     }
-    const isLoggedIn = !!req.session.user_id;
-    res.render("scores", { scores, isLoggedIn });
+    res.render("scores", { scores });
   },
 };
 

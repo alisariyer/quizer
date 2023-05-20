@@ -28,8 +28,7 @@ const QuizController = {
       req.flash('error', err);
       return res.redirect('/');
     }
-    const isLoggedIn = !!req.session.user_id;
-    res.render("quiz", { questions, isLoggedIn });
+    res.render("quiz", { questions });
   },
 
   // POST answers (and send back with correct answers to client side)

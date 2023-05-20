@@ -4,8 +4,7 @@ const bcrypt = require("bcrypt");
 
 const AuthController = {
   getSignUp: (req, res) => {
-    const isLoggedIn = !!req.session.user_id;
-    res.render("signup", { isLoggedIn });
+    res.render("signup");
   },
 
   postSignUp: async (req, res, next) => {
@@ -63,8 +62,7 @@ const AuthController = {
   },
 
   getLogin: (req, res) => {
-    const isLoggedIn = !!req.session.user_id;
-    res.render("login", { isLoggedIn });
+    res.render("login");
   },
 
   postLogin: async (req, res, next) => {

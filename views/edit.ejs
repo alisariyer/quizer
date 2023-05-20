@@ -8,14 +8,14 @@
 </head>
 
 <body class="bg-image">
-    <%- include('partials/header', { isQuiz: false, isLoggedIn }) %>
+    <%- include('partials/header', { isQuiz: false }) %>
         <main class="container main min-vh-100-within d-flex d-flex-col justify-content-center ">
 
             <!-- Main content goes here -->
             <form action="#" method="POST" class="form-edit my-2" data-id="<%= question.id %>">
 
                 <div class="mb-2">
-                    <label for="question" class="d-flex align-items-center mb-1"><%- include('components/rocket-svg') %>New Question:</label>
+                    <label for="question" class="d-flex align-items-center mb-1">New Question:</label>
                     <textarea name="question" id="question" class="form-control" rows="5"
                         placeholder="Write question here..." required><%= question.question %></textarea>
                 </div>

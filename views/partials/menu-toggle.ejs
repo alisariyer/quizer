@@ -4,7 +4,7 @@
         <li class="list-group-item"><a href="/quiz">New quiz</a></li>
         <li class="list-group-item"><a href="/scores">Score table</a></li>
         <li class="list-group-item"><a href="/questions">Edit questions</a></li>
-        <% if (!isLoggedIn) { %>
+        <% if (!user_id) { %>
             <li class="list-group-item bg-primary fw-bold"><a href="/login">Login</a></li>
         <% } else { %>
             <li class="list-group-item bg-primary fw-bold"><a href="/logout">Log out</a></li>

@@ -8,8 +8,7 @@ const ScoresController = require("../controllers/ScoresController");
 
 // GET home route
 router.get("/", (req, res) => {
-  const isLoggedIn = !!req.session.user_id;
-  res.render("home", { isLoggedIn });
+  res.render("home");
 });
 
 router.get("/login", AuthController.getLogin);

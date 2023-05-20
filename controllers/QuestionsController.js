@@ -5,8 +5,7 @@ const { questionValidationSchema } = require("../utils/validationSchemas");
 const QuestionsController = {
   // GET new question
   getNew: (req, res) => {
-    const isLoggedIn = !!req.session.user_id;
-    res.render("new", { isLoggedIn });
+    res.render("new");
   },
 
   // POST new question (and save in DB)
@@ -52,8 +51,8 @@ const QuestionsController = {
       req.flash("error", err);
       return res.redirect(302, "/");
     }
-    const isLoggedIn = !!req.session.user_id;
-    res.render("questions", { questions, isLoggedIn });
+
+    res.render("questions", { questions });
   },
 
   // GET a specific question
@@ -68,8 +67,7 @@ const QuestionsController = {
       return res.redirect(302, "/questions");
     }
 
-    const isLoggedIn = !!req.session.user_id;
-    res.render("edit", { question, isLoggedIn });
+    res.render("edit", { question });
   },
 
   // UPDATE a specific question

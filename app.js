@@ -53,6 +53,8 @@ app.use(session(sessionConfig));
 
 // setup flash middleware
 app.use((req, res, next) => {
+  // On each response load current user id, in order to use to toggle ui elements
+  res.locals.user_id = req.session.user_id;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   // second option
@@ -73,9 +75,7 @@ app.use((err, req, res, next) => {
   // Mongoose errors: ValidationError, CastError,
   // if (err.name === 'ValidationError') err = handleValidationErr(err);
   const { status = 500, message = "Something went wrong" } = err;
-  const isLoggedIn = false;
-  if (req.session.user_id) isLoggedIn = true;
-  res.status(status).render('404', { status, message, isLoggedIn });
+  res.status(status).render('404', { status, message });
 });
 
 const PORT = process.env.PORT || 3000;
