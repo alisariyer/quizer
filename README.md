@@ -5,7 +5,7 @@ A quiz web application
 ![Quizer Screenshot](./screenshots/screenshot.png)
 
 ## About
-The goal of this project is to implement and consolidate the backend web structure.
+A simple multiply choice quiz application providing user quiz scores, and customization for admin user.
 
 ## NOTE
 **THIS PROJECT IS STILL IN DEVELOPMENT**. DO NOT USE AS A FULLY WORKING APPLICATION. HOWEVER ACTUAL VERSION CAN BE RUN LOCALLY.
