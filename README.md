@@ -7,9 +7,6 @@ A quiz web application
 ## About
 A simple multiply choice quiz application providing user quiz scores, and customization for admin user.
 
-## NOTE
-**THIS PROJECT IS STILL IN DEVELOPMENT**. DO NOT USE AS A FULLY WORKING APPLICATION. HOWEVER ACTUAL VERSION CAN BE RUN LOCALLY.
-
 ## How to install locally
 1. You need to install node.js, mongodb, and git on your computer.
 2. Open a terminal.
